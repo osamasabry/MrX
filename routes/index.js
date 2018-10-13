@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var customer = require('../Controller/customerController');
+var SettingController = require('../Controller/settingController');
 var user = require('../Controller/userController');
 
 var account = require('../Controller/accountController');
@@ -26,6 +26,14 @@ router.post('/login', type,function(req, res, next) {
           return res.send(user);
         });
       })(req, res, next);
+});
+
+
+router.get('/getCategory', type,function(req, res) {
+    var Category = async (function (){
+        await (SettingController.getCategory(req,res));
+    });
+    Category();
 });
 
 

@@ -26,7 +26,7 @@ module.exports = function(passport) {
     },
     function(req, user_name, password, done) {
        process.nextTick(function() {
-            User.findOne({ 'AccountUser_UserName' :  user_name }, function(err, user) {
+            User.findOne({ 'Account_UserName' :  user_name }, function(err, user) {
                 if (err){ return done(err);}
                 if (!user)
                   return done(null,false,{status:false,message:'user is not exist'});

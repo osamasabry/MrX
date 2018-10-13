@@ -20,7 +20,7 @@ require('./config/passport')(passport);
 
 var app = express();
 
-db.connect("mongodb://localhost:27017/Medical");
+db.connect("mongodb://localhost:27017/MrX");
 
 // view engine setup
 app.use(express.static(path.join(__dirname, 'public')));
