@@ -18,7 +18,7 @@ module.exports = {
 		},
 
 		getCategory:function(req,res){
-			Category.findOne({Category_ID:req.body.Category_ID}, function(err, category) {
+			Category.findOne({Category_ID:Number(req.body.Category_ID)}, function(err, category) {
 				if (err){
 		    		return res.send({
 						message: err
