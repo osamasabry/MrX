@@ -1,49 +1,35 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
 
-var rxpUserSchema = mongoose.Schema({
+var Hcm_ProductSchema = mongoose.Schema({
    
-		User_Code        :Number,
-        User_Name        :String,
-        User_Password    :String,
-        User_DisplayName :String,
-        User_Permissions :[String],
-		User_IsActive    :Number,
-        User_Employee_ID :Number
-        // User_Access_Token:String
+		Product_Code        		:Number,
+        Product_Name        		:String,
+        Product_Chemical_Name 		:String,
+        Product_Abbreviation   		:String,
+        Product_Molecular_Formula 	:String,
+		Product_Molecular_Weight    :Number,
+        Product_CAS_Number 			:String,
+        Product_EC_Number 			:String,
+        Product_Appearance 			:String,
+        Product_Active_Content 		:String,
+        Product_pH 					:String,
+        Product_Sp_gravity 			:String,
+        Product_Chloride 			:String,
+        Product_Iron 				:String,
+        Product_Phosphorous_Acid 	:String,
+        Product_O_phosphate			:String,
+        Product_Hazen_color			:String,
+        Product_Category_ID			:Number,
+        Product_Estba7s				:Number,
 });
 
-// rxpUserSchema.methods.generateHash = function(password) {
-//     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-// };
-
-// rxpUserSchema.methods.verifyPassword = function(password) {
-//     if(bcrypt.compareSync(password, this.User_Password))
-//         return 1;
-//     else
-//         return 0;
-// };
-
-
-// rxpUserSchema.methods.updatePassword = function(password) {
-//     this.User_Password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-// 	this.save();
-// };
-
-
-// userSchema.methods.updateUser = function(request, response){
-
-// 	this.name = request.body.name;
-// 	this.address = request.body.address;
-// 	 this.save();
-// 	response.redirect('/user');
-// };
 
 
 
-var Users = module.exports = mongoose.model('rxp_users', rxpUserSchema);
+
+var Hcm_Product = module.exports = mongoose.model('hcm_product', Hcm_ProductSchema);
 
 module.exports.getLastCode = function(callback){
     
-    Users.findOne({},callback).sort({User_Code:-1});
+    Hcm_Product.findOne({},callback).sort({Product_Code:-1});
 }

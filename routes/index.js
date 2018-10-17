@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var SettingController = require('../Controller/settingController');
-var user = require('../Controller/userController');
 
-var account = require('../Controller/accountController');
+var CategoryUser = require('../Controller/userController');
+var CategoryController = require('../Controller/categoryController');
+// var user = require('../Controller/userController');
+
+
 var passport = require('passport');
 
 
@@ -29,9 +31,16 @@ router.post('/login', type,function(req, res, next) {
 });
 
 
-router.get('/getCategory', type,function(req, res) {
+router.get('/getCategories', type,function(req, res) {
+    var Categories= async (function (){
+        await (CategoryController.getCategories(req,res));
+    });
+    Categories();
+});
+
+router.post('/getCategory', type,function(req, res) {
     var Category = async (function (){
-        await (SettingController.getCategory(req,res));
+        await (CategoryController.getCategory(req,res));
     });
     Category();
 });

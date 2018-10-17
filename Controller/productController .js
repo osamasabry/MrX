@@ -1,4 +1,4 @@
-var SystemSetting = require('../Model/system_setting');
+var SystemSetting = require('../Model/product');
 
 
 
