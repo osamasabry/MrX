@@ -4,6 +4,8 @@ var router = express.Router();
 var CategoryUser = require('../Controller/userController');
 var CategoryController = require('../Controller/categoryController');
 var ProductController = require('../Controller/productController');
+var SupplierController = require('../Controller/supplierController');
+
 
 var passport = require('passport');
 var multer=require('multer');
@@ -67,5 +69,29 @@ router.post('/EditProduct', type,function(req, res) {
     EditProduct();
 });
 
+
+router.get('/getSupplier', type,function(req, res) {
+    var Supplier = async (function (){
+        await (SupplierController.getSupplier(req,res));
+    });
+    Supplier();
+});
+
+
+router.post('/AddSupplier', type,function(req, res) {
+    var AddSupplier = async (function (){
+        var NextCode = await (SupplierController.GetNextCode(req,res));
+        await (SupplierController.addSupplier(req,res,NextCode));
+    });
+    AddSupplier();
+});
+
+
+router.post('/EditSupplier', type,function(req, res) {
+    var EditSupplier = async (function (){
+        await (SupplierController.editSupplier(req,res,NextCode));
+    });
+    EditSupplier();
+});
 
 module.exports = router;
