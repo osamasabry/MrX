@@ -6,6 +6,7 @@ var Hcm_ProductSchema = mongoose.Schema({
         Product_Name        		:String,
         Product_Chemical_Name 		:String,
         Product_Abbreviation   		:String,
+        Product_IsActive            : Number,
         Product_Molecular_Formula 	:String,
 		Product_Molecular_Weight    :Number,
         Product_CAS_Number 			:String,

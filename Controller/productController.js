@@ -17,6 +17,20 @@ module.exports = {
 			})
 		},
 
+		getAllProduct:function(req,res){
+			Prodcut.find({}, function(err, product) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(product) {
+		    		res.send(product);
+				}else{
+		    		res.send("not Product");
+				}
+			})
+		},
+
 		searchProduct:function(req,res){
 			var object  = {};
 			if (req.body.type=='name') 

@@ -4,6 +4,7 @@ var Hcm_CategorySchema = mongoose.Schema({
     
 	Category_ID     		: Number,
     Category_Name     		: String,
+    Category_IsActive     	: Number,
     Category_FieldList      : [String],
    
 });

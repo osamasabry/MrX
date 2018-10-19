@@ -2,11 +2,11 @@ var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
+var port     = process.env.PORT || 3111;
 var routes = require('./routes/index');
 var db= require('mongoose');
+var cors = require('cors');
+var bodyParser = require('body-parser');
 
 // var md5 = require('md5');
 
@@ -20,8 +20,9 @@ require('./config/passport')(passport);
 
 var app = express();
 
-db.connect("mongodb://localhost:27017/MrX");
+db.connect(process.env.hcmProductionDBConnection,{useNewUrlParser: true});
 
+app.use(cors({credentials: true, origin: true}))
 // view engine setup
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -34,12 +35,12 @@ app.set('view engine', 'html');
 
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session()); 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 app.use('/', routes);
 
 /// catch 404 and forwarding to error handler
@@ -72,8 +73,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
+var listener = app.listen(port, function(){
+    console.log('Listening on port ' + listener.address().port); //Listening on port 8888
+});
 
 module.exports = app;
-

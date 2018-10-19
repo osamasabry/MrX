@@ -47,6 +47,13 @@ router.post('/getProduct', type,function(req, res) {
     Product();
 });
 
+router.post('/getAllProduct', type,function(req, res) {
+    var Product = async (function (){
+        await (ProductController.getAllProduct(req,res));
+    });
+    Product();
+});
+
 router.post('/SearchProduct', type,function(req, res) {
     var Search = async (function (){
         await (ProductController.searchProduct(req,res));

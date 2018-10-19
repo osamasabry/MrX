@@ -3,16 +3,15 @@ var Category = require('../Model/category');
 
 
 module.exports = {
+	
 		getCategories:function(req,res){
 			Category.find({}, function(err, category) {
 				if (err){
-		    		return res.send({
-						message: err
-					});
+		    		res.send(err);
 		    	} else if(category) {
 		    		res.send(category);
 				}else{
-		    		res.send("not Categories");
+		    		res.send("no Categories found");
 				}
 			})
 		},
