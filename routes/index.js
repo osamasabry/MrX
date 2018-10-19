@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var CategoryUser = require('../Controller/userController');
+var User = require('../Controller/userController');
 var CategoryController = require('../Controller/categoryController');
 var ProductController = require('../Controller/productController');
 var SupplierController = require('../Controller/supplierController');
@@ -76,7 +76,6 @@ router.post('/EditProduct', type,function(req, res) {
     EditProduct();
 });
 
-
 router.get('/getSupplier', type,function(req, res) {
     var Supplier = async (function (){
         await (SupplierController.getSupplier(req,res));
@@ -99,6 +98,15 @@ router.post('/EditSupplier', type,function(req, res) {
         await (SupplierController.editSupplier(req,res,NextCode));
     });
     EditSupplier();
+});
+
+
+router.post('/AddUser', type,function(req, res) {
+    var addUser = async (function (){
+        var NextCode = await (User.GetNextCode(req,res));
+        await (User.addUser(req,res,NextCode));
+    });
+    addUser();
 });
 
 module.exports = router;

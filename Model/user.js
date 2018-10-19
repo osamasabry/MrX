@@ -3,9 +3,12 @@ var mongoose = require('mongoose');
 
 var Hcm_UserSchema = mongoose.Schema({
    
-		User_Code        :Number,
-        User_Name    	 :String,
-        User_Password    :String,
+		User_Code        			:Number,
+        User_Name    	 			:String,
+        User_Password    			:String,
+        User_DisplayName            :String,
+        User_Permissions            :[String],
+        User_IsActive               :Number
 });
 
 Hcm_UserSchema.methods.verifyPassword = function(password) {

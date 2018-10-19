@@ -65,6 +65,8 @@ module.exports = {
 			var newProduct = new Prodcut();
 			newProduct.Product_Code     	 		= NextCode;
 			newProduct.Product_Name 	     		= request.body.Product_Name;
+			newProduct.Product_Manufacturer 	    = request.body.Product_Manufacturer;
+			newProduct.Product_Exporter 	     	= request.body.Product_Exporter;
 			newProduct.Product_Chemical_Name   		= request.body.Product_Chemical_Name;
 			newProduct.Product_Molecular_Formula	= request.body.Product_Molecular_Formula;
 			newProduct.Product_Molecular_Weight	 	= request.body.Product_Molecular_Weight;
@@ -99,6 +101,8 @@ module.exports = {
 			var newvalues = { $set: {
 				Product_Name 	     		: request.body.Product_Name,
 				Product_Chemical_Name   	: request.body.Product_Chemical_Name,
+				Product_Manufacturer 	    : request.body.Product_Manufacturer,
+				Product_Exporter 	     	: request.body.Product_Exporter,
 				Product_Molecular_Formula	: request.body.Product_Molecular_Formula,
 				Product_Molecular_Weight	: request.body.Product_Molecular_Weight,
 				Product_CAS_Number	 		: request.body.Product_CAS_Number,
