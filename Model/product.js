@@ -24,6 +24,9 @@ var Hcm_ProductSchema = mongoose.Schema({
         Product_Hazen_color			:String,
         Product_Category_ID			:Number,
         Product_Estba7s				:Number,
+        Product_OriginCountry       :Number,
+        Product_Packing             :[Number],
+        Product_SupplierIds         :[Number],
 });
 
 
