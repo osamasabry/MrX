@@ -121,6 +121,9 @@ module.exports = {
 				Product_Hazen_color	 		: request.body.Product_Hazen_color,
 				Product_Category_ID	 		: request.body.Product_Category_ID,
 				Product_Estba7s	 			: request.body.Product_Estba7s,
+				Product_OriginCountry       : request.body.Product_OriginCountry,
+        		Product_Packing             : request.body.Product_Packing,
+        		Product_SupplierIds         : request.body.Product_SupplierIds,
 			} };
 			var myquery = { Product_Code: request.body.Product_Code }; 
 			Product.findOneAndUpdate( myquery,newvalues, function(err, field) {
