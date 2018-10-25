@@ -1,5 +1,10 @@
 var Supplier = require('../Model/supplier');
-
+var Category = require('../Model/category');
+var SupplierType = require('../Model/lut_supplier_types');
+var supplierclass = require('../Model/lut_classes');
+var country = require('../Model/countries');
+var PaymentMethod = require('../Model/lut_payment_methods');
+var WayOfDelivery = require('../Model/lut_ways_of_delivery');
 
 
 module.exports = {
@@ -19,10 +24,95 @@ module.exports = {
 			})
 		},
 
+		getCountries:function(req,res){
+			console.log('heel')
+			country.find({})
+			.select('Country_Code Country_Name')
+			.exec(function(err, ctry) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(ctry) {
+		    		res.send(ctry);
+				}else{
+		    		res.send("no Country");
+				}
+			})
+		},
+		getSupplierTypes:function(req,res){
+			SupplierType.find({})
+			.select('SupplierType_Code SupplierType_Name')
+			.exec(function(err, supptype) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supptype) {
+		    		res.send(supptype);
+				}else{
+		    		res.send("no data");
+				}
+			})
+		},
+		getClasses:function(req,res){
+			supplierclass.find({})
+			.select('Class_Code Class_Name')
+			.exec(function(err, suplierclass) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(suplierclass) {
+		    		res.send(suplierclass);
+				}else{
+		    		res.send("no data");
+				}
+			})
+		},
+		
+		getPaymentMethods:function(req,res){
+			PaymentMethod.find({})
+			.select('PaymentMethod_Code PaymentMethod_Name')
+			.exec(function(err, paymentMethod) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(paymentMethod) {
+		    		res.send(paymentMethod);
+				}else{
+		    		res.send("no data");
+				}
+			})
+		},
+
+		getWaysOfDelivery:function(req,res){
+			WayOfDelivery.find({})
+			.select('WayOfDelivary_Code WayOfDelivary_Name')
+			.exec(function(err, waysofDelivery) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(waysofDelivery) {
+		    		res.send(waysofDelivery);
+				}else{
+		    		res.send("no data");
+				}
+			})
+		},
+		
+
 		getAllSuppliers:function(req,res){
 			Supplier.find({})
 			.select('Supplier_Code Supplier_Name Supplier_PaymentMethod')
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'SupplierType', select: 'SupplierType_Name' })
+			.populate({ path: 'supplierclass', select: 'Class_Name' })
 			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
+			.populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
 			.exec(function(err, supplier) {
 				if (err){
 		    		return res.send({

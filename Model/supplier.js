@@ -48,7 +48,7 @@ Hcm_SupplierSchema.methods.verifyPassword = function(password) {
         return 0;
 };
 Hcm_SupplierSchema.virtual('Category',{
-    ref: 'hcm_category',
+    ref: 'hcm_categories',
     localField: 'Supplier_Category_IDs',
     foreignField: 'Category_ID',
     justOne: false // for many-to-1 relationships
@@ -80,9 +80,15 @@ Hcm_SupplierSchema.virtual('PaymentMethod',{
 });
 
 Hcm_SupplierSchema.virtual('WayOfDelivery',{
-    ref: 'hcm_lut_ways_of_delivery',
+    ref: 'hcm_lut_ways_of_deliver',
     localField: 'Supplier_WayOfDelivery_Codes',
     foreignField: 'WayOfDelivary_Code',
+    justOne: false // for many-to-1 relationships
+});
+Hcm_SupplierSchema.virtual('SupplierClass',{
+    ref: 'hcm_lut_classes',
+    localField: 'Supplier_Class_Code',
+    foreignField: 'Class_Code',
     justOne: false // for many-to-1 relationships
 });
 

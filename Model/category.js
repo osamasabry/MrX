@@ -10,4 +10,4 @@ var Hcm_CategorySchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('hcm_category', Hcm_CategorySchema);
+module.exports = mongoose.model('hcm_categories', Hcm_CategorySchema);

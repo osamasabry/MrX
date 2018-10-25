@@ -90,6 +90,39 @@ router.get('/getAllSupplier', type,function(req, res) {
     Supplier();
 });
 
+router.get('/getCountries', type,function(req, res) {
+    var Countries= async (function (){
+        await (SupplierController.getCountries(req,res));
+    });
+    Countries();
+});
+
+router.get('/getSupplierTypes', type,function(req, res) {
+    var SupplierTypes= async (function (){
+        await (SupplierController.getSupplierTypes(req,res));
+    });
+    SupplierTypes();
+});
+router.get('/getPaymentMethods', type,function(req, res) {
+    var PaymentMethods= async (function (){
+        await (SupplierController.getPaymentMethods(req,res));
+    });
+    PaymentMethods();
+});
+
+router.get('/getWaysOfDelivery', type,function(req, res) {
+    var WaysOfDelivery= async (function (){
+        await (SupplierController.getWaysOfDelivery(req,res));
+    });
+    WaysOfDelivery();
+});
+
+router.get('/getClasses', type,function(req, res) {
+    var Classes= async (function (){
+        await (SupplierController.getClasses(req,res));
+    });
+    Classes();
+});
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
