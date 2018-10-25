@@ -147,16 +147,19 @@ module.exports = {
 		// 	})
 		// },
 
-		GetNextCode:function(req,res){
-    		Supplier.getLastCode(function(err,supplier){
-				if (supplier) 
-					res.send( Number(supplier.Supplier_Code)+1);
-				else
-					res.send(1);
+		GetNextCode:function(){
+			return new Promise((resolve, reject) => {
+				Supplier.getLastCode(function(err,supplier){
+					if (supplier)
+						resolve( Number(supplier.Supplier_Code)+1);
+					else
+						resolve (1);
+				})
 			})
 		},
 
 		addSupplier:function(request,res,NextCode){
+			console.log(NextCode);
 			var newSupplier = new Supplier();
 			newSupplier.Supplier_Code     	 	 		= NextCode;
 			newSupplier.Supplier_Name 	     	 		= request.body.Supplier_Name;
