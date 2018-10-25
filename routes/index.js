@@ -83,6 +83,13 @@ router.get('/getSupplier', type,function(req, res) {
     Supplier();
 });
 
+router.get('/getAllSupplier', type,function(req, res) {
+    var Supplier = async (function (){
+        await (SupplierController.getAllSuppliers(req,res));
+    });
+    Supplier();
+});
+
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){

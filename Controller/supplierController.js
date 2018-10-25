@@ -19,6 +19,23 @@ module.exports = {
 			})
 		},
 
+		getAllSuppliers:function(req,res){
+			Supplier.find({})
+			.select('Supplier_Code Supplier_Name Supplier_PaymentMethod')
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.exec(function(err, supplier) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supplier) {
+		    		res.send(supplier);
+				}else{
+		    		res.send("not Supplier");
+				}
+			})
+		},
+
 		// searchSupplier:function(req,res){
 		// 	var object  = {};
 		// 	if (req.body.type=='name') 
