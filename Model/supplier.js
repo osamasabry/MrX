@@ -35,10 +35,11 @@ var Hcm_SupplierSchema = mongoose.Schema({
         Supplier_SupplierType_Codes     :[Number],
         Supplier_Class_Code             :Number,
         Supplier_Rate                   :Number,
-        Supplier_Status                 :Number
+        Supplier_IsActive               :Number
 },{
     toJSON: { virtuals: true }
 });
+
 
 
 Hcm_SupplierSchema.methods.verifyPassword = function(password) {
@@ -96,4 +97,9 @@ Hcm_SupplierSchema.virtual('SupplierClass',{
 //     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 // };
 
-module.exports = mongoose.model('hcm_supplier', Hcm_SupplierSchema);
+var Suppliers = module.exports = mongoose.model('hcm_supplier', Hcm_SupplierSchema);
+
+module.exports.getLastCode = function(callback){
+    
+    Suppliers.findOne({},callback).sort({Supplier_Code:-1});
+}

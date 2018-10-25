@@ -25,7 +25,6 @@ module.exports = {
 		},
 
 		getCountries:function(req,res){
-			console.log('heel')
 			country.find({})
 			.select('Country_Code Country_Name')
 			.exec(function(err, ctry) {
@@ -106,20 +105,21 @@ module.exports = {
 
 		getAllSuppliers:function(req,res){
 			Supplier.find({})
-			.select('Supplier_Code Supplier_Name Supplier_PaymentMethod')
 			.populate({ path: 'Category', select: 'Category_Name' })
 			.populate({ path: 'SupplierType', select: 'SupplierType_Name' })
 			.populate({ path: 'supplierclass', select: 'Class_Name' })
 			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
 			.populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
 			.populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
+			.lean()
 			.exec(function(err, supplier) {
 				if (err){
 		    		return res.send({
 						message: err
 					});
 		    	} else if(supplier) {
-		    		res.send(supplier);
+					res.send(supplier);
+					
 				}else{
 		    		res.send("not Supplier");
 				}
@@ -156,29 +156,33 @@ module.exports = {
 			})
 		},
 
-		addSupplier:function(req,res,NextCode){
+		addSupplier:function(request,res,NextCode){
 			var newSupplier = new Supplier();
-			newSupplier.Supplier_Code     	 	 	= NextCode;
-			newSupplier.Supplier_Name 	     	 	= request.body.Supplier_Name;
-			newSupplier.Supplier_Email   		 	= request.body.Supplier_Email;
-			newSupplier.Supplier_Country	 	 	= request.body.Supplier_Country;
-			newSupplier.Supplier_City	 		 	= request.body.Supplier_City;
-			newSupplier.Supplier_Address	 	 	= request.body.Supplier_Address;
-			newSupplier.Supplier_Phone	 		 	= request.body.Supplier_Phone;
-			newSupplier.Supplier_Contact	 	 	= request.body.Supplier_Contact;
-			newSupplier.Supplier_FaceBook        	= request.body.Supplier_FaceBook;
-			newSupplier.Supplier_PaymentMethod   	= request.body.Supplier_PaymentMethod;
-			newSupplier.Supplier_TimeOfDelivery  	= request.body.Supplier_TimeOfDelivery;
-			newSupplier.Supplier_Agency 		 	= request.body.Supplier_Agency;	 
-			newSupplier.Supplier_Certificate	 	= request.body.Supplier_Certificate;
-			newSupplier.Supplier_StoreAddress	 	= request.body.Supplier_StoreAddress;
-			newSupplier.Supplier_WayOfDelivery	 	= request.body.Supplier_WayOfDelivery;
-			newSupplier.Supplier_AddressGPSLocation = request.body.Supplier_AddressGPSLocation;
-			newSupplier.Supplier_StoreGPSLocation 	= request.body.Supplier_StoreGPSLocation;
-			newSupplier.Supplier_Category			= request.body.Supplier_Category;
-			newSupplier.Supplier_Type				= request.body.Supplier_Type;
+			newSupplier.Supplier_Code     	 	 		= NextCode;
+			newSupplier.Supplier_Name 	     	 		= request.body.Supplier_Name;
+			newSupplier.Supplier_Email   		 		= request.body.Supplier_Email;
+			newSupplier.Supplier_Country_Code	 		= request.body.Supplier_Country_Code;
+			newSupplier.Supplier_City	 		 		= request.body.Supplier_City;
+			newSupplier.Supplier_Address	 	 		= request.body.Supplier_Address;
+			newSupplier.Supplier_Phone	 		 		= request.body.Supplier_Phone;
+			newSupplier.Supplier_Contact	 	 		= request.body.Supplier_Contact;
+			newSupplier.Supplier_FaceBook        		= request.body.Supplier_FaceBook;
+			newSupplier.Supplier_PaymentMethod_Codes   	= request.body.Supplier_PaymentMethod_Codes;
+			newSupplier.Supplier_TimeOfDelivery  		= request.body.Supplier_TimeOfDelivery;
+			newSupplier.Supplier_Agencies 		 		= request.body.Supplier_Agencies;	 
+			newSupplier.Supplier_Certificates	 		= request.body.Supplier_Certificates;
+			newSupplier.Supplier_StoreAddress	 		= request.body.Supplier_StoreAddress;
+			newSupplier.Supplier_WayOfDelivery_Codes	= request.body.Supplier_WayOfDelivery_Codes;
+			newSupplier.Supplier_AddressGPSLocation 	= request.body.Supplier_AddressGPSLocation;
+			newSupplier.Supplier_StoreGPSLocation 		= request.body.Supplier_StoreGPSLocation;
+			newSupplier.Supplier_Category_IDs			= request.body.Supplier_Category_IDs;
+			newSupplier.Supplier_SupplierType_Codes		= request.body.Supplier_SupplierType_Codes;
+			newSupplier.Supplier_Rate					= request.body.Supplier_Rate;
+			newSupplier.Supplier_Class_Code 			= request.body.Supplier_Class_Code;
+			newSupplier.Supplier_IsActive 				= 1;
 			newSupplier.save(function(error, doneadd){
 				if(error){
+					console.log(error)
 					return res.send({
 						message: error
 					});
