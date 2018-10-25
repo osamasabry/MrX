@@ -159,7 +159,6 @@ module.exports = {
 		},
 
 		addSupplier:function(request,res,NextCode){
-			console.log(NextCode);
 			var newSupplier = new Supplier();
 			newSupplier.Supplier_Code     	 	 		= NextCode;
 			newSupplier.Supplier_Name 	     	 		= request.body.Supplier_Name;
