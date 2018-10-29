@@ -1,10 +1,6 @@
 var Supplier = require('../Model/supplier');
 var Category = require('../Model/category');
-var SupplierType = require('../Model/lut_supplier_types');
-var supplierclass = require('../Model/lut_classes');
-var country = require('../Model/countries');
-var PaymentMethod = require('../Model/lut_payment_methods');
-var WayOfDelivery = require('../Model/lut_ways_of_delivery');
+
 
 
 module.exports = {
@@ -23,86 +19,7 @@ module.exports = {
 				}
 			})
 		},
-
-		getCountries:function(req,res){
-			country.find({})
-			.select('Country_Code Country_Name')
-			.exec(function(err, ctry) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(ctry) {
-		    		res.send(ctry);
-				}else{
-		    		res.send("no Country");
-				}
-			})
-		},
-		getSupplierTypes:function(req,res){
-			SupplierType.find({})
-			.select('SupplierType_Code SupplierType_Name')
-			.exec(function(err, supptype) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(supptype) {
-		    		res.send(supptype);
-				}else{
-		    		res.send("no data");
-				}
-			})
-		},
-		getClasses:function(req,res){
-			supplierclass.find({})
-			.select('Class_Code Class_Name')
-			.exec(function(err, suplierclass) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(suplierclass) {
-		    		res.send(suplierclass);
-				}else{
-		    		res.send("no data");
-				}
-			})
-		},
 		
-		getPaymentMethods:function(req,res){
-			PaymentMethod.find({})
-			.select('PaymentMethod_Code PaymentMethod_Name')
-			.exec(function(err, paymentMethod) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(paymentMethod) {
-		    		res.send(paymentMethod);
-				}else{
-		    		res.send("no data");
-				}
-			})
-		},
-
-		getWaysOfDelivery:function(req,res){
-			WayOfDelivery.find({})
-			.select('WayOfDelivary_Code WayOfDelivary_Name')
-			.exec(function(err, waysofDelivery) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(waysofDelivery) {
-		    		res.send(waysofDelivery);
-				}else{
-		    		res.send("no data");
-				}
-			})
-		},
-		
-
 		getAllSuppliers:function(req,res){
 			Supplier.find({})
 			.populate({ path: 'Category', select: 'Category_Name' })
@@ -167,7 +84,7 @@ module.exports = {
 			newSupplier.Supplier_City	 		 		= request.body.Supplier_City;
 			newSupplier.Supplier_Address	 	 		= request.body.Supplier_Address;
 			newSupplier.Supplier_Phone	 		 		= request.body.Supplier_Phone;
-			newSupplier.Supplier_Contact	 	 		= request.body.Supplier_Contact;
+			// newSupplier.Supplier_Contact	 	 		= request.body.Supplier_Contact;
 			newSupplier.Supplier_FaceBook        		= request.body.Supplier_FaceBook;
 			newSupplier.Supplier_PaymentMethod_Codes   	= request.body.Supplier_PaymentMethod_Codes;
 			newSupplier.Supplier_TimeOfDelivery  		= request.body.Supplier_TimeOfDelivery;
@@ -197,7 +114,7 @@ module.exports = {
 			});
 		},
 
-		editSupplier:function(req,res){
+		editSupplier:function(request,res){
 			var newvalues = { $set: {
 				Product_Name 	    		: request.body.Product_Name,
 				Supplier_Name   			: request.body.Supplier_Name,
@@ -206,8 +123,8 @@ module.exports = {
 				Supplier_City	 			: request.body.Supplier_City,
 				Supplier_Address	 		: request.body.Supplier_Address,
 				Supplier_Phone	 			: request.body.Supplier_Phone,
-				Supplier_Contact	 		: request.body.Supplier_Contact,
-				Supplier_Product_Ids		: request.body.Supplier_Product_Ids,
+				// Supplier_Contact	 		: request.body.Supplier_Contact,
+				// Supplier_Product_Ids		: request.body.Supplier_Product_Ids,
 				Supplier_FaceBook        	: request.body.Supplier_FaceBook,
 				Supplier_PaymentMethod   	: request.body.Supplier_PaymentMethod,
 				Supplier_TimeOfDelivery  	: request.body.Supplier_TimeOfDelivery,
@@ -221,6 +138,31 @@ module.exports = {
 				Supplier_Type				: request.body.Supplier_Type,
 			} };
 			var myquery = { Supplier_Code: request.body.Supplier_Code }; 
+			Supplier.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Supplier not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+		editSupplierContact:function(request,res){
+			var myquery = { Supplier_Code: request.body.Supplier_Code }; 
+
+			var newvalues = { $push: {
+				Supplier_Contact	 		: request.body.Supplier_Contact,
+			} };
 			Supplier.findOneAndUpdate( myquery,newvalues, function(err, field) {
 	    	    if (err){
 	    	    	return res.send({

@@ -20,7 +20,10 @@ require('./config/passport')(passport);
 
 var app = express();
 
-db.connect(process.env.hcmProductionDBConnection,{useNewUrlParser: true});
+// db.connect(process.env.hcmProductionDBConnection,{useNewUrlParser: true});
+
+db.connect("mongodb://localhost:27017/MrX");
+
 
 app.use(cors({credentials: true, origin: true}))
 // view engine setup

@@ -5,6 +5,8 @@ var User = require('../Controller/userController');
 var CategoryController = require('../Controller/categoryController');
 var ProductController = require('../Controller/productController');
 var SupplierController = require('../Controller/supplierController');
+var SetupController = require('../Controller/lutSetupController');
+
 
 
 var passport = require('passport');
@@ -92,34 +94,35 @@ router.get('/getAllSupplier', type,function(req, res) {
 
 router.get('/getCountries', type,function(req, res) {
     var Countries= async (function (){
-        await (SupplierController.getCountries(req,res));
+        await (SetupController.getCountries(req,res));
     });
     Countries();
 });
 
 router.get('/getSupplierTypes', type,function(req, res) {
     var SupplierTypes= async (function (){
-        await (SupplierController.getSupplierTypes(req,res));
+        await (SetupController.getSupplierTypes(req,res));
     });
     SupplierTypes();
 });
+
 router.get('/getPaymentMethods', type,function(req, res) {
     var PaymentMethods= async (function (){
-        await (SupplierController.getPaymentMethods(req,res));
+        await (SetupController.getPaymentMethods(req,res));
     });
     PaymentMethods();
 });
 
 router.get('/getWaysOfDelivery', type,function(req, res) {
     var WaysOfDelivery= async (function (){
-        await (SupplierController.getWaysOfDelivery(req,res));
+        await (SetupController.getWaysOfDelivery(req,res));
     });
     WaysOfDelivery();
 });
 
 router.get('/getClasses', type,function(req, res) {
     var Classes= async (function (){
-        await (SupplierController.getClasses(req,res));
+        await (SetupController.getClasses(req,res));
     });
     Classes();
 });
@@ -132,12 +135,18 @@ router.post('/AddSupplier', type,function(req, res) {
     AddSupplier();
 });
 
-
 router.post('/EditSupplier', type,function(req, res) {
     var EditSupplier = async (function (){
         await (SupplierController.editSupplier(req,res,NextCode));
     });
     EditSupplier();
+});
+
+router.post('/EditSupplierContact', type,function(req, res) {
+    var EditSupplierContact = async (function (){
+        await (SupplierController.editSupplierContact(req,res));
+    });
+    EditSupplierContact();
 });
 
 
