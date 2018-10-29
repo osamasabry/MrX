@@ -83,7 +83,7 @@ module.exports = {
 			newProduct.Product_Hazen_color	 		= request.body.Product_Hazen_color;
 			newProduct.Product_Category_ID	 		= request.body.Product_Category_ID;
 			newProduct.Product_Estba7s	 			= request.body.Product_Estba7s;
-		 	newProduct.Product_OriginCountry       	= request.body.Product_OriginCountry;
+		 	newProduct.Product_Origin_Country_Code  = request.body.Product_Origin_Country_Code;
         	newProduct.Product_Packing             	= request.body.Product_Packing;
         	newProduct.Product_SupplierIds         	= request.body.Product_SupplierIds;
 			newProduct.save(function(error, doneadd){
@@ -121,7 +121,7 @@ module.exports = {
 				Product_Hazen_color	 		: request.body.Product_Hazen_color,
 				Product_Category_ID	 		: request.body.Product_Category_ID,
 				Product_Estba7s	 			: request.body.Product_Estba7s,
-				Product_OriginCountry       : request.body.Product_OriginCountry,
+				Product_Origin_Country_Code : request.body.Product_Origin_Country_Code,
         		Product_Packing             : request.body.Product_Packing,
         		Product_SupplierIds         : request.body.Product_SupplierIds,
 			} };

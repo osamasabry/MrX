@@ -22,11 +22,11 @@ var Hcm_ProductSchema = mongoose.Schema({
         Product_Phosphorous_Acid 	:String,
         Product_O_phosphate			:String,
         Product_Hazen_color			:String,
-        Product_Category_ID			:Number,
+        Product_Category_ID			:[Number],
         Product_Estba7s				:Number,
-        Product_OriginCountry       :Number,
+        Product_Origin_Country_Code :Number,
         Product_Packing             :[Number],
-        Product_SupplierIds         :[Number],
+        Product_Supplier_Codes      :[Number],
 });
 
 

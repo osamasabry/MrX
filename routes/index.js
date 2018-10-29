@@ -127,6 +127,41 @@ router.get('/getClasses', type,function(req, res) {
     Classes();
 });
 
+router.get('/getForm', type,function(req, res) {
+    var Form = async (function (){
+        await (SetupController.getForm(req,res));
+    });
+    Form();
+});
+
+router.get('/getPacking', type,function(req, res) {
+    var Packing = async (function (){
+        await (SetupController.getPacking(req,res));
+    });
+    Packing();
+});
+
+router.get('/getProductCategory', type,function(req, res) {
+    var ProductCategory = async (function (){
+        await (SetupController.getProductCategory(req,res));
+    });
+    ProductCategory();
+});
+
+router.get('/getRelease', type,function(req, res) {
+    var Release = async (function (){
+        await (SetupController.getRelease(req,res));
+    });
+    Release();
+});
+
+router.get('/getStorageType', type,function(req, res) {
+    var StorageType = async (function (){
+        await (SetupController.getStorageType(req,res));
+    });
+    StorageType();
+});
+
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
         var NextCode = await (SupplierController.GetNextCode(req,res));
