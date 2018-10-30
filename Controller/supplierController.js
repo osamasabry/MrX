@@ -158,11 +158,12 @@ module.exports = {
 		},
 
 		editSupplierContact:function(request,res){
+			console.log(request.body)
 			var myquery = { Supplier_Code: request.body.Supplier_Code }; 
 
-			var newvalues = { $push: {
+			var newvalues = { 
 				Supplier_Contact	 		: request.body.Supplier_Contact,
-			} };
+			 };
 			Supplier.findOneAndUpdate( myquery,newvalues, function(err, field) {
 	    	    if (err){
 	    	    	return res.send({
