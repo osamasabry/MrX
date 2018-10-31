@@ -8,6 +8,7 @@ var Packing 		= require('../Model/lut_packing');
 var ProductCategory = require('../Model/lut_product_category');
 var Release 		= require('../Model/lut_release');
 var StorageType 	= require('../Model/lut_storage_type');
+var ProductCategory = require('../Model/lut_product_category');
 
 
 
@@ -174,6 +175,19 @@ module.exports = {
 			})
 		},
 
-		
-
-}
+		getProdcutCategory:function(req,res){
+			ProductCategory.find({})
+			.select('ProductCategory_Code ProductCategory_Name')
+			.exec(function(err, productcategory) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(productcategory) {
+		    		res.send(productcategory);
+				}else{
+		    		res.send("no Product Category");
+				}
+			})
+		},
+}	

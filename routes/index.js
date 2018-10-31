@@ -162,6 +162,13 @@ router.get('/getStorageType', type,function(req, res) {
     StorageType();
 });
 
+router.get('/getProdcutCategory', type,function(req, res) {
+    var ProdcutCategory = async (function (){
+        await (SetupController.getProdcutCategory(req,res));
+    });
+    ProdcutCategory();
+});
+
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
         var NextCode = await (SupplierController.GetNextCode(req,res));
