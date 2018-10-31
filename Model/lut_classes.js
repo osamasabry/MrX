@@ -10,4 +10,10 @@ var Hcm_ClassesSchema = mongoose.Schema({
 });
 
 
-SizeUnit = module.exports = mongoose.model('hcm_lut_classes', Hcm_ClassesSchema);
+Classes = module.exports = mongoose.model('hcm_lut_classes', Hcm_ClassesSchema);
+
+
+module.exports.getLastCode = function(callback){
+    
+    Classes.findOne({},callback).sort({Class_Code:-1});
+}

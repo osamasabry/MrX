@@ -11,3 +11,8 @@ var Hcm_PackingSchema = mongoose.Schema({
 
 
 Packing = module.exports = mongoose.model('hcm_lut_packing', Hcm_PackingSchema);
+
+module.exports.getLastCode = function(callback){
+    
+    Packing.findOne({},callback).sort({Packing_Code:-1});
+}

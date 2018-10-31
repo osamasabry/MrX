@@ -10,4 +10,10 @@ var Hcm_WaysOfDelivarySchema = mongoose.Schema({
 });
 
 
-SizeUnit = module.exports = mongoose.model('hcm_lut_ways_of_deliver', Hcm_WaysOfDelivarySchema);
+WaysOfDelivary = module.exports = mongoose.model('hcm_lut_ways_of_deliver', Hcm_WaysOfDelivarySchema);
+
+module.exports.getLastCode = function(callback){
+    
+    WaysOfDelivary.findOne({},callback).sort({WayOfDelivary_Code:-1});
+}
+

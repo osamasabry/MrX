@@ -10,4 +10,10 @@ var Hcm_SupplierTypesSchema = mongoose.Schema({
 });
 
 
-SizeUnit = module.exports = mongoose.model('hcm_lut_supplier_types', Hcm_SupplierTypesSchema);
+SupplierType = module.exports = mongoose.model('hcm_lut_supplier_types', Hcm_SupplierTypesSchema);
+
+
+module.exports.getLastCode = function(callback){
+    
+    SupplierType.findOne({},callback).sort({SupplierType_Code:-1});
+}

@@ -73,7 +73,7 @@ router.post('/AddProduct', type,function(req, res) {
 
 router.post('/EditProduct', type,function(req, res) {
     var EditProduct = async (function (){
-        await (ProductController.editProduct(req,res,NextCode));
+        await (ProductController.editProduct(req,res));
     });
     EditProduct();
 });
@@ -148,11 +148,11 @@ router.get('/getProductCategory', type,function(req, res) {
     ProductCategory();
 });
 
-router.get('/getRelease', type,function(req, res) {
-    var Release = async (function (){
-        await (SetupController.getRelease(req,res));
+router.get('/getReleaseType', type,function(req, res) {
+    var ReleaseType = async (function (){
+        await (SetupController.getReleaseType(req,res));
     });
-    Release();
+    ReleaseType();
 });
 
 router.get('/getStorageType', type,function(req, res) {
@@ -162,12 +162,163 @@ router.get('/getStorageType', type,function(req, res) {
     StorageType();
 });
 
-router.get('/getProdcutCategory', type,function(req, res) {
-    var ProdcutCategory = async (function (){
-        await (SetupController.getProdcutCategory(req,res));
+router.post('/AddCountry', type,function(req, res) {
+    var AddCountry = async (function (){
+        var NextCode = await (SetupController.GetNextCodeCountry(req,res));
+        await (SetupController.addCountry(req,res,NextCode));
     });
-    ProdcutCategory();
+    AddCountry();
 });
+
+router.post('/EditCountry', type,function(req, res) {
+    var EditCountry = async (function (){
+        await (SetupController.editCountry(req,res));
+    });
+    EditCountry();
+});
+
+
+router.post('/AddSupplierType', type,function(req, res) {
+    var AddSupplierType = async (function (){
+        var NextCode = await (SetupController.GetNextCodeSupplierType(req,res));
+        await (SetupController.addSupplierType(req,res,NextCode));
+    });
+    AddSupplierType();
+});
+
+router.post('/EditSupplierType', type,function(req, res) {
+    var EditSupplierType = async (function (){
+        await (SetupController.editSupplierType(req,res));
+    });
+    EditSupplierType();
+});
+
+
+router.post('/AddSupplierClass', type,function(req, res) {
+    var AddSupplierClass = async (function (){
+        var NextCode = await (SetupController.GetNextCodeSupplierClass(req,res));
+        await (SetupController.addSupplierClass(req,res,NextCode));
+    });
+    AddSupplierClass();
+});
+
+router.post('/EditSupplierClass', type,function(req, res) {
+    var EditSupplierClass = async (function (){
+        await (SetupController.editSupplierClass(req,res));
+    });
+    EditSupplierClass();
+});
+
+
+router.post('/AddPaymentMethod', type,function(req, res) {
+    var AddPaymentMethod = async (function (){
+        var NextCode = await (SetupController.GetNextCodePaymentMethods(req,res));
+        await (SetupController.addPaymentMethod(req,res,NextCode));
+    });
+    AddPaymentMethod();
+});
+
+router.post('/EditPaymentMethod', type,function(req, res) {
+    var EditPaymentMethod = async (function (){
+        await (SetupController.editPaymentMethod(req,res));
+    });
+    EditPaymentMethod();
+});
+
+router.post('/AddWaysOfDelivery', type,function(req, res) {
+    var AddWaysOfDelivery = async (function (){
+        var NextCode = await (SetupController.GetNextCodeWaysOfDelivery(req,res));
+        await (SetupController.addWaysOfDelivery(req,res,NextCode));
+    });
+    AddWaysOfDelivery();
+});
+
+router.post('/EditWaysOfDelivery', type,function(req, res) {
+    var EditWaysOfDelivery = async (function (){
+        await (SetupController.editWaysOfDelivery(req,res));
+    });
+    EditWaysOfDelivery();
+});
+
+
+router.post('/AddForm', type,function(req, res) {
+    var AddForm = async (function (){
+        var NextCode = await (SetupController.GetNextCodeForm(req,res));
+        await (SetupController.addForm(req,res,NextCode));
+    });
+    AddForm();
+});
+
+router.post('/EditForm', type,function(req, res) {
+    var EditForm = async (function (){
+        await (SetupController.editForm(req,res));
+    });
+    EditForm();
+});
+
+router.post('/AddPacking', type,function(req, res) {
+    var AddPacking = async (function (){
+        var NextCode = await (SetupController.GetNextCodePacking(req,res));
+        await (SetupController.addPacking(req,res,NextCode));
+    });
+    AddPacking();
+});
+
+router.post('/EditPacking', type,function(req, res) {
+    var EditPacking = async (function (){
+        await (SetupController.editPacking(req,res));
+    });
+    EditPacking();
+});
+
+
+router.post('/AddProductCategory', type,function(req, res) {
+    var AddProductCategory = async (function (){
+        var NextCode = await (SetupController.GetNextCodeProductCategory(req,res));
+        await (SetupController.addProductCategory(req,res,NextCode));
+    });
+    AddProductCategory();
+});
+
+router.post('/EditProductCategory', type,function(req, res) {
+    var EditProductCategory = async (function (){
+        await (SetupController.editProductCategory(req,res));
+    });
+    EditProductCategory();
+});
+
+
+router.post('/AddReleaseType', type,function(req, res) {
+    var AddReleaseType = async (function (){
+        var NextCode = await (SetupController.GetNextCodeReleaseType(req,res));
+        await (SetupController.addReleaseType(req,res,NextCode));
+    });
+    AddReleaseType();
+});
+
+router.post('/EditReleaseType', type,function(req, res) {
+    var EditReleaseType = async (function (){
+        await (SetupController.editReleaseType(req,res));
+    });
+    EditReleaseType();
+});
+
+
+router.post('/AddStorageType', type,function(req, res) {
+    var AddStorageType = async (function (){
+        var NextCode = await (SetupController.GetNextCodeStorageType(req,res));
+        await (SetupController.addStorageType(req,res,NextCode));
+    });
+    AddStorageType();
+});
+
+router.post('/EditStorageType', type,function(req, res) {
+    var EditStorageType = async (function (){
+        await (SetupController.editStorageType(req,res));
+    });
+    EditStorageType();
+});
+
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
@@ -179,7 +330,7 @@ router.post('/AddSupplier', type,function(req, res) {
 
 router.post('/EditSupplier', type,function(req, res) {
     var EditSupplier = async (function (){
-        await (SupplierController.editSupplier(req,res,NextCode));
+        await (SupplierController.editSupplier(req,res));
     });
     EditSupplier();
 });
