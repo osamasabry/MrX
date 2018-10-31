@@ -4,7 +4,18 @@ var Prodcut = require('../Model/product');
 
 module.exports = {
 		getProduct:function(req,res){
-			Prodcut.findOne({Product_Code:Number(req.body.Product_Code)}, function(err, product) {
+			Prodcut.findOne({Product_Code:Number(req.body.Product_Code)})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.populate({ path: 'productclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.lean()
+			.exec(function(err, product) {
 				if (err){
 		    		return res.send({
 						message: err
@@ -18,7 +29,18 @@ module.exports = {
 		},
 
 		getAllProduct:function(req,res){
-			Prodcut.find({}, function(err, product) {
+			Prodcut.find({})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.populate({ path: 'productclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.lean()
+			.exec(function(err, product) {
 				if (err){
 		    		return res.send({
 						message: err
@@ -39,6 +61,16 @@ module.exports = {
 				object = {Product_Chemical_Name:{$regex:req.body.Product_Chemical_Name}};
 
 			Prodcut.findOne({object})
+				.populate({ path: 'Category', select: 'Category_Name' })
+				.populate({ path: 'Supplier', select: 'Supplier_Name' })
+				.populate({ path: 'productclass', select: 'Class_Name' })
+				.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+				.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+				.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+				.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+				.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+				.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+				.lean()
 				.exec(function(err, product) {
 				if (err){
 		    		return res.send({
@@ -162,4 +194,6 @@ module.exports = {
 				}
 			})
 		}
+
+
 }
