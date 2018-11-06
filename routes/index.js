@@ -41,6 +41,12 @@ router.post('/getCategory', type,function(req, res) {
     Category();
 });
 
+router.post('/AddCategory', type,function(req, res) {
+    var AddCategory = async (function (){
+        CategoryController.addCategory(req,res)
+    });
+    AddCategory();
+});
 
 router.post('/getProduct', type,function(req, res) {
     var Product = async (function (){

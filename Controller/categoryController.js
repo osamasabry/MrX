@@ -28,5 +28,49 @@ module.exports = {
 		    		res.send("not Category");
 				}
 			})
-		}
+		},
+
+		GetNextCode:function(req,res){
+			Category.getLastCode(function(err,category){
+				if (category) {
+					console.log(category)
+					res.send({
+						nextCode: category.Category_ID+1
+					})
+				}
+				else
+					res.send({
+						nextCode: 1
+					});
+			})
+		},
+
+		addCategory:function(request,res){
+			Category.getLastCode(function(err,category){
+				if (category) 
+					InsertIntoCategory(category.Category_ID+1);
+				else
+					InsertIntoCategory(1);
+			});
+			function InsertIntoCategory(NextCode){
+				var newCategory = new Category();
+				newCategory.Category_ID    	 		= NextCode;
+				newCategory.Category_Name   	 	= request.body.Category_Name;
+				newCategory.Category_Description   	= request.body.Category_Description;
+				newCategory.Category_IsActive	 	= 1;
+				
+				newCategory.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
 }
