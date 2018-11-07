@@ -14,7 +14,15 @@ module.exports = {
 		})
 	},
 
-	addUser:function(req,res,NextCode){
+	addUser:function(req,res){
+		User.getLastCode(function(err,user){
+			if (user) 
+				InsertIntoUser(user.User_Code+1);
+			else
+				InsertIntoUser(1);
+		});
+
+		function InsertIntoUser(NextCode){
 			var newUser = new User();
 			newUser.User_Code     	 	 = NextCode;
 			newUser.User_Name 	     	 = request.body.User_Name;
@@ -35,6 +43,7 @@ module.exports = {
 					});
 				}
 			});
+		}
 	},
 }
 

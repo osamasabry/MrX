@@ -78,8 +78,7 @@ router.post('/SearchProduct', type,function(req, res) {
 
 router.post('/AddProduct', type,function(req, res) {
     var AddProduct = async (function (){
-        var NextCode = await (ProductController.GetNextCode(req,res));
-        await (ProductController.addProduct(req,res,NextCode));
+        ProductController.addProduct(req,res);
     });
     AddProduct();
 });
@@ -177,8 +176,7 @@ router.get('/getStorageType', type,function(req, res) {
 
 router.post('/AddCountry', type,function(req, res) {
     var AddCountry = async (function (){
-        var NextCode = await (SetupController.GetNextCodeCountry(req,res));
-        await (SetupController.addCountry(req,res,NextCode));
+        SetupController.addCountry(req,res);
     });
     AddCountry();
 });
@@ -193,8 +191,7 @@ router.post('/EditCountry', type,function(req, res) {
 
 router.post('/AddSupplierType', type,function(req, res) {
     var AddSupplierType = async (function (){
-        var NextCode = await (SetupController.GetNextCodeSupplierType(req,res));
-        await (SetupController.addSupplierType(req,res,NextCode));
+        SetupController.addSupplierType(req,res);
     });
     AddSupplierType();
 });
@@ -209,8 +206,7 @@ router.post('/EditSupplierType', type,function(req, res) {
 
 router.post('/AddSupplierClass', type,function(req, res) {
     var AddSupplierClass = async (function (){
-        var NextCode = await (SetupController.GetNextCodeSupplierClass(req,res));
-        await (SetupController.addSupplierClass(req,res,NextCode));
+        SetupController.addSupplierClass(req,res);
     });
     AddSupplierClass();
 });
@@ -225,8 +221,7 @@ router.post('/EditSupplierClass', type,function(req, res) {
 
 router.post('/AddPaymentMethod', type,function(req, res) {
     var AddPaymentMethod = async (function (){
-        var NextCode = await (SetupController.GetNextCodePaymentMethods(req,res));
-        await (SetupController.addPaymentMethod(req,res,NextCode));
+        SetupController.addPaymentMethod(req,res);
     });
     AddPaymentMethod();
 });
@@ -240,8 +235,7 @@ router.post('/EditPaymentMethod', type,function(req, res) {
 
 router.post('/AddWaysOfDelivery', type,function(req, res) {
     var AddWaysOfDelivery = async (function (){
-        var NextCode = await (SetupController.GetNextCodeWaysOfDelivery(req,res));
-        await (SetupController.addWaysOfDelivery(req,res,NextCode));
+        SetupController.addWaysOfDelivery(req,res);
     });
     AddWaysOfDelivery();
 });
@@ -256,8 +250,7 @@ router.post('/EditWaysOfDelivery', type,function(req, res) {
 
 router.post('/AddForm', type,function(req, res) {
     var AddForm = async (function (){
-        var NextCode = await (SetupController.GetNextCodeForm(req,res));
-        await (SetupController.addForm(req,res,NextCode));
+        SetupController.addForm(req,res);
     });
     AddForm();
 });
@@ -271,8 +264,7 @@ router.post('/EditForm', type,function(req, res) {
 
 router.post('/AddPacking', type,function(req, res) {
     var AddPacking = async (function (){
-        var NextCode = await (SetupController.GetNextCodePacking(req,res));
-        await (SetupController.addPacking(req,res,NextCode));
+        SetupController.addPacking(req,res);
     });
     AddPacking();
 });
@@ -287,8 +279,7 @@ router.post('/EditPacking', type,function(req, res) {
 
 router.post('/AddProductCategory', type,function(req, res) {
     var AddProductCategory = async (function (){
-        var NextCode = await (SetupController.GetNextCodeProductCategory(req,res));
-        await (SetupController.addProductCategory(req,res,NextCode));
+        SetupController.addProductCategory(req,res);
     });
     AddProductCategory();
 });
@@ -303,8 +294,7 @@ router.post('/EditProductCategory', type,function(req, res) {
 
 router.post('/AddReleaseType', type,function(req, res) {
     var AddReleaseType = async (function (){
-        var NextCode = await (SetupController.GetNextCodeReleaseType(req,res));
-        await (SetupController.addReleaseType(req,res,NextCode));
+        SetupController.addReleaseType(req,res);
     });
     AddReleaseType();
 });
@@ -319,8 +309,7 @@ router.post('/EditReleaseType', type,function(req, res) {
 
 router.post('/AddStorageType', type,function(req, res) {
     var AddStorageType = async (function (){
-        var NextCode = await (SetupController.GetNextCodeStorageType(req,res));
-        await (SetupController.addStorageType(req,res,NextCode));
+       SetupController.addStorageType(req,res);
     });
     AddStorageType();
 });
@@ -335,8 +324,7 @@ router.post('/EditStorageType', type,function(req, res) {
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
-        var NextCode = await (SupplierController.GetNextCode(req,res));
-        await (SupplierController.addSupplier(req,res,NextCode));
+        SupplierController.addSupplier(req,res,NextCode);
     });
     AddSupplier();
 });
@@ -358,8 +346,7 @@ router.post('/EditSupplierContact', type,function(req, res) {
 
 router.post('/AddUser', type,function(req, res) {
     var addUser = async (function (){
-        var NextCode = await (User.GetNextCode(req,res));
-        await (User.addUser(req,res,NextCode));
+        User.addUser(req,res,NextCode);
     });
     addUser();
 });

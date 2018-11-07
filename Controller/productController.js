@@ -84,61 +84,71 @@ module.exports = {
 			})
 		},
 
-		GetNextCode:function(req,res){
-    		Prodcut.getLastCode(function(err,prodcut){
-				if (prodcut) 
-					res.send( Number(prodcut.Product_Code)+1);
-				else
-					res.send(1);
-			})
-		},
+		// GetNextCode:function(req,res){
+  //   		Prodcut.getLastCode(function(err,prodcut){
+		// 		if (prodcut) 
+		// 			res.send( Number(prodcut.Product_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
 
-		addPrdouct:function(req,res,NextCode){
-			var newProduct = new Prodcut();
-			newProduct.Product_Code     	 		= NextCode;
-			newProduct.Product_Name 	     		= request.body.Product_Name;
-			newProduct.Product_Manufacturer 	    = request.body.Product_Manufacturer;
-			newProduct.Product_Exporter 	     	= request.body.Product_Exporter;
-			newProduct.Product_Chemical_Name   		= request.body.Product_Chemical_Name;
-			newProduct.Product_Molecular_Formula	= request.body.Product_Molecular_Formula;
-			newProduct.Product_Molecular_Weight	 	= request.body.Product_Molecular_Weight;
-			newProduct.Product_CAS_Number	 		= request.body.Product_CAS_Number;
-			newProduct.Product_EC_Number	 		= request.body.Product_EC_Number;
-			newProduct.Product_Appearance	 		= request.body.Product_Appearance;
-			newProduct.Product_Active_Content	 	= request.body.Product_Active_Content;
-			newProduct.Product_pH	 				= request.body.Product_pH;
-			newProduct.Product_Sp_gravity	 		= request.body.Product_Sp_gravity;
-			newProduct.Product_Chloride	 			= request.body.Product_Chloride;
-			newProduct.Product_Iron	 				= request.body.Product_Iron;
-			newProduct.Product_Phosphorous_Acid	 	= request.body.Product_Phosphorous_Acid;
-			newProduct.Product_O_phosphate	 		= request.body.Product_O_phosphate;
-			newProduct.Product_Hazen_color	 		= request.body.Product_Hazen_color;
-			newProduct.Product_Category_ID	 		= request.body.Product_Category_ID;
-			newProduct.Product_Estba7s	 			= request.body.Product_Estba7s;
-		 	newProduct.Product_Origin_Country_Code  = request.body.Product_Origin_Country_Code;
-        	newProduct.Product_Packing_Code         = request.body.Product_Packing_Code;
-        	newProduct.Product_Supplier_Codes       = request.body.Product_Supplier_Codes;
-        	newProduct.Product_MSDS         		= request.body.Product_MSDS;
-        	newProduct.Product_Classes_Code         = request.body.Product_Classes_Code;
-        	newProduct.Product_Assay         		= request.body.Product_Assay;
-        	newProduct.Product_Form_Code         	= request.body.Product_Form_Code;
-        	newProduct.Product_Certification        = request.body.Product_Certification;
-        	newProduct.Product_Release_Code         = request.body.Product_Release_Code;
-        	newProduct.Product_StorageType_Code     = request.body.Product_StorageType_Code;
-        	newProduct.Product_ProductCategory_Code = request.body.Product_ProductCategory_Code;
-			
-			newProduct.save(function(error, doneadd){
-				if(error){
-					return res.send({
-						message: error
-					});
-				}
-				else{
-					return res.send({
-						message: true
-					});
-				}
+		addPrdouct:function(req,res){
+
+			Prodcut.getLastCode(function(err,product){
+				if (product) 
+					InsertIntoProduct(product.Product_Code+1);
+				else
+					InsertIntoProduct(1);
 			});
+
+			function InsertIntoProduct(NextCode){
+				var newProduct = new Prodcut();
+				newProduct.Product_Code     	 		= NextCode;
+				newProduct.Product_Name 	     		= request.body.Product_Name;
+				newProduct.Product_Manufacturer 	    = request.body.Product_Manufacturer;
+				newProduct.Product_Exporter 	     	= request.body.Product_Exporter;
+				newProduct.Product_Chemical_Name   		= request.body.Product_Chemical_Name;
+				newProduct.Product_Molecular_Formula	= request.body.Product_Molecular_Formula;
+				newProduct.Product_Molecular_Weight	 	= request.body.Product_Molecular_Weight;
+				newProduct.Product_CAS_Number	 		= request.body.Product_CAS_Number;
+				newProduct.Product_EC_Number	 		= request.body.Product_EC_Number;
+				newProduct.Product_Appearance	 		= request.body.Product_Appearance;
+				newProduct.Product_Active_Content	 	= request.body.Product_Active_Content;
+				newProduct.Product_pH	 				= request.body.Product_pH;
+				newProduct.Product_Sp_gravity	 		= request.body.Product_Sp_gravity;
+				newProduct.Product_Chloride	 			= request.body.Product_Chloride;
+				newProduct.Product_Iron	 				= request.body.Product_Iron;
+				newProduct.Product_Phosphorous_Acid	 	= request.body.Product_Phosphorous_Acid;
+				newProduct.Product_O_phosphate	 		= request.body.Product_O_phosphate;
+				newProduct.Product_Hazen_color	 		= request.body.Product_Hazen_color;
+				newProduct.Product_Category_ID	 		= request.body.Product_Category_ID;
+				newProduct.Product_Estba7s	 			= request.body.Product_Estba7s;
+			 	newProduct.Product_Origin_Country_Code  = request.body.Product_Origin_Country_Code;
+	        	newProduct.Product_Packing_Code         = request.body.Product_Packing_Code;
+	        	newProduct.Product_Supplier_Codes       = request.body.Product_Supplier_Codes;
+	        	newProduct.Product_MSDS         		= request.body.Product_MSDS;
+	        	newProduct.Product_Classes_Code         = request.body.Product_Classes_Code;
+	        	newProduct.Product_Assay         		= request.body.Product_Assay;
+	        	newProduct.Product_Form_Code         	= request.body.Product_Form_Code;
+	        	newProduct.Product_Certification        = request.body.Product_Certification;
+	        	newProduct.Product_Release_Code         = request.body.Product_Release_Code;
+	        	newProduct.Product_StorageType_Code     = request.body.Product_StorageType_Code;
+	        	newProduct.Product_ProductCategory_Code = request.body.Product_ProductCategory_Code;
+				
+				newProduct.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
 		},
 
 		editProduct:function(req,res){

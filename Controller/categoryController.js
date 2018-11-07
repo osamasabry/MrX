@@ -30,20 +30,20 @@ module.exports = {
 			})
 		},
 
-		GetNextCode:function(req,res){
-			Category.getLastCode(function(err,category){
-				if (category) {
-					console.log(category)
-					res.send({
-						nextCode: category.Category_ID+1
-					})
-				}
-				else
-					res.send({
-						nextCode: 1
-					});
-			})
-		},
+		// GetNextCode:function(req,res){
+		// 	Category.getLastCode(function(err,category){
+		// 		if (category) {
+		// 			console.log(category)
+		// 			res.send({
+		// 				nextCode: category.Category_ID+1
+		// 			})
+		// 		}
+		// 		else
+		// 			res.send({
+		// 				nextCode: 1
+		// 			});
+		// 	})
+		// },
 
 		addCategory:function(request,res){
 			Category.getLastCode(function(err,category){

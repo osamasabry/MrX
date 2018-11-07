@@ -30,17 +30,26 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeCountry:function(req,res){
+		// GetNextCodeCountry:function(req,res){
+		// 	Country.getLastCode(function(err,country){
+		// 		if (country) 
+		// 			res.send( Number(country.Country_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addCountry:function(req,res){
 			Country.getLastCode(function(err,country){
 				if (country) 
-					res.send( Number(country.Country_Code)+1);
+					InsertIntoCountry(country.Country_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoCountry(1);
+			});
 
-		addCountry:function(req,res,NextCode){
-				var newCountry = new Country();
+			function InsertIntoCountry(NextCode){
+				var newCountry 	= new Country();
+
 				newCountry.Country_Code    	 = NextCode;
 				newCountry.Country_Name   	 = request.body.Country_Name;
 				newCountry.Country_IsActive	 = 1;
@@ -58,6 +67,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editCountry:function(request,res){
@@ -105,16 +115,25 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeSupplierType:function(req,res){
+		// GetNextCodeSupplierType:function(req,res){
+		// 	SupplierType.getLastCode(function(err,suppliertype){
+		// 		if (suppliertype) 
+		// 			res.send( Number(suppliertype.SupplierType_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addSupplierType:function(req,res){
 			SupplierType.getLastCode(function(err,suppliertype){
 				if (suppliertype) 
-					res.send( Number(suppliertype.SupplierType_Code)+1);
+					InsertIntoSupplierType(suppliertype.SupplierType_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoSupplierType(1);
+			});
 
-		addSupplierType:function(req,res,NextCode){
+			function InsertIntoSupplierType(NextCode){
+
 				var newSupplierType = new SupplierType();
 				newSupplierType.SupplierType_Code    	 = NextCode;
 				newSupplierType.SupplierType_Name   	 = request.body.SupplierType_Name;
@@ -133,6 +152,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editSupplierType:function(request,res){
@@ -181,16 +201,25 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeSupplierClass:function(req,res){
+		// GetNextCodeSupplierClass:function(req,res){
+		// 	SupplierClass.getLastCode(function(err,supplierclass){
+		// 		if (supplierclass) 
+		// 			res.send( Number(supplierclass.Class_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addSupplierClass:function(req,res){
 			SupplierClass.getLastCode(function(err,supplierclass){
 				if (supplierclass) 
-					res.send( Number(supplierclass.Class_Code)+1);
+					InsertIntoSupplierClass(supplierclass.Class_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoSupplierClass(1);
+			});
 
-		addSupplierClass:function(req,res,NextCode){
+			function InsertIntoSupplierClass(NextCode){
+
 				var newSupplierClass = new SupplierClass();
 				newSupplierClass.Class_Code    		 = NextCode;
 				newSupplierClass.Class_Name   	 	 = request.body.Class_Name;
@@ -209,6 +238,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editSupplierClass:function(request,res){
@@ -257,16 +287,26 @@ module.exports = {
 			})
 		},
 
-		GetNextCodePaymentMethods:function(req,res){
+		// GetNextCodePaymentMethods:function(req,res){
+		// 	PaymentMethod.getLastCode(function(err,paymentmethod){
+		// 		if (paymentmethod) 
+		// 			res.send( Number(paymentmethod.PaymentMethod_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addPaymentMethod:function(req,res){
+
 			PaymentMethod.getLastCode(function(err,paymentmethod){
 				if (paymentmethod) 
-					res.send( Number(paymentmethod.PaymentMethod_Code)+1);
+					InsertIntoPaymentMethod(paymentmethod.PaymentMethod_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoPaymentMethod(1);
+			});	
 
-		addPaymentMethod:function(req,res,NextCode){
+			function InsertIntoPaymentMethod(NextCode){
+
 				var newPaymentMethod = new PaymentMethods();
 				newPaymentMethod.PaymentMethod_Code    		 = NextCode;
 				newPaymentMethod.PaymentMethod_Name   	 	 = request.body.PaymentMethod_Name;
@@ -285,6 +325,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editPaymentMethod:function(request,res){
@@ -333,16 +374,25 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeWaysOfDelivery:function(req,res){
+		// GetNextCodeWaysOfDelivery:function(req,res){
+		// 	WayOfDelivery.getLastCode(function(err,wayofdelivery){
+		// 		if (wayofdelivery) 
+		// 			res.send( Number(wayofdelivery.WayOfDelivary_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addWaysOfDelivery:function(req,res){
+
 			WayOfDelivery.getLastCode(function(err,wayofdelivery){
 				if (wayofdelivery) 
-					res.send( Number(wayofdelivery.WayOfDelivary_Code)+1);
+					InsertIntoWayOfDelivery(wayofdelivery.WayOfDelivary_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoWayOfDelivery(1);
+			});
+			function InsertIntoWayOfDelivery(NextCode){
 
-		addWaysOfDelivery:function(req,res,NextCode){
 				var newWayOfDelivery = new WayOfDelivery();
 				newWayOfDelivery.WayOfDelivary_Code    		 = NextCode;
 				newWayOfDelivery.WayOfDelivary_Name   	 	 = request.body.WayOfDelivary_Name;
@@ -361,6 +411,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editWaysOfDelivery:function(request,res){
@@ -408,16 +459,24 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeForm:function(req,res){
+		// GetNextCodeForm:function(req,res){
+		// 	Form.getLastCode(function(err,form){
+		// 		if (form) 
+		// 			res.send( Number(form.Form_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addForm:function(req,res){
 			Form.getLastCode(function(err,form){
 				if (form) 
-					res.send( Number(form.Form_Code)+1);
+					InsertIntoForm(form.Form_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoForm(1);
+			});
 
-		addForm:function(req,res,NextCode){
+			function InsertIntoForm(NextCode){
 				var newForm = new Form();
 				newForm.Form_Code    		 = NextCode;
 				newForm.Form_Name   	 	 = request.body.Form_Name;
@@ -436,6 +495,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editForm:function(request,res){
@@ -484,16 +544,25 @@ module.exports = {
 			})
 		},
 
-		GetNextCodePacking:function(req,res){
+		// GetNextCodePacking:function(req,res){
+		// 	Packing.getLastCode(function(err,packing){
+		// 		if (packing) 
+		// 			res.send( Number(packing.Packing_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addPacking:function(req,res){
 			Packing.getLastCode(function(err,packing){
 				if (packing) 
-					res.send( Number(packing.Packing_Code)+1);
+					InsertIntoPacking(packing.Packing_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoPacking(1);
+			});
 
-		addPacking:function(req,res,NextCode){
+			function InsertIntoPacking(NextCode){
+
 				var newPacking = new Packing();
 				newPacking.Packing_Code    		 = NextCode;
 				newPacking.Packing_Name   	 	 = request.body.Packing_Name;
@@ -512,6 +581,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editPacking:function(request,res){
@@ -560,16 +630,26 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeProductCategory:function(req,res){
+		// GetNextCodeProductCategory:function(req,res){
+		// 	ProductCategory.getLastCode(function(err,productcategory){
+		// 		if (productcategory) 
+		// 			res.send( Number(productcategory.ProductCategory_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addProductCategory:function(req,res){
+
 			ProductCategory.getLastCode(function(err,productcategory){
 				if (productcategory) 
-					res.send( Number(productcategory.ProductCategory_Code)+1);
+					InsertIntoProductCategory(productcategory.ProductCategory_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoProductCategory(1);
+			});
 
-		addProductCategory:function(req,res,NextCode){
+			function InsertIntoProductCategory(NextCode){
+
 				var newProductCategory = new ProductCategory();
 				newProductCategory.ProductCategory_Code    		 = NextCode;
 				newProductCategory.ProductCategory_Name   	 	 = request.body.ProductCategory_Name;
@@ -588,6 +668,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editProductCategory:function(request,res){
@@ -635,16 +716,25 @@ module.exports = {
 			})
 		},
 		
-		GetNextCodeReleaseType:function(req,res){
+		// GetNextCodeReleaseType:function(req,res){
+		// 	ReleaseType.getLastCode(function(err,releasetype){
+		// 		if (releasetype) 
+		// 			res.send( Number(releasetype.ReleaseType_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addReleaseType:function(req,res){
 			ReleaseType.getLastCode(function(err,releasetype){
 				if (releasetype) 
-					res.send( Number(releasetype.ReleaseType_Code)+1);
+					InsertIntoReleaseType(releasetype.ReleaseType_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoReleaseType(1);
+			});
 
-		addReleaseType:function(req,res,NextCode){
+			function InsertIntoReleaseType(NextCode){
+
 				var newReleaseType = new ReleaseType();
 				newReleaseType.ReleaseType_Code    		 = NextCode;
 				newReleaseType.ReleaseType_Name   	 	 = request.body.ReleaseType_Name;
@@ -663,6 +753,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editReleaseType:function(request,res){
@@ -710,16 +801,25 @@ module.exports = {
 			})
 		},
 
-		GetNextCodeStorageType:function(req,res){
+		// GetNextCodeStorageType:function(req,res){
+		// 	StorageType.getLastCode(function(err,storagetype){
+		// 		if (storagetype) 
+		// 			res.send( Number(storagetype.StorageType_Code)+1);
+		// 		else
+		// 			res.send(1);
+		// 	})
+		// },
+
+		addStorageType:function(req,res){
+
 			StorageType.getLastCode(function(err,storagetype){
 				if (storagetype) 
-					res.send( Number(storagetype.StorageType_Code)+1);
+					InsertIntoStorageType(storagetype.StorageType_Code+1);
 				else
-					res.send(1);
-			})
-		},
+					InsertIntoStorageType(1);
+			});
 
-		addStorageType:function(req,res,NextCode){
+			function InsertIntoStorageType(NextCode){
 				var newStorageType = new StorageType();
 				newStorageType.StorageType_Code    		 = NextCode;
 				newStorageType.StorageType_Name   	 	 = request.body.StorageType_Name;
@@ -738,6 +838,7 @@ module.exports = {
 						});
 					}
 				});
+			}
 		},
 
 		editStorageType:function(request,res){
