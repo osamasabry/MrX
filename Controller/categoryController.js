@@ -73,4 +73,31 @@ module.exports = {
 				});
 			}
 		},
+		editCategory:function(request,res){
+
+			var myquery = { Category_ID: request.body.Category_ID }; 
+			var newvalues = { 
+				Category_Name	 		: request.body.Category_Name,
+				Category_IsActive	 	: request.body.Category_IsActive,
+				Category_Description	: request.body.Category_Description,
+
+			 };
+			 Category.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Category not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
 }

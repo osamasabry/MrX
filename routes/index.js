@@ -48,6 +48,13 @@ router.post('/AddCategory', type,function(req, res) {
     AddCategory();
 });
 
+router.post('/EditCategory', type,function(req, res) {
+    var EditCategory = async (function (){
+        CategoryController.editCategory(req,res)
+    });
+    EditCategory();
+});
+
 router.post('/getProduct', type,function(req, res) {
     var Product = async (function (){
         await (ProductController.getProduct(req,res));
