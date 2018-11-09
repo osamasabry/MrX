@@ -151,7 +151,7 @@ module.exports = {
 				Customer_StoreGPSLocation 	: request.body.Customer_StoreGPSLocation,
 				Customer_Category			: request.body.Customer_Category,
 				Customer_Type				: request.body.Customer_Type,
-				Customer_SellingAreaCodes   : request.body.Customer_SellingAreaCodes;
+				Customer_SellingAreaCodes   : request.body.Customer_SellingAreaCodes,
 			} };
 			var myquery = { Customer_Code: request.body.Customer_Code }; 
 			Customer.findOneAndUpdate( myquery,newvalues, function(err, field) {
