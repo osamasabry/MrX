@@ -184,12 +184,8 @@ module.exports = {
 				}
 			})
 		},
-<<<<<<< HEAD
-		addSupplierClass:function(request,res){
-=======
 
-		addSupplierClass:function(req,res){
->>>>>>> 2b2b7c1a542906646953bb349ef96e41c97ab635
+		addSupplierClass:function(request,res){
 			SupplierClass.getLastCode(function(err,supplierclass){
 				if (supplierclass) 
 					InsertIntoSupplierClass(supplierclass.Class_Code+1);
@@ -266,20 +262,7 @@ module.exports = {
 			})
 		},
 
-<<<<<<< HEAD
-		// GetNextCodePaymentMethods:function(req,res){
-		// 	PaymentMethod.getLastCode(function(err,paymentmethod){
-		// 		if (paymentmethod) 
-		// 			res.send( Number(paymentmethod.PaymentMethod_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addPaymentMethod:function(request,res){
-=======
-		addPaymentMethod:function(req,res){
->>>>>>> 2b2b7c1a542906646953bb349ef96e41c97ab635
 
 			PaymentMethod.getLastCode(function(err,paymentmethod){
 				if (paymentmethod) 
@@ -433,20 +416,7 @@ module.exports = {
 			})
 		},
 
-<<<<<<< HEAD
-		// GetNextCodeForm:function(req,res){
-		// 	Form.getLastCode(function(err,form){
-		// 		if (form) 
-		// 			res.send( Number(form.Form_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addForm:function(request,res){
-=======
-		addForm:function(req,res){
->>>>>>> 2b2b7c1a542906646953bb349ef96e41c97ab635
 			Form.getLastCode(function(err,form){
 				if (form) 
 					InsertIntoForm(form.Form_Code+1);
@@ -522,20 +492,8 @@ module.exports = {
 			})
 		},
 
-<<<<<<< HEAD
-		// GetNextCodePacking:function(req,res){
-		// 	Packing.getLastCode(function(err,packing){
-		// 		if (packing) 
-		// 			res.send( Number(packing.Packing_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
 
 		addPacking:function(request,res){
-=======
-		addPacking:function(req,res){
->>>>>>> 2b2b7c1a542906646953bb349ef96e41c97ab635
 			Packing.getLastCode(function(err,packing){
 				if (packing) 
 					InsertIntoPacking(packing.Packing_Code+1);
