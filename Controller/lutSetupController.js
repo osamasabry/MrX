@@ -187,7 +187,7 @@ module.exports = {
 
 		getClasses:function(req,res){
 			SupplierClass.find({})
-			.select('Class_Code Class_Name')
+			.select('Class_Code Class_Name Class_Description Class_IsActive')
 			.exec(function(err, suplierclass) {
 				if (err){
 		    		return res.send({
@@ -200,17 +200,7 @@ module.exports = {
 				}
 			})
 		},
-
-		// GetNextCodeSupplierClass:function(req,res){
-		// 	SupplierClass.getLastCode(function(err,supplierclass){
-		// 		if (supplierclass) 
-		// 			res.send( Number(supplierclass.Class_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
-		addSupplierClass:function(req,res){
+		addSupplierClass:function(request,res){
 			SupplierClass.getLastCode(function(err,supplierclass){
 				if (supplierclass) 
 					InsertIntoSupplierClass(supplierclass.Class_Code+1);
@@ -273,7 +263,7 @@ module.exports = {
 		
 		getPaymentMethods:function(req,res){
 			PaymentMethod.find({})
-			.select('PaymentMethod_Code PaymentMethod_Name')
+			.select('PaymentMethod_Code PaymentMethod_Name PaymentMethod_Description PaymentMethod_IsActive')
 			.exec(function(err, paymentMethod) {
 				if (err){
 		    		return res.send({
@@ -296,7 +286,7 @@ module.exports = {
 		// 	})
 		// },
 
-		addPaymentMethod:function(req,res){
+		addPaymentMethod:function(request,res){
 
 			PaymentMethod.getLastCode(function(err,paymentmethod){
 				if (paymentmethod) 
@@ -445,7 +435,7 @@ module.exports = {
 	/****************** Form ***********/
 		getForm:function(req,res){
 			Form.find({})
-			.select('Form_Code Form_Name')
+			.select('Form_Code Form_Name Form_Description Form_IsActive')
 			.exec(function(err, form) {
 				if (err){
 		    		return res.send({
@@ -468,7 +458,7 @@ module.exports = {
 		// 	})
 		// },
 
-		addForm:function(req,res){
+		addForm:function(request,res){
 			Form.getLastCode(function(err,form){
 				if (form) 
 					InsertIntoForm(form.Form_Code+1);
@@ -530,7 +520,7 @@ module.exports = {
 
 		getPacking:function(req,res){
 			Packing.find({})
-			.select('Packing_Code Packing_Name')
+			.select('Packing_Code Packing_Name Packing_Description Packing_IsActive')
 			.exec(function(err, packing) {
 				if (err){
 		    		return res.send({
@@ -553,7 +543,7 @@ module.exports = {
 		// 	})
 		// },
 
-		addPacking:function(req,res){
+		addPacking:function(request,res){
 			Packing.getLastCode(function(err,packing){
 				if (packing) 
 					InsertIntoPacking(packing.Packing_Code+1);
