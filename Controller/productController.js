@@ -14,6 +14,7 @@ module.exports = {
 			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
 			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
 			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
 			.lean()
 			.exec(function(err, product) {
 				if (err){
@@ -39,6 +40,7 @@ module.exports = {
 			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
 			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
 			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
 			.lean()
 			.exec(function(err, product) {
 				if (err){
@@ -127,6 +129,7 @@ module.exports = {
 			 	newProduct.Product_Origin_Country_Code  = request.body.Product_Origin_Country_Code;
 	        	newProduct.Product_Packing_Code         = request.body.Product_Packing_Code;
 	        	newProduct.Product_Supplier_Codes       = request.body.Product_Supplier_Codes;
+	        	newProduct.Product_Customer_Codes       = request.body.Product_Customer_Codes;
 	        	newProduct.Product_MSDS         		= request.body.Product_MSDS;
 	        	newProduct.Product_Classes_Code         = request.body.Product_Classes_Code;
 	        	newProduct.Product_Assay         		= request.body.Product_Assay;
@@ -175,6 +178,7 @@ module.exports = {
 				Product_Origin_Country_Code 	  : request.body.Product_Origin_Country_Code,
         		Product_Packing_Code              : request.body.Product_Packing_Code,
         		Product_Supplier_Codes       	  : request.body.Product_Supplier_Codes,
+        		Product_Customer_Codes       	  : request.body.Product_Customer_Codes,
 	        	Product_MSDS         			  : request.body.Product_MSDS,
 	        	Product_Classes_Code         	  : request.body.Product_Classes_Code,
 	        	Product_Assay         			  : request.body.Product_Assay,

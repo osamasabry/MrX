@@ -8,6 +8,8 @@ var Packing 		= require('../Model/lut_packing');
 var ProductCategory = require('../Model/lut_product_category');
 var ReleaseType 	= require('../Model/lut_release_type');
 var StorageType 	= require('../Model/lut_storage_type');
+var SellingArea 	= require('../Model/lut_sell_area');
+
 
 
 
@@ -29,15 +31,6 @@ module.exports = {
 				}
 			})
 		},
-
-		// GetNextCodeCountry:function(req,res){
-		// 	Country.getLastCode(function(err,country){
-		// 		if (country) 
-		// 			res.send( Number(country.Country_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
 
 		addCountry:function(req,res){
 			Country.getLastCode(function(err,country){
@@ -114,15 +107,6 @@ module.exports = {
 				}
 			})
 		},
-
-		// GetNextCodeSupplierType:function(req,res){
-		// 	SupplierType.getLastCode(function(err,suppliertype){
-		// 		if (suppliertype) 
-		// 			res.send( Number(suppliertype.SupplierType_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
 
 		addSupplierType:function(req,res){
 			SupplierType.getLastCode(function(err,suppliertype){
@@ -201,15 +185,6 @@ module.exports = {
 			})
 		},
 
-		// GetNextCodeSupplierClass:function(req,res){
-		// 	SupplierClass.getLastCode(function(err,supplierclass){
-		// 		if (supplierclass) 
-		// 			res.send( Number(supplierclass.Class_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addSupplierClass:function(req,res){
 			SupplierClass.getLastCode(function(err,supplierclass){
 				if (supplierclass) 
@@ -286,15 +261,6 @@ module.exports = {
 				}
 			})
 		},
-
-		// GetNextCodePaymentMethods:function(req,res){
-		// 	PaymentMethod.getLastCode(function(err,paymentmethod){
-		// 		if (paymentmethod) 
-		// 			res.send( Number(paymentmethod.PaymentMethod_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
 
 		addPaymentMethod:function(req,res){
 
@@ -374,15 +340,6 @@ module.exports = {
 			})
 		},
 
-		// GetNextCodeWaysOfDelivery:function(req,res){
-		// 	WayOfDelivery.getLastCode(function(err,wayofdelivery){
-		// 		if (wayofdelivery) 
-		// 			res.send( Number(wayofdelivery.WayOfDelivary_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addWaysOfDelivery:function(req,res){
 
 			WayOfDelivery.getLastCode(function(err,wayofdelivery){
@@ -459,15 +416,6 @@ module.exports = {
 			})
 		},
 
-		// GetNextCodeForm:function(req,res){
-		// 	Form.getLastCode(function(err,form){
-		// 		if (form) 
-		// 			res.send( Number(form.Form_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addForm:function(req,res){
 			Form.getLastCode(function(err,form){
 				if (form) 
@@ -543,15 +491,6 @@ module.exports = {
 				}
 			})
 		},
-
-		// GetNextCodePacking:function(req,res){
-		// 	Packing.getLastCode(function(err,packing){
-		// 		if (packing) 
-		// 			res.send( Number(packing.Packing_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
 
 		addPacking:function(req,res){
 			Packing.getLastCode(function(err,packing){
@@ -630,15 +569,6 @@ module.exports = {
 			})
 		},
 
-		// GetNextCodeProductCategory:function(req,res){
-		// 	ProductCategory.getLastCode(function(err,productcategory){
-		// 		if (productcategory) 
-		// 			res.send( Number(productcategory.ProductCategory_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addProductCategory:function(req,res){
 
 			ProductCategory.getLastCode(function(err,productcategory){
@@ -716,15 +646,6 @@ module.exports = {
 			})
 		},
 		
-		// GetNextCodeReleaseType:function(req,res){
-		// 	ReleaseType.getLastCode(function(err,releasetype){
-		// 		if (releasetype) 
-		// 			res.send( Number(releasetype.ReleaseType_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
 		addReleaseType:function(req,res){
 			ReleaseType.getLastCode(function(err,releasetype){
 				if (releasetype) 
@@ -859,6 +780,83 @@ module.exports = {
 	            if (!field) {
 	            	return res.send({
 						message: 'Storage Type not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+/****************** Selling Area ***********/
+
+		getSellingArea:function(req,res){
+			SellingArea.find({})
+			.select('SellingArea_Code SellingArea_Name')
+			.exec(function(err, sellingarea) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(sellingarea) {
+		    		res.send(sellingarea);
+				}else{
+		    		res.send("no Selling Area");
+				}
+			})
+		},
+
+		addSellingArea:function(req,res){
+
+			SellingArea.getLastCode(function(err,sellingarea){
+				if (sellingarea) 
+					InsertIntoSellingArea(sellingarea.SellingArea_Code+1);
+				else
+					InsertIntoSellingArea(1);
+			});
+
+			function InsertIntoSellingArea(NextCode){
+				var newSellingArea = new SellingArea();
+				newSellingArea.SellingArea_Code    		 = NextCode;
+				newSellingArea.SellingArea_Name   	 	 = request.body.SellingArea_Name;
+				newSellingArea.SellingArea_Description   = request.body.SellingArea_Description;
+				newSellingArea.SellingArea_IsActive		 = 1;
+				
+				newSellingArea.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
+
+		editSellingArea:function(request,res){
+
+			var myquery = { SellingArea_Code: request.body.SellingArea_Code }; 
+			var newvalues = { 
+				SellingArea_Name	 		: request.body.SellingArea_Name,
+				SellingArea_Description	 	: request.body.SellingArea_Description,
+				SellingArea_IsActive	 	: request.body.SellingArea_IsActive,
+
+			 };
+			SellingArea.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Selling Area not exists'
 					});
 	            } else {
 
