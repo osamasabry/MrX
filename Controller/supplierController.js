@@ -1,7 +1,11 @@
 var Supplier = require('../Model/supplier');
 var Category = require('../Model/category');
 
-
+var SupplierType 	= require('../Model/lut_supplier_types');
+var SupplierClass 	= require('../Model/lut_classes');
+var Country 		= require('../Model/countries');
+var PaymentMethod 	= require('../Model/lut_payment_methods');
+var WayOfDelivery 	= require('../Model/lut_ways_of_delivery');
 
 module.exports = {
 		getSupplier:function(req,res){
@@ -126,7 +130,6 @@ module.exports = {
 
 		editSupplier:function(request,res){
 			var newvalues = { $set: {
-				Product_Name 	    		: request.body.Product_Name,
 				Supplier_Name   			: request.body.Supplier_Name,
 				Supplier_Email				: request.body.Supplier_Email,
 				Supplier_Country			: request.body.Supplier_Country,

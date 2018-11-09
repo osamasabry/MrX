@@ -6,6 +6,10 @@ var CategoryController = require('../Controller/categoryController');
 var ProductController = require('../Controller/productController');
 var SupplierController = require('../Controller/supplierController');
 var SetupController = require('../Controller/lutSetupController');
+var CustomerController = require('../Controller/customerController');
+
+
+
 
 
 
@@ -174,6 +178,13 @@ router.get('/getStorageType', type,function(req, res) {
     StorageType();
 });
 
+router.get('/getSellingArea', type,function(req, res) {
+    var SellingArea = async (function (){
+        await (SetupController.getSellingArea(req,res));
+    });
+    SellingArea();
+});
+
 router.post('/AddCountry', type,function(req, res) {
     var AddCountry = async (function (){
         SetupController.addCountry(req,res);
@@ -322,6 +333,21 @@ router.post('/EditStorageType', type,function(req, res) {
 });
 
 
+router.post('/AddSellingArea', type,function(req, res) {
+    var AddSellingArea = async (function (){
+       SetupController.addSellingArea(req,res);
+    });
+    AddSellingArea();
+});
+
+router.post('/EditSellingArea', type,function(req, res) {
+    var EditSellingArea = async (function (){
+        await (SetupController.editSellingArea(req,res));
+    });
+    EditSellingArea();
+});
+
+
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
         SupplierController.addSupplier(req,res,NextCode);
@@ -350,5 +376,43 @@ router.post('/AddUser', type,function(req, res) {
     });
     addUser();
 });
+
+
+//************** Customer **********************************
+router.get('/getCustomer', type,function(req, res) {
+    var Customer = async (function (){
+        await (CustomerController.getCustomer(req,res));
+    });
+    Customer();
+});
+
+router.get('/getAllCustomer', type,function(req, res) {
+    var Customeres = async (function (){
+        await (CustomerController.getAllCustomer(req,res));
+    });
+    Customeres();
+});
+
+router.post('/addCustomer', type,function(req, res) {
+    var AddCustomer = async (function (){
+        CustomerController.addCustomer(req,res,NextCode);
+    });
+    AddCustomer();
+});
+
+router.post('/EditCustomer', type,function(req, res) {
+    var EditCustomer = async (function (){
+        await (CustomerController.editCustomer(req,res));
+    });
+    EditCustomer();
+});
+
+router.post('/EditCustomerContact', type,function(req, res) {
+    var EditCustomerContact = async (function (){
+        await (CustomerController.editCustomerContact(req,res));
+    });
+    EditCustomerContact();
+});
+
 
 module.exports = router;
