@@ -95,7 +95,7 @@ module.exports = {
 		// 	})
 		// },
 
-		addPrdouct:function(req,res){
+		addProduct:function(req,res){
 
 			Prodcut.getLastCode(function(err,product){
 				if (product) 

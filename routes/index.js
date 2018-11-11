@@ -7,9 +7,7 @@ var ProductController = require('../Controller/productController');
 var SupplierController = require('../Controller/supplierController');
 var SetupController = require('../Controller/lutSetupController');
 var CustomerController = require('../Controller/customerController');
-
-
-
+var SearchController = require('../Controller/searchController');
 
 
 
@@ -414,5 +412,76 @@ router.post('/EditCustomerContact', type,function(req, res) {
     EditCustomerContact();
 });
 
+/****************** Search *********************/
+
+router.post('/getCustomerByProductID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getCustomerByProductID(req,res));
+    });
+    Search();
+});
+
+router.post('/getSupplierByProductID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getSupplierByProductID(req,res));
+    });
+    Search();
+});
+
+router.post('/getProductBySupplierID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getProductBySupplierID(req,res));
+    });
+    Search();
+});
+
+router.post('/getCustomerByName', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getCustomerByName(req,res));
+    });
+    Search();
+});
+
+router.post('/getSupplierByName', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getSupplierByName(req,res));
+    });
+    Search();
+});
+
+router.post('/getProductByName', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getProductByName(req,res));
+    });
+    Search();
+});
+
+router.post('/getCustomerByCategoryID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getCustomerByCategoryID(req,res));
+    });
+    Search();
+});
+
+router.post('/getSupplierByCategoryID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getSupplierByCategoryID(req,res));
+    });
+    Search();
+});
+
+router.post('/getProductByCategoryID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getProductByCategoryID(req,res));
+    });
+    Search();
+});
+
+router.post('/getProductByProductCategoryID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getProductByProductCategoryID(req,res));
+    });
+    Search();
+});
 
 module.exports = router;
