@@ -94,7 +94,7 @@ module.exports = {
 
 		getSupplierTypes:function(req,res){
 			SupplierType.find({})
-			.select('SupplierType_Code SupplierType_Name')
+			.select('SupplierType_Code SupplierType_Name SupplierType_Description SupplierType_IsActive')
 			.exec(function(err, supptype) {
 				if (err){
 		    		return res.send({
@@ -108,7 +108,7 @@ module.exports = {
 			})
 		},
 
-		addSupplierType:function(req,res){
+		addSupplierType:function(request,res){
 			SupplierType.getLastCode(function(err,suppliertype){
 				if (suppliertype) 
 					InsertIntoSupplierType(suppliertype.SupplierType_Code+1);
@@ -326,7 +326,7 @@ module.exports = {
 
 		getWaysOfDelivery:function(req,res){
 			WayOfDelivery.find({})
-			.select('WayOfDelivary_Code WayOfDelivary_Name')
+			.select('WayOfDelivary_Code WayOfDelivary_Name WayOfDelivary_Description WayOfDelivary_IsActive')
 			.exec(function(err, waysofDelivery) {
 				if (err){
 		    		return res.send({
@@ -340,7 +340,7 @@ module.exports = {
 			})
 		},
 
-		addWaysOfDelivery:function(req,res){
+		addWaysOfDelivery:function(request,res){
 
 			WayOfDelivery.getLastCode(function(err,wayofdelivery){
 				if (wayofdelivery) 
@@ -556,7 +556,7 @@ module.exports = {
 
 		getProductCategory:function(req,res){
 			ProductCategory.find({})
-			.select('ProductCategory_Code ProductCategory_Name')
+			.select('ProductCategory_Code ProductCategory_Name ProductCategory_Description ProductCategory_IsActive')
 			.exec(function(err, product_category) {
 				if (err){
 		    		return res.send({
@@ -570,7 +570,7 @@ module.exports = {
 			})
 		},
 
-		addProductCategory:function(req,res){
+		addProductCategory:function(request,res){
 
 			ProductCategory.getLastCode(function(err,productcategory){
 				if (productcategory) 
@@ -633,7 +633,7 @@ module.exports = {
 
 		getReleaseType:function(req,res){
 			ReleaseType.find({})
-			.select('Release_Code Release_Name')
+			.select('ReleaseType_Code ReleaseType_Name ReleaseType_Description ReleaseType_IsActive')
 			.exec(function(err, release) {
 				if (err){
 		    		return res.send({
@@ -647,7 +647,7 @@ module.exports = {
 			})
 		},
 		
-		addReleaseType:function(req,res){
+		addReleaseType:function(request,res){
 			ReleaseType.getLastCode(function(err,releasetype){
 				if (releasetype) 
 					InsertIntoReleaseType(releasetype.ReleaseType_Code+1);
@@ -709,7 +709,7 @@ module.exports = {
 
 		getStorageType:function(req,res){
 			StorageType.find({})
-			.select('StorageType_Code StorageType_Name')
+			.select('StorageType_Code StorageType_Name StorageType_Description StorageType_IsActive')
 			.exec(function(err, storagetype) {
 				if (err){
 		    		return res.send({
@@ -732,7 +732,7 @@ module.exports = {
 		// 	})
 		// },
 
-		addStorageType:function(req,res){
+		addStorageType:function(request,res){
 
 			StorageType.getLastCode(function(err,storagetype){
 				if (storagetype) 
@@ -795,7 +795,7 @@ module.exports = {
 
 		getSellingArea:function(req,res){
 			SellingArea.find({})
-			.select('SellingArea_Code SellingArea_Name')
+			.select('SellingArea_Code SellingArea_Name SellingArea_Description SellingArea_IsActive')
 			.exec(function(err, sellingarea) {
 				if (err){
 		    		return res.send({
@@ -809,7 +809,7 @@ module.exports = {
 			})
 		},
 
-		addSellingArea:function(req,res){
+		addSellingArea:function(request,res){
 
 			SellingArea.getLastCode(function(err,sellingarea){
 				if (sellingarea) 

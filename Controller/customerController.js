@@ -112,7 +112,7 @@ module.exports = {
 				newCustomer.Customer_AddressGPSLocation 	= request.body.Customer_AddressGPSLocation;
 				newCustomer.Customer_StoreGPSLocation 		= request.body.Customer_StoreGPSLocation;
 				newCustomer.Customer_Category_IDs			= request.body.Customer_Category_IDs;
-				newCustomer.Customer_CustomerType_Codes		= request.body.Customer_CustomerType_Codes;
+				newCustomer.Customer_SupplierType_Codes		= request.body.Customer_SupplierType_Codes;
 				newCustomer.Customer_Rate					= request.body.Customer_Rate;
 				newCustomer.Customer_Class_Code 			= request.body.Customer_Class_Code;
 				newCustomer.Customer_IsActive 				= 1;
@@ -135,23 +135,26 @@ module.exports = {
 
 		editCustomer:function(request,res){
 			var newvalues = { $set: {
-				Customer_Name   			: request.body.Customer_Name,
-				Customer_Email				: request.body.Customer_Email,
-				Customer_Country			: request.body.Customer_Country,
-				Customer_City	 			: request.body.Customer_City,
-				Customer_Address	 		: request.body.Customer_Address,
-				Customer_Phone	 			: request.body.Customer_Phone,
-				Customer_FaceBook        	: request.body.Customer_FaceBook,
-				Customer_PaymentMethod   	: request.body.Customer_PaymentMethod,
-				Customer_Agency 		 	: request.body.Customer_Agency,	 
-				Customer_Certificate	 	: request.body.Customer_Certificate,
-				Customer_StoreAddress	 	: request.body.Customer_StoreAddress,
-				Customer_WayOfDelivery	 	: request.body.Customer_WayOfDelivery,
-				Customer_AddressGPSLocation : request.body.Customer_AddressGPSLocation,
-				Customer_StoreGPSLocation 	: request.body.Customer_StoreGPSLocation,
-				Customer_Category			: request.body.Customer_Category,
-				Customer_Type				: request.body.Customer_Type,
-				Customer_SellingAreaCodes   : request.body.Customer_SellingAreaCodes,
+				Customer_Name   					: request.body.Customer_Name,
+				Customer_Email						: request.body.Customer_Email,
+				Customer_Country_Code				: request.body.Customer_Country_Code,
+				Customer_City	 					: request.body.Customer_City,
+				Customer_Address	 				: request.body.Customer_Address,
+				Customer_Phone	 					: request.body.Customer_Phone,
+				Customer_FaceBook        			: request.body.Customer_FaceBook,
+				Customer_PaymentMethod_Codes   		: request.body.Customer_PaymentMethod_Codes,
+				Customer_Agencies 		 			: request.body.Customer_Agencies,	 
+				Customer_Certificates	 			: request.body.Customer_Certificates,
+				Customer_StoreAddress	 			: request.body.Customer_StoreAddress,
+				Customer_WayOfDelivery_Codes	 	: request.body.Customer_WayOfDelivery_Codes,
+				Customer_AddressGPSLocation 		: request.body.Customer_AddressGPSLocation,
+				Customer_StoreGPSLocation 			: request.body.Customer_StoreGPSLocation,
+				Customer_Category_IDs				: request.body.Customer_Category_IDs,
+				Customer_SupplierType_Codes			: request.body.Customer_SupplierType_Codes,
+				Customer_Rate						: request.body.Customer_Rate,
+				Customer_Class_Code					: request.body.Customer_Class_Code,
+				Customer_IsActive					: request.body.Customer_IsActive,
+				Customer_SellingAreaCodes   		: request.body.Customer_SellingAreaCodes,
 			} };
 			var myquery = { Customer_Code: request.body.Customer_Code }; 
 			Customer.findOneAndUpdate( myquery,newvalues, function(err, field) {

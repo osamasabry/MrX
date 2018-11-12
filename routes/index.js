@@ -393,7 +393,7 @@ router.get('/getAllCustomer', type,function(req, res) {
 
 router.post('/addCustomer', type,function(req, res) {
     var AddCustomer = async (function (){
-        CustomerController.addCustomer(req,res,NextCode);
+        CustomerController.addCustomer(req,res);
     });
     AddCustomer();
 });

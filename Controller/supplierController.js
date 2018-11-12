@@ -97,7 +97,6 @@ module.exports = {
 				newSupplier.Supplier_City	 		 		= request.body.Supplier_City;
 				newSupplier.Supplier_Address	 	 		= request.body.Supplier_Address;
 				newSupplier.Supplier_Phone	 		 		= request.body.Supplier_Phone;
-				// newSupplier.Supplier_Contact	 	 		= request.body.Supplier_Contact;
 				newSupplier.Supplier_FaceBook        		= request.body.Supplier_FaceBook;
 				newSupplier.Supplier_PaymentMethod_Codes   	= request.body.Supplier_PaymentMethod_Codes;
 				newSupplier.Supplier_TimeOfDelivery  		= request.body.Supplier_TimeOfDelivery;
@@ -130,25 +129,26 @@ module.exports = {
 
 		editSupplier:function(request,res){
 			var newvalues = { $set: {
-				Supplier_Name   			: request.body.Supplier_Name,
-				Supplier_Email				: request.body.Supplier_Email,
-				Supplier_Country			: request.body.Supplier_Country,
-				Supplier_City	 			: request.body.Supplier_City,
-				Supplier_Address	 		: request.body.Supplier_Address,
-				Supplier_Phone	 			: request.body.Supplier_Phone,
-				// Supplier_Contact	 		: request.body.Supplier_Contact,
-				// Supplier_Product_Ids		: request.body.Supplier_Product_Ids,
-				Supplier_FaceBook        	: request.body.Supplier_FaceBook,
-				Supplier_PaymentMethod   	: request.body.Supplier_PaymentMethod,
-				Supplier_TimeOfDelivery  	: request.body.Supplier_TimeOfDelivery,
-				Supplier_Agency 		 	: request.body.Supplier_Agency,	 
-				Supplier_Certificate	 	: request.body.Supplier_Certificate,
-				Supplier_StoreAddress	 	: request.body.Supplier_StoreAddress,
-				Supplier_WayOfDelivery	 	: request.body.Supplier_WayOfDelivery,
-				Supplier_AddressGPSLocation : request.body.Supplier_AddressGPSLocation,
-				Supplier_StoreGPSLocation 	: request.body.Supplier_StoreGPSLocation,
-				Supplier_Category			: request.body.Supplier_Category,
-				Supplier_Type				: request.body.Supplier_Type,
+				Supplier_Name   				: request.body.Supplier_Name,
+				Supplier_Email					: request.body.Supplier_Email,
+				Supplier_Country_Code			: request.body.Supplier_Country_Code,
+				Supplier_City	 				: request.body.Supplier_City,
+				Supplier_Address	 			: request.body.Supplier_Address,
+				Supplier_Phone	 				: request.body.Supplier_Phone,
+				Supplier_FaceBook        		: request.body.Supplier_FaceBook,
+				Supplier_PaymentMethod_Codes   	: request.body.Supplier_PaymentMethod_Codes,
+				Supplier_TimeOfDelivery  		: request.body.Supplier_TimeOfDelivery,
+				Supplier_Agencies	 		 	: request.body.Supplier_Agencies,	 
+				Supplier_Certificates	 		: request.body.Supplier_Certificates,
+				Supplier_StoreAddress	 		: request.body.Supplier_StoreAddress,
+				Supplier_WayOfDelivery_Codes	: request.body.Supplier_WayOfDelivery_Codes,
+				Supplier_AddressGPSLocation 	: request.body.Supplier_AddressGPSLocation,
+				Supplier_StoreGPSLocation 		: request.body.Supplier_StoreGPSLocation,
+				Supplier_Category_IDs			: request.body.Supplier_Category_IDs,
+				Supplier_SupplierType_Codes		: request.body.Supplier_SupplierType_Codes,
+				Supplier_Rate					: request.body.Supplier_Rate,
+				Supplier_Class_Code				: request.body.Supplier_Class_Code,
+				Supplier_IsActive				: request.body.Supplier_IsActive
 			} };
 			var myquery = { Supplier_Code: request.body.Supplier_Code }; 
 			Supplier.findOneAndUpdate( myquery,newvalues, function(err, field) {

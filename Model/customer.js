@@ -14,7 +14,6 @@ var Hcm_CustomerSchema = mongoose.Schema({
         Customer_AddressGPSLocation     :String,
         Customer_StoreGPSLocation       :String,
         Customer_Phone    		        :Number,
-        // Customer_Product_Ids            :[Number],
         Customer_Contact        :[{
             Customer_ContactTitle           : String,
             Customer_ContactName            : String,
