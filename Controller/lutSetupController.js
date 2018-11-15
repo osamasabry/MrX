@@ -16,7 +16,7 @@ var SellingArea 	= require('../Model/lut_sell_area');
 
 module.exports = {
 	/******************country ***********/
-		getCountries:function(req,res){
+		getCountries:function(request,res){
 			Country.find({})
 			.select('Country_Code Country_Name')
 			.exec(function(err, ctry) {
@@ -32,7 +32,7 @@ module.exports = {
 			})
 		},
 
-		addCountry:function(req,res){
+		addCountry:function(request,res){
 			Country.getLastCode(function(err,country){
 				if (country) 
 					InsertIntoCountry(country.Country_Code+1);
@@ -92,7 +92,7 @@ module.exports = {
 		},
 	/****************** Supplier Types ***********/
 
-		getSupplierTypes:function(req,res){
+		getSupplierTypes:function(request,res){
 			SupplierType.find({})
 			.select('SupplierType_Code SupplierType_Name SupplierType_Description SupplierType_IsActive')
 			.exec(function(err, supptype) {
@@ -169,7 +169,7 @@ module.exports = {
 
 	/****************** Supplier Class ***********/
 
-		getClasses:function(req,res){
+		getClasses:function(request,res){
 			SupplierClass.find({})
 			.select('Class_Code Class_Name Class_Description Class_IsActive')
 			.exec(function(err, suplierclass) {
@@ -246,7 +246,7 @@ module.exports = {
 	
 	/****************** Paymnet Methods ***********/
 		
-		getPaymentMethods:function(req,res){
+		getPaymentMethods:function(request,res){
 			PaymentMethod.find({})
 			.select('PaymentMethod_Code PaymentMethod_Name PaymentMethod_Description PaymentMethod_IsActive')
 			.exec(function(err, paymentMethod) {
@@ -324,7 +324,7 @@ module.exports = {
 
 	/****************** Ways Of Delivery ***********/
 
-		getWaysOfDelivery:function(req,res){
+		getWaysOfDelivery:function(request,res){
 			WayOfDelivery.find({})
 			.select('WayOfDelivary_Code WayOfDelivary_Name WayOfDelivary_Description WayOfDelivary_IsActive')
 			.exec(function(err, waysofDelivery) {
@@ -400,7 +400,7 @@ module.exports = {
 		},
 
 	/****************** Form ***********/
-		getForm:function(req,res){
+		getForm:function(request,res){
 			Form.find({})
 			.select('Form_Code Form_Name Form_Description Form_IsActive')
 			.exec(function(err, form) {
@@ -476,7 +476,7 @@ module.exports = {
 
 	/****************** Packing ***********/
 
-		getPacking:function(req,res){
+		getPacking:function(request,res){
 			Packing.find({})
 			.select('Packing_Code Packing_Name Packing_Description Packing_IsActive')
 			.exec(function(err, packing) {
@@ -554,7 +554,7 @@ module.exports = {
 
 	/****************** Product Category ***********/
 
-		getProductCategory:function(req,res){
+		getProductCategory:function(request,res){
 			ProductCategory.find({})
 			.select('ProductCategory_Code ProductCategory_Name ProductCategory_Description ProductCategory_IsActive')
 			.exec(function(err, product_category) {
@@ -631,7 +631,7 @@ module.exports = {
 		},
 	/****************** Release Type ***********/
 
-		getReleaseType:function(req,res){
+		getReleaseType:function(request,res){
 			ReleaseType.find({})
 			.select('ReleaseType_Code ReleaseType_Name ReleaseType_Description ReleaseType_IsActive')
 			.exec(function(err, release) {
@@ -707,7 +707,7 @@ module.exports = {
 		},
 	/****************** Storage Type ***********/
 
-		getStorageType:function(req,res){
+		getStorageType:function(request,res){
 			StorageType.find({})
 			.select('StorageType_Code StorageType_Name StorageType_Description StorageType_IsActive')
 			.exec(function(err, storagetype) {
@@ -793,7 +793,7 @@ module.exports = {
 
 /****************** Selling Area ***********/
 
-		getSellingArea:function(req,res){
+		getSellingArea:function(request,res){
 			SellingArea.find({})
 			.select('SellingArea_Code SellingArea_Name SellingArea_Description SellingArea_IsActive')
 			.exec(function(err, sellingarea) {
