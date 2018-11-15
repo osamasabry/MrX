@@ -301,7 +301,8 @@ module.exports = {
 	        	newProduct.Product_Certification        = product.Product_Certification;
 	        	newProduct.Product_Release_Code         = product.Product_Release_Code;
 	        	newProduct.Product_StorageType_Code     = product.Product_StorageType_Code;
-	        	newProduct.Product_ProductCategory_Code = product.Product_ProductCategory_Code;
+				newProduct.Product_ProductCategory_Code = product.Product_ProductCategory_Code;
+				newProduct.Product_IsActive				= product.Product_IsActive
 				
 				newProduct.save(function(error, doneadd){
 					if(error){
