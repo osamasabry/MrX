@@ -131,7 +131,7 @@ module.exports = {
 	        	newProduct.Product_Release_Code         = request.body.Product_Release_Code;
 	        	newProduct.Product_StorageType_Code     = request.body.Product_StorageType_Code;
 				newProduct.Product_ProductCategory_Code = request.body.Product_ProductCategory_Code;
-				newProduct.Product_IsActive						= 1;
+				newProduct.Product_IsActive				= 1;
 
 				
 				newProduct.save(function(error, doneadd){
@@ -227,7 +227,7 @@ module.exports = {
 	        	Product_Release_Code         	  : req.body.Product_Release_Code,
 	        	Product_StorageType_Code     	  : req.body.Product_StorageType_Code,
 	        	Product_ProductCategory_Code 	  : req.body.Product_ProductCategory_Code,
-			
+				Product_IsActive				  : req.body.Product_IsActive,
 			} };
 			var myquery = { Product_Code: req.body.Product_Code }; 
 			Product.findOneAndUpdate( myquery,newvalues, function(err, field) {
@@ -271,7 +271,7 @@ module.exports = {
 			function copyNewProduct(NextCode,product){
 				var newProduct = new Prodcut();
 				newProduct.Product_Code     	 		= NextCode;
-				newProduct.Product_Name 	     		= product.Product_Name;
+				newProduct.Product_Name 	     		= req.body.Product_Name,
 				newProduct.Product_Manufacturer 	    = product.Product_Manufacturer;
 				newProduct.Product_Exporter 	     	= product.Product_Exporter;
 				newProduct.Product_Chemical_Name   		= product.Product_Chemical_Name;
