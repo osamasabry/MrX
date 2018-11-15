@@ -87,9 +87,9 @@ Hcm_ProductSchema.virtual('productpacking',{
 
 
 Hcm_ProductSchema.virtual('productrelease',{
-    ref: 'hcm_lut_release',
+    ref: 'hcm_lut_release_type',
     localField: 'Product_Release_Code',
-    foreignField: 'Release_Code',
+    foreignField: 'ReleaseType_Code',
     justOne: true // for many-to-1 relationships
 });
 
@@ -112,7 +112,7 @@ Hcm_ProductSchema.virtual('customer',{
     ref: 'hcm_customer',
     localField: 'Product_Customer_Codes',
     foreignField: 'Customer_Code',
-    justOne: true // for many-to-1 relationships
+    justOne: false // for many-to-1 relationships
 });
 
 var Hcm_Product = module.exports = mongoose.model('hcm_product', Hcm_ProductSchema);

@@ -91,6 +91,18 @@ router.post('/EditProduct', type,function(req, res) {
     });
     EditProduct();
 });
+router.post('/editProductSuppliers', type,function(req, res) {
+    var EditProduct = async (function (){
+        await (ProductController.editProductSuppliers(req,res));
+    });
+    EditProduct();
+});
+router.post('/editProductCustomers', type,function(req, res) {
+    var EditProduct = async (function (){
+        await (ProductController.editProductCustomers(req,res));
+    });
+    EditProduct();
+});
 
 router.get('/getSupplier', type,function(req, res) {
     var Supplier = async (function (){
@@ -348,7 +360,7 @@ router.post('/EditSellingArea', type,function(req, res) {
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
-        SupplierController.addSupplier(req,res,NextCode);
+        SupplierController.addSupplier(req,res);
     });
     AddSupplier();
 });

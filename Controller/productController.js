@@ -65,6 +65,7 @@ module.exports = {
 			Prodcut.findOne({object})
 				.populate({ path: 'Category', select: 'Category_Name' })
 				.populate({ path: 'Supplier', select: 'Supplier_Name' })
+				.populate({ path: 'customer', select: 'Customer_Name' })
 				.populate({ path: 'productclass', select: 'Class_Name' })
 				.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
 				.populate({ path: 'productform', select: 'Form_Code Form_Name' })
@@ -86,16 +87,7 @@ module.exports = {
 			})
 		},
 
-		// GetNextCode:function(req,res){
-  //   		Prodcut.getLastCode(function(err,prodcut){
-		// 		if (prodcut) 
-		// 			res.send( Number(prodcut.Product_Code)+1);
-		// 		else
-		// 			res.send(1);
-		// 	})
-		// },
-
-		addProduct:function(req,res){
+		addProduct:function(request,res){
 
 			Prodcut.getLastCode(function(err,product){
 				if (product) 
@@ -137,7 +129,8 @@ module.exports = {
 	        	newProduct.Product_Certification        = request.body.Product_Certification;
 	        	newProduct.Product_Release_Code         = request.body.Product_Release_Code;
 	        	newProduct.Product_StorageType_Code     = request.body.Product_StorageType_Code;
-	        	newProduct.Product_ProductCategory_Code = request.body.Product_ProductCategory_Code;
+				newProduct.Product_ProductCategory_Code = request.body.Product_ProductCategory_Code;
+				newProduct.Product_IsActive						= 1;
 				
 				newProduct.save(function(error, doneadd){
 					if(error){
@@ -153,7 +146,52 @@ module.exports = {
 				});
 			}
 		},
+		editProductSuppliers:function(request,res){
+			var myquery = { Product_Code: request.body.Product_Code }; 
+			var newvalues = { 
+				Product_Supplier_Codes	 		: request.body.Product_Supplier_Codes,
+			 };
+			 Prodcut.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Product not exists'
+					});
+	            } else {
 
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+		editProductCustomers:function(request,res){
+			var myquery = { Product_Code: request.body.Product_Code }; 
+			var newvalues = { 
+				Product_Customer_Codes	 		: request.body.Product_Customer_Codes,
+			 };
+			 Prodcut.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Product not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
 		editProduct:function(req,res){
 			var newvalues = { $set: {
 				Product_Name 	     			  : request.body.Product_Name,
