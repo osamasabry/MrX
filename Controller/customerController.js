@@ -13,7 +13,7 @@ var WayOfDelivery 	= require('../Model/lut_ways_of_delivery');
 
 
 module.exports = {
-		getCustomer:function(req,res){
+		getCustomer:function(request,res){
 			Customer.find({})
 			.select('Customer_Code Customer_Name')
 			.exec(function(err, customer) {
@@ -29,7 +29,7 @@ module.exports = {
 			})
 		},
 		
-		getAllCustomer:function(req,res){
+		getAllCustomer:function(request,res){
 			Customer.find({})
 			.populate({ path: 'Category', select: 'Category_Name' })
 			.populate({ path: 'CustomerType', select: 'SupplierType_Name' })

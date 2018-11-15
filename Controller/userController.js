@@ -5,7 +5,7 @@ var User = require('../Model/user');
 module.exports = {
 
 
-	GetNextCode:function(req,res){
+	GetNextCode:function(request,res){
 		User.getLastCode(function(err,user){
 			if (user) 
 				res.send( Number(user.User_Code)+1);
@@ -14,7 +14,7 @@ module.exports = {
 		})
 	},
 
-	addUser:function(req,res){
+	addUser:function(request,res){
 		User.getLastCode(function(err,user){
 			if (user) 
 				InsertIntoUser(user.User_Code+1);
