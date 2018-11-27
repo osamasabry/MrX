@@ -195,6 +195,20 @@ router.get('/getSellingArea', type,function(req, res) {
     SellingArea();
 });
 
+router.get('/getWeight', type,function(req, res) {
+    var Weight = async (function (){
+        await (SetupController.getWeight(req,res));
+    });
+    Weight();
+});
+
+router.get('/getConcentration', type,function(req, res) {
+    var Concentration = async (function (){
+        await (SetupController.getConcentration(req,res));
+    });
+    Concentration();
+});
+
 router.post('/AddCountry', type,function(req, res) {
     var AddCountry = async (function (){
         SetupController.addCountry(req,res);
@@ -357,6 +371,34 @@ router.post('/EditSellingArea', type,function(req, res) {
     EditSellingArea();
 });
 
+router.post('/AddWeight', type,function(req, res) {
+    var AddWeight = async (function (){
+       SetupController.addWeight(req,res);
+    });
+    AddWeight();
+});
+
+router.post('/EditWeight', type,function(req, res) {
+    var EditWeight = async (function (){
+        await (SetupController.editWeight(req,res));
+    });
+    EditWeight();
+});
+
+
+router.post('/AddConcentration', type,function(req, res) {
+    var AddConcentration = async (function (){
+       SetupController.addConcentration(req,res);
+    });
+    AddConcentration();
+});
+
+router.post('/EditConcentration', type,function(req, res) {
+    var EditConcentration = async (function (){
+        await (SetupController.editConcentration(req,res));
+    });
+    EditConcentration();
+});
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){

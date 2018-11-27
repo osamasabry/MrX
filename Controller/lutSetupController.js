@@ -9,6 +9,8 @@ var ProductCategory = require('../Model/lut_product_category');
 var ReleaseType 	= require('../Model/lut_release_type');
 var StorageType 	= require('../Model/lut_storage_type');
 var SellingArea 	= require('../Model/lut_sell_area');
+var Weight 			= require('../Model/lut_weight');
+var Concentration 	= require('../Model/lut_concentration');
 
 
 
@@ -90,6 +92,7 @@ module.exports = {
 				}
 			})
 		},
+	
 	/****************** Supplier Types ***********/
 
 		getSupplierTypes:function(request,res){
@@ -629,6 +632,7 @@ module.exports = {
 				}
 			})
 		},
+	
 	/****************** Release Type ***********/
 
 		getReleaseType:function(request,res){
@@ -705,6 +709,7 @@ module.exports = {
 				}
 			})
 		},
+	
 	/****************** Storage Type ***********/
 
 		getStorageType:function(request,res){
@@ -791,7 +796,7 @@ module.exports = {
 			})
 		},
 
-/****************** Selling Area ***********/
+	/****************** Selling Area ***********/
 
 		getSellingArea:function(request,res){
 			SellingArea.find({})
@@ -858,6 +863,161 @@ module.exports = {
 	            if (!field) {
 	            	return res.send({
 						message: 'Selling Area not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+	/****************** Wight ***********/
+
+		getWeight:function(request,res){
+			Weight.find({})
+			.select('Weight_Code Weight_Name Weight_Description Weight_IsActive')
+			.exec(function(err, weight) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(weight) {
+		    		res.send(weight);
+				}else{
+		    		res.send("no Weight");
+				}
+			})
+		},
+
+		addWeight:function(request,res){
+
+			Weight.getLastCode(function(err,weight){
+				if (weight) 
+					InsertIntoWeight(weight.Weight_Code+1);
+				else
+					InsertIntoWeight(1);
+			});
+
+			function InsertIntoWeight(NextCode){
+				var newWeight = new Weight();
+				newWeight.Weight_Code    	   = NextCode;
+				newWeight.Weight_Name   	   = request.body.Weight_Name;
+				newWeight.Weight_Description   = request.body.Weight_Description;
+				newWeight.Weight_IsActive	   = 1;
+				
+				newWeight.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
+
+		editWeight:function(request,res){
+			var myquery = { Weight_Code: request.body.Weight_Code }; 
+			var newvalues = { 
+				Weight_Name	 		: request.body.Weight_Name,
+				Weight_Description	: request.body.Weight_Description,
+				Weight_IsActive	 	: request.body.Weight_IsActive,
+
+			 };
+
+			Weight.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Weight not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+
+	/****************** Concentration ***********/
+
+		getConcentration:function(request,res){
+			Concentration.find({})
+			.select('Concentration_Code Concentration_Name Concentration_Description Concentration_IsActive')
+			.exec(function(err, concentration) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(concentration) {
+		    		res.send(concentration);
+				}else{
+		    		res.send("no Concentration");
+				}
+			})
+		},
+
+		addConcentration:function(request,res){
+
+			Concentration.getLastCode(function(err,concentration){
+				if (concentration) 
+					InsertIntoConcentration(concentration.Concentration_Code+1);
+				else
+					InsertIntoConcentration(1);
+			});
+
+			function InsertIntoConcentration(NextCode){
+				var newConcentration = new Concentration();
+				newConcentration.Concentration_Code    	   = NextCode;
+				newConcentration.Concentration_Name   	   = request.body.Concentration_Name;
+				newConcentration.Concentration_Description = request.body.Concentration_Description;
+				newConcentration.Concentration_IsActive	   = 1;
+				
+				newConcentration.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
+
+		editConcentration:function(request,res){
+			var myquery = { Concentration_Code: request.body.Concentration_Code }; 
+			var newvalues = { 
+				Concentration_Name	 		: request.body.Concentration_Name,
+				Concentration_Description	: request.body.Concentration_Description,
+				Concentration_IsActive	 	: request.body.Concentration_IsActive,
+
+			 };
+
+			Concentration.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Concentration not exists'
 					});
 	            } else {
 

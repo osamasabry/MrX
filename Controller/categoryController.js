@@ -73,6 +73,7 @@ module.exports = {
 				});
 			}
 		},
+		
 		editCategory:function(request,res){
 
 			var myquery = { Category_ID: request.body.Category_ID }; 
