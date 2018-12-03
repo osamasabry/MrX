@@ -124,7 +124,6 @@ module.exports = {
 				newProduct.Product_O_phosphate	 				 = request.body.Product_O_phosphate;
 				newProduct.Product_Hazen_color	 				 = request.body.Product_Hazen_color;
 				newProduct.Product_Category_ID	 				 = request.body.Product_Category_ID;
-				newProduct.Product_Estba7s	 					 = request.body.Product_Estba7s;
 			 	newProduct.Product_Origin_Country_Code  		 = request.body.Product_Origin_Country_Code;
 	        	newProduct.Product_Packing_Code         		 = request.body.Product_Packing_Code;
 	        	newProduct.Product_Supplier_Codes       		 = request.body.Product_Supplier_Codes;
@@ -139,7 +138,6 @@ module.exports = {
 				newProduct.Product_ProductCategory_Code 		 = request.body.Product_ProductCategory_Code;
 				newProduct.Product_IsActive						 = 1;
 				newProduct.Product_Volatile_Matter               =request.body.Product_Volatile_Matter;
-		        newProduct.Product_Chlorides                     =request.body.Product_Chlorides;
 		        newProduct.Product_Sulphates                     =request.body.Product_Sulphates;
 		        newProduct.Product_Water_Insoluble_Matter        =request.body.Product_Water_Insoluble_Matter;
 		        newProduct.Product_Organic_Compounds             =request.body.Product_Organic_Compounds;
@@ -167,7 +165,6 @@ module.exports = {
 		        newProduct.Product_Sulfur_Dioxides_Residual      =request.body.Product_Sulfur_Dioxides_Residual;
 		        newProduct.Product_Antimony                      =request.body.Product_Antimony;
 		        newProduct.Product_Chrome                        =request.body.Product_Chrome;
-		        newProduct.Product_Cadmium                       =request.body.Product_Cadmium;
 		        newProduct.Product_Selenium                      =request.body.Product_Selenium;
 		        newProduct.Product_Nickel                        =request.body.Product_Nickel;
 		        newProduct.Product_Residual_On_Solvent           =request.body.Product_Residual_On_Solvent;
@@ -189,7 +186,6 @@ module.exports = {
 		        newProduct.Product_Think_Layer_Chromatography    =request.body.Product_Think_Layer_Chromatography;
 		        newProduct.Product_Identifications_Relative_Dens =request.body.Product_Identifications_Relative_Density;
 		        newProduct.Product_Viscosity                     =request.body.Product_Viscosity;
-		        newProduct.Product_Appearance                    =request.body.Product_Appearance;
 		        newProduct.Product_Foriein_Matter                =request.body.Product_Foriein_Matter;
 		        newProduct.Product_Relative_Density_From         =request.body.Product_Relative_Density_From;
 		        newProduct.Product_Relative_Density_To           =request.body.Product_Relative_Density_To;             
@@ -291,7 +287,6 @@ module.exports = {
 				Product_O_phosphate	 			  	  : request.body.Product_O_phosphate,
 				Product_Hazen_color	 			  	  : request.body.Product_Hazen_color,
 				Product_Category_ID	 			  	  : request.body.Product_Category_ID,
-				Product_Estba7s	 				  	  : request.body.Product_Estba7s,
 				Product_Origin_Country_Code 	  	  : request.body.Product_Origin_Country_Code,
         		Product_Packing_Code              	  : request.body.Product_Packing_Code,
         		Product_Supplier_Codes       	  	  : request.body.Product_Supplier_Codes,
@@ -306,7 +301,6 @@ module.exports = {
 	        	Product_ProductCategory_Code 	  	  : request.body.Product_ProductCategory_Code,
 				Product_IsActive				  	  : request.body.Product_IsActive,
 				Product_Volatile_Matter               : request.body.Product_Volatile_Matter,
-		        Product_Chlorides                     : request.body.Product_Chlorides,
 		        Product_Sulphates                     : request.body.Product_Sulphates,
 		        Product_Water_Insoluble_Matter        : request.body.Product_Water_Insoluble_Matter,
 		        Product_Organic_Compounds             : request.body.Product_Organic_Compounds,
@@ -334,7 +328,6 @@ module.exports = {
 		        Product_Sulfur_Dioxides_Residual      : request.body.Product_Sulfur_Dioxides_Residual,
 		        Product_Antimony                      : request.body.Product_Antimony,
 		        Product_Chrome                        : request.body.Product_Chrome,
-		        Product_Cadmium                       : request.body.Product_Cadmium,
 		        Product_Selenium                      : request.body.Product_Selenium,
 		        Product_Nickel                        : request.body.Product_Nickel,
 		        Product_Residual_On_Solvent           : request.body.Product_Residual_On_Solvent,
@@ -356,7 +349,6 @@ module.exports = {
 		        Product_Think_Layer_Chromatography    : request.body.Product_Think_Layer_Chromatography,
 		        Product_Identifications_Relative_Dens : request.body.Product_Identifications_Relative_Density,
 		        Product_Viscosity                     : request.body.Product_Viscosity,
-		        Product_Appearance                    : request.body.Product_Appearance,
 		        Product_Foriein_Matter                : request.body.Product_Foriein_Matter,
 		        Product_Relative_Density_From         : request.body.Product_Relative_Density_From,
 		        Product_Relative_Density_To           : request.body.Product_Relative_Density_To,             
@@ -436,7 +428,6 @@ module.exports = {
 				newProduct.Product_O_phosphate	 				 = product.Product_O_phosphate;
 				newProduct.Product_Hazen_color	 				 = product.Product_Hazen_color;
 				newProduct.Product_Category_ID	 				 = product.Product_Category_ID;
-				newProduct.Product_Estba7s	 					 = product.Product_Estba7s;
 			 	newProduct.Product_Origin_Country_Code  		 = product.Product_Origin_Country_Code;
 	        	newProduct.Product_Packing_Code         		 = product.Product_Packing_Code;
 	        	newProduct.Product_Supplier_Codes       		 = product.Product_Supplier_Codes;
@@ -451,7 +442,6 @@ module.exports = {
 				newProduct.Product_ProductCategory_Code 		 = product.Product_ProductCategory_Code;
 				newProduct.Product_IsActive						 = product.Product_IsActive
 				newProduct.Product_Volatile_Matter               = product.Product_Volatile_Matter;
-		        newProduct.Product_Chlorides                     = product.Product_Chlorides;
 		        newProduct.Product_Sulphates                     = product.Product_Sulphates;
 		        newProduct.Product_Water_Insoluble_Matter        = product.Product_Water_Insoluble_Matter;
 		        newProduct.Product_Organic_Compounds             = product.Product_Organic_Compounds;
@@ -479,7 +469,6 @@ module.exports = {
 		        newProduct.Product_Sulfur_Dioxides_Residual      = product.Product_Sulfur_Dioxides_Residual;
 		        newProduct.Product_Antimony                      = product.Product_Antimony;
 		        newProduct.Product_Chrome                        = product.Product_Chrome;
-		        newProduct.Product_Cadmium                       = product.Product_Cadmium;
 		        newProduct.Product_Selenium                      = product.Product_Selenium;
 		        newProduct.Product_Nickel                        = product.Product_Nickel;
 		        newProduct.Product_Residual_On_Solvent           = product.Product_Residual_On_Solvent;
@@ -501,7 +490,6 @@ module.exports = {
 		        newProduct.Product_Think_Layer_Chromatography    = product.Product_Think_Layer_Chromatography;
 		        newProduct.Product_Identifications_Relative_Dens = product.Product_Identifications_Relative_Density;
 		        newProduct.Product_Viscosity                     = product.Product_Viscosity;
-		        newProduct.Product_Appearance                    = product.Product_Appearance;
 		        newProduct.Product_Foriein_Matter                = product.Product_Foriein_Matter;
 		        newProduct.Product_Relative_Density_From         = product.Product_Relative_Density_From;
 		        newProduct.Product_Relative_Density_To           = product.Product_Relative_Density_To;             
