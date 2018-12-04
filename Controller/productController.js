@@ -203,7 +203,25 @@ module.exports = {
 		        newProduct.Product_Concentration_Unit_Code       =request.body.Product_Concentration_Unit_Code;
 		        newProduct.Product_Concentration_Value           =request.body.Product_Concentration_Value;
 		        newProduct.Product_Remarkes                      =request.body.Product_Remarkes;
-				
+				newProduct.Product_Total_Plate_Count             =request.body.Product_Total_Plate_Count;      
+			    newProduct.Product_EColi                         =request.body.Product_EColi;      
+			    newProduct.Product_Yeast                         =request.body.Product_Yeast;      
+			    newProduct.Product_Mould                         =request.body.Product_Mould;      
+			    newProduct.Product_Pathogenic_Bacterium          =request.body.Product_Pathogenic_Bacterium;      
+			    newProduct.Product_Escherichia_Cali              =request.body.Product_Escherichia_Cali;      
+			    newProduct.Product_Salmonila                     =request.body.Product_Salmonila;      
+			    newProduct.Product_Staphyloccuse_Aureus          =request.body.Product_Staphyloccuse_Aureus;      
+			    newProduct.Product_Extra1                        =request.body.Product_Extra1;      
+			    newProduct.Product_Extra2                        =request.body.Product_Extra2;      
+			    newProduct.Product_Extra3                        =request.body.Product_Extra3;      
+			    newProduct.Product_Extra4                        =request.body.Product_Extra4;      
+			    newProduct.Product_Extra5                        =request.body.Product_Extra5;      
+			    newProduct.Product_Extra6                        =request.body.Product_Extra6;      
+			    newProduct.Product_Extra7                        =request.body.Product_Extra7;      
+			    newProduct.Product_Extra8                        =request.body.Product_Extra8;      
+			    newProduct.Product_Extra9                        =request.body.Product_Extra9;      
+			    newProduct.Product_Extra10                       =request.body.Product_Extra10;      
+			    newProduct.Product_Extra11                       =request.body.Product_Extra11;      
 				newProduct.save(function(error, doneadd){
 					if(error){
 						return res.send({
@@ -366,8 +384,27 @@ module.exports = {
 		        Product_Concentration_Unit_Code       : request.body.Product_Concentration_Unit_Code,
 		        Product_Concentration_Value           : request.body.Product_Concentration_Value,
 		        Product_Remarkes                      : request.body.Product_Remarkes,
-				
+				Product_Total_Plate_Count             : request.body.Product_Total_Plate_Count,      
+			    Product_EColi                         : request.body.Product_EColi,      
+			    Product_Yeast                         : request.body.Product_Yeast,      
+			    Product_Mould                         : request.body.Product_Mould,      
+			    Product_Pathogenic_Bacterium          : request.body.Product_Pathogenic_Bacterium,      
+			    Product_Escherichia_Cali              : request.body.Product_Escherichia_Cali,      
+			    Product_Salmonila                     : request.body.Product_Salmonila,      
+			    Product_Staphyloccuse_Aureus          : request.body.Product_Staphyloccuse_Aureus,      
+			    Product_Extra1                        : request.body.Product_Extra1,      
+			    Product_Extra2                        : request.body.Product_Extra2,      
+			    Product_Extra3                        : request.body.Product_Extra3,      
+			    Product_Extra4                        : request.body.Product_Extra4,      
+			    Product_Extra5                        : request.body.Product_Extra5,      
+			    Product_Extra6                        : request.body.Product_Extra6,      
+			    Product_Extra7                        : request.body.Product_Extra7,      
+			    Product_Extra8                        : request.body.Product_Extra8,      
+			    Product_Extra9                        : request.body.Product_Extra9,      
+			    Product_Extra10                       : request.body.Product_Extra10,      
+			    Product_Extra11                       : request.body.Product_Extra11,      
 			} };
+
 			var myquery = { Product_Code: req.body.Product_Code }; 
 			Product.findOneAndUpdate( myquery,newvalues, function(err, field) {
 	    	    if (err){
@@ -507,7 +544,25 @@ module.exports = {
 		        newProduct.Product_Concentration_Unit_Code       = product.Product_Concentration_Unit_Code;
 		        newProduct.Product_Concentration_Value           = product.Product_Concentration_Value;
 		        newProduct.Product_Remarkes                      = product.Product_Remarkes;
-				
+				newProduct.Product_Total_Plate_Count             = product.Product_Total_Plate_Count;      
+			    newProduct.Product_EColi                         = product.Product_EColi;      
+			    newProduct.Product_Yeast                         = product.Product_Yeast;      
+			    newProduct.Product_Mould                         = product.Product_Mould;      
+			    newProduct.Product_Pathogenic_Bacterium          = product.Product_Pathogenic_Bacterium;      
+			    newProduct.Product_Escherichia_Cali              = product.Product_Escherichia_Cali;      
+			    newProduct.Product_Salmonila                     = product.Product_Salmonila;      
+			    newProduct.Product_Staphyloccuse_Aureus          = product.Product_Staphyloccuse_Aureus;      
+			    newProduct.Product_Extra1                        = product.Product_Extra1;      
+			    newProduct.Product_Extra2                        = product.Product_Extra2;      
+			    newProduct.Product_Extra3                        = product.Product_Extra3;      
+			    newProduct.Product_Extra4                        = product.Product_Extra4;      
+			    newProduct.Product_Extra5                        = product.Product_Extra5;      
+			    newProduct.Product_Extra6                        = product.Product_Extra6;      
+			    newProduct.Product_Extra7                        = product.Product_Extra7;      
+			    newProduct.Product_Extra8                        = product.Product_Extra8;      
+			    newProduct.Product_Extra9                        = product.Product_Extra9;      
+			    newProduct.Product_Extra10                       = product.Product_Extra10;      
+			    newProduct.Product_Extra11                       = product.Product_Extra11;      
 				newProduct.save(function(error, doneadd){
 					if(error){
 						return res.send({
