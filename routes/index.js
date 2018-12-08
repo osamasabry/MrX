@@ -9,6 +9,7 @@ var SetupController = require('../Controller/lutSetupController');
 var CustomerController = require('../Controller/customerController');
 var SearchController = require('../Controller/searchController');
 
+var RequestPriceController = require('../Controller/requestpriceController');
 
 
 var passport = require('passport');
@@ -537,5 +538,21 @@ router.post('/getProductByProductCategoryID', type,function(req, res) {
     });
     Search();
 });
+
+
+router.post('/addRequestPrice', type,function(req, res) {
+    var AddRequestPrice = async (function (){
+        RequestPriceController.addRequestPrice(req,res)
+    });
+    AddRequestPrice();
+});
+
+router.post('/updateRequestPrice', type,function(req, res) {
+    var UpdateRequestPrice = async (function (){
+        RequestPriceController.updateRequestPrice(req,res)
+    });
+    UpdateRequestPrice();
+});
+
 
 module.exports = router;
