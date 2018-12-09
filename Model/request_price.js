@@ -14,14 +14,16 @@ var Hcm_RequestPriceSchema = mongoose.Schema({
         }],
 
         RequestPrice_Supplier               :[{
-            Supplier_ID                 :Number,
+            Supplier_ID                 :String,
+            Supplier_Email              :String,
             Valid_Till                  :Date,
-            Price_Details                       :[{
-                Price               :Number,
+            status                      :Number, 
+
+            Details                       :[{
                 Product_ID          :Number,
+                Price               :Number,
                 Quantity_Available  :Number,
                 Weight_ID           :Number,
-                status              :Number, 
             }]
 
         },{
