@@ -17,7 +17,7 @@ var Hcm_RequestPriceSchema = mongoose.Schema({
             Supplier_ID                 :String,
             Supplier_Email              :String,
             Valid_Till                  :Date,
-            status                      :Number, 
+            Price_Status                :Number, 
 
             Details                       :[{
                 Product_ID          :Number,

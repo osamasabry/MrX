@@ -36,6 +36,7 @@ module.exports = {
 							var supplierTest = {};
 							supplierTest.Supplier_ID = supplier[i]._id;
 							supplierTest.Supplier_Email = supplier[i].Supplier_Email;
+							supplierTest.Price_Status = 0;
 			    			arrayOfSuppliers.push(supplierTest);
 			    			
 			    		}
@@ -124,8 +125,9 @@ module.exports = {
 			}; 
 
 			var newvalues = { 
-					$set: {"RequestPrice_Supplier.$.Valid_Till" : request.body.Valid_Till,
-							"RequestPrice_Supplier.$.Details" : array
+					$set: { "RequestPrice_Supplier.$.Valid_Till"   : request.body.Valid_Till,
+							"RequestPrice_Supplier.$.Price_Status" : 1,
+							"RequestPrice_Supplier.$.Details"      : request.body.RequestPrice_Details,
 					 },
 
 			 },options = {upsert: true};
