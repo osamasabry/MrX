@@ -73,7 +73,15 @@ module.exports = {
 
 		getSupplierByName:function(req,res){
 			var Searchquery = req.body.Supplier_Name;
-			Supplier.findOne({Supplier_Name:{ $regex: new RegExp("^" + Searchquery.toLowerCase(), "i") }})
+			
+			Supplier.find({Supplier_Name:{ $regex: new RegExp("^" + Searchquery.toLowerCase(), "i") }})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'SupplierType', select: 'SupplierType_Name' })
+			.populate({ path: 'supplierclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
+			.populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
+			.lean()
 			.exec(function(err, supplier) {
 				if (err){
 		    		return res.send({
@@ -89,7 +97,20 @@ module.exports = {
 
 		getProductByName:function(req,res){
 			var Searchquery = req.body.Product_Name;
-			Product.findOne({Product_Name:{ $regex: new RegExp("^" + Searchquery.toLowerCase(), "i") }})
+			Product.find({Product_Name:{ $regex: new RegExp("^" + Searchquery.toLowerCase(), "i") }})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.populate({ path: 'productclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
+			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
+			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
+			.lean()
 			.exec(function(err, product) {
 				if (err){
 		    		return res.send({

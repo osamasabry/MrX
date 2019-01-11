@@ -76,37 +76,6 @@ module.exports = {
 				}
 			})
 		},
-		// searchSupplier:function(req,res){
-		// 	var object  = {};
-		// 	if (req.body.type=='name') 
-		// 		object = {Product_Name:{$regex:req.body.Product_Name}};
-		// 	else
-		// 		object = {Product_Chemical_Name:{$regex:req.body.Product_Chemical_Name}};
-
-		// 	Prodcut.findOne({object})
-		// 		.exec(function(err, product) {
-		// 		if (err){
-		//     		return res.send({
-		// 				message: err
-		// 			});
-		//     	} else if(product) {
-		//     		res.send(product);
-		// 		}else{
-		//     		res.send("not Product");
-		// 		}
-		// 	})
-		// },
-
-		// GetNextCode:function(){
-		// 	return new Promise((resolve, reject) => {
-		// 		Supplier.getLastCode(function(err,supplier){
-		// 			if (supplier)
-		// 				resolve( Number(supplier.Supplier_Code)+1);
-		// 			else
-		// 				resolve (1);
-		// 		})
-		// 	})
-		// },
 
 		addCustomer:function(request,res){
 			Customer.getLastCode(function(err,customer){
