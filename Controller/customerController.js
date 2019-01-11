@@ -53,6 +53,29 @@ module.exports = {
 			})
 		},
 
+		searchCustomerByName:function(req,res){
+			var Searchquery = req.body.Customer_Name;
+			Customer.find({Customer_Name:{ $regex: new RegExp("^" + Searchquery.toLowerCase(), "i") }})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'CustomerType', select: 'SupplierType_Name' })
+			.populate({ path: 'CustomerClass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
+			.populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
+			.populate({ path: 'SellingArea', select: 'SellingArea_Name' })
+			.lean()
+			.exec(function(err, customer) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(customer) {
+		    		res.send(customer);
+				}else{
+		    		res.send("Customer not found");
+				}
+			})
+		},
 		// searchSupplier:function(req,res){
 		// 	var object  = {};
 		// 	if (req.body.type=='name') 

@@ -439,6 +439,13 @@ router.get('/getCustomer', type,function(req, res) {
     Customer();
 });
 
+router.post('/searchCustomerByName', type,function(req, res) {
+    var Search = async (function (){
+        await (CustomerController.searchCustomerByName(req,res));
+    });
+    Search();
+});
+
 router.get('/getAllCustomer', type,function(req, res) {
     var Customeres = async (function (){
         await (CustomerController.getAllCustomer(req,res));
