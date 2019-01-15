@@ -5,8 +5,8 @@ var Customer = require('../Model/customer');
 var Supplier = require('../Model/supplier');
 var Prodcut = require('../Model/product');
 
-//const sgMail = require('@sendgrid/mail');
-//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 
@@ -91,7 +91,7 @@ module.exports = {
 					  text: 'please fill from',
 					  html: '<h1>Row ID'+row_id+'</h1><br><p>Supplier ID:'+row.RequestPrice_Supplier[i]._id+'</p>',
 					};
-					//sgMail.send(msg); 
+					sgMail.send(msg); 
 				}
 
 				return res.send({

@@ -405,8 +405,8 @@ module.exports = {
 			    Product_Extra11                       : request.body.Product_Extra11,      
 			} };
 
-			var myquery = { Product_Code: req.body.Product_Code }; 
-			Product.findOneAndUpdate( myquery,newvalues, function(err, field) {
+			var myquery = { Product_Code: request.body.Product_Code }; 
+			Prodcut.findOneAndUpdate( myquery,newvalues, function(err, field) {
 	    	    if (err){
 	    	    	return res.send({
 						message: 'Error'

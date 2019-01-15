@@ -104,6 +104,12 @@ router.post('/editProductCustomers', type,function(req, res) {
     });
     EditProduct();
 });
+router.post('/CopyProduct', type,function(req, res) {
+    var CopyProduct = async (function (){
+        ProductController.copyProduct(req,res);
+    });
+    CopyProduct();
+});
 
 router.get('/getSupplier', type,function(req, res) {
     var Supplier = async (function (){
