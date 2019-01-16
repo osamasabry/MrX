@@ -20,7 +20,7 @@ module.exports = {
 	/******************country ***********/
 		getCountries:function(request,res){
 			Country.find({})
-			.select('Country_Code Country_Name')
+			.select('Country_Code Country_Name Country_IsActive Country_Tcode')
 			.exec(function(err, ctry) {
 				if (err){
 		    		return res.send({
