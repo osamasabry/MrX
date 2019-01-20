@@ -61,6 +61,7 @@ module.exports = {
 
 				var newRequestPrice = new RequestPrice();
 				newRequestPrice.RequestPrice_Code        	        = NextCode;
+		        newRequestPrice.RequestPrice_Create_Date            = request.body.RequestPrice_Create_Date;
 		        newRequestPrice.RequestPrice_Customer_ID    	    = request.body.RequestPrice_Customer_ID;
 		        newRequestPrice.RequestPrice_Product           		= request.body.RequestPrice_Product;
 				newRequestPrice.RequestPrice_Supplier     	 	 	= arrayOfSuppliers;

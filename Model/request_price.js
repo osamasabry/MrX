@@ -4,6 +4,7 @@ var Hcm_RequestPriceSchema = mongoose.Schema({
    
 		RequestPrice_Code        	        :Number,
         RequestPrice_Customer_ID    	    :Number,
+        RequestPrice_Create_Date            :Date,
         RequestPrice_Product           		:[{
             Product_ID          :Number,
             Quantity_Required   :Number,
