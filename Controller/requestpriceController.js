@@ -83,6 +83,7 @@ module.exports = {
 			}
 
 			function SendEmail(row){
+				// url: http://highchem.winexme.com/#!/supplier-pricing?spid=asdfsadf&rqid=fgsdfg
 				var row_id = row._id;
 				for (var i = row.RequestPrice_Supplier.length - 1; i >= 0; i--) {
 					 const msg = {
@@ -91,6 +92,7 @@ module.exports = {
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  html: '<h1>Row ID'+row_id+'</h1><br><p>Supplier ID:'+row.RequestPrice_Supplier[i]._id+'</p>',
+
 					};
 					sgMail.send(msg); 
 				}
