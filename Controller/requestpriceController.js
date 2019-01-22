@@ -7,18 +7,46 @@ var Prodcut = require('../Model/product');
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey('SG.ef9B5ltjSXCGIrve6xh9xQ.uJJB0S1hOkJrc9k505e3q1fCbjoJnaSscWXojIIafuk');
 
 
 
 module.exports = {
 		
-		addRequestPrice:function(request,res){
+		getAllRequestPrice:function(req,res){
+			RequestPrice.find({})
+			.populate({ path: 'Customer', select: 'Customer_Name' })
+			.populate({ path: 'Product', select: 'Product_Name' })
+			.populate({ path: 'Weight', select: 'Weight_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.lean()
+			.exec(function(err, supplier) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supplier) {
+					res.send(supplier);
+					
+				}else{
+		    		res.send("not Request");
+				}
+			})
+		},
+
+		addRequestPrice:function(request,res,URL){
+			// console.log(URL);
 			var arrayOfSuppliers = [];
+			arrayOfSuppliers = [{
+				Supplier_ID : 1,
+				Supplier_Email : 'osamasabry14@gmail.com',
+				Price_Status :0
+			}];
 
 			if (request.body.Category_ID) {
 				CheckData();		
 			}else{
-				arrayOfSuppliers = request.body.Supplier_ID;
+				// arrayOfSuppliers = request.body.Supplier_ID;
 				GetlastID();
 			}
 
@@ -91,18 +119,26 @@ module.exports = {
 					  from: 'dev@pharmedsolutions.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
-					  html: '<h1>Row ID'+row_id+'</h1><br><p>Supplier ID:'+row.RequestPrice_Supplier[i]._id+'</p>',
+					  html: '<h1>Row ID: '+row_id+'</h1><br><p>Supplier ID:'+row.RequestPrice_Supplier[i]._id+'</p>',
 
 					};
-					sgMail.send(msg); 
+					console.log(msg);
+					// sgMail.send(msg); 
+					sgMail.send(function(error, doneadd){
+						if (error) {
+							console.log(error);
+						}else{
+
+							console.log('oooo');
+						}
+					})
 				}
 
-				return res.send({
-					message: true
-				});
+				// return res.send({
+				// 	message: true
+				// });
 			}
 		},
-
 
 		updateRequestPrice:function(request,res){
 
@@ -153,5 +189,5 @@ module.exports = {
 					});
 				}
 			})
-		}
+		},
 }
