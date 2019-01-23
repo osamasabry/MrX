@@ -5,15 +5,16 @@ var Customer = require('../Model/customer');
 var Supplier = require('../Model/supplier');
 var Prodcut = require('../Model/product');
 
+var crypto = require('crypto'),
+ algorithm = 'aes-256-ctr',
+  password = 'd6F3Efeq';
+
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-// sgMail.setApiKey('SG.ef9B5ltjSXCGIrve6xh9xQ.uJJB0S1hOkJrc9k505e3q1fCbjoJnaSscWXojIIafuk');
-
-
 
 module.exports = {
 		
-		getAllRequestPrice:function(req,res){
+		getAllRequestPrice:function(request,res){
 			RequestPrice.find({})
 			.populate({ path: 'Customer', select: 'Customer_Name' })
 			.populate({ path: 'Product', select: 'Product_Name' })
@@ -37,16 +38,22 @@ module.exports = {
 		addRequestPrice:function(request,res,URL){
 			// console.log(URL);
 			var arrayOfSuppliers = [];
-			arrayOfSuppliers = [{
-				Supplier_ID : 1,
-				Supplier_Email : 'osamasabry14@gmail.com',
-				Price_Status :0
-			}];
+			// arrayOfSuppliers = [{
+			// 	Supplier_ID : 1,
+			// 	Supplier_Email : 'osamasabry14@gmail.com',
+			// 	Price_Status :0
+			// }];
+
+			// var arrayOfProducts = [{
+			// 	Product_ID : 1,
+			// 	Quantity_Required : 250,
+			// 	Weight_ID :1
+			// }];
 
 			if (request.body.Category_ID) {
 				CheckData();		
 			}else{
-				// arrayOfSuppliers = request.body.Supplier_ID;
+				arrayOfSuppliers = request.body.Supplier_ID;
 				GetlastID();
 			}
 
@@ -92,6 +99,7 @@ module.exports = {
 		        newRequestPrice.RequestPrice_Create_Date            = request.body.RequestPrice_Create_Date;
 		        newRequestPrice.RequestPrice_Customer_ID    	    = request.body.RequestPrice_Customer_ID;
 		        newRequestPrice.RequestPrice_Product           		= request.body.RequestPrice_Product;
+		        // newRequestPrice.RequestPrice_Product           		= arrayOfProducts;
 				newRequestPrice.RequestPrice_Supplier     	 	 	= arrayOfSuppliers;
 				newRequestPrice.RequestPrice_Status 	     	 	= request.body.RequestPrice_Status;
 				
@@ -110,33 +118,36 @@ module.exports = {
 				});
 			}
 
+			function encrypt(text){
+			    var cipher = crypto.createCipher(algorithm,password)
+			    var crypted = cipher.update(text,'utf8','hex')
+			    crypted += cipher.final('hex');
+			    return crypted;
+			}
+			
 			function SendEmail(row){
 				// url: http://highchem.winexme.com/#!/supplier-pricing?spid=asdfsadf&rqid=fgsdfg
 				var row_id = row._id;
+				row_id = encrypt(String(row_id));
+				// console.log('row_id: '+row_id);
 				for (var i = row.RequestPrice_Supplier.length - 1; i >= 0; i--) {
+					var supplier_id = encrypt(String(row.RequestPrice_Supplier[i]._id)); 
+					// console.log('supplied_id: '+supplier_id);
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
 					  from: 'dev@pharmedsolutions.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
-					  html: '<h1>Row ID: '+row_id+'</h1><br><p>Supplier ID:'+row.RequestPrice_Supplier[i]._id+'</p>',
+					  html: '<h1><a href='+URL+'supplier-pricing?spid='+supplier_id+'&rqid='+row_id+'></a></h1>',
 
 					};
-					console.log(msg);
-					// sgMail.send(msg); 
-					sgMail.send(function(error, doneadd){
-						if (error) {
-							console.log(error);
-						}else{
-
-							console.log('oooo');
-						}
-					})
+					// console.log(msg);
+					sgMail.send(msg); 
 				}
 
-				// return res.send({
-				// 	message: true
-				// });
+				return res.send({
+					message: true
+				});
 			}
 		},
 
@@ -187,6 +198,35 @@ module.exports = {
 	                return res.send({
 						message: true
 					});
+				}
+			})
+		},
+
+		getRequestPriceByID:function(request,res){
+
+			function decrypt(text){
+			  	var decipher = crypto.createDecipher(algorithm,password)
+			  	var dec = decipher.update(text,'hex','utf8')
+			  	dec += decipher.final('utf8');
+			  	return dec;
+			}
+			
+			var id = decrypt(request.body.row_id);
+			RequestPrice.findOne({_id:id})
+			.select('RequestPrice_Product')
+			.populate({ path: 'Product', select: 'Product_Name' })
+			.populate({ path: 'Weight', select: 'Weight_Name' })
+			.lean()
+			.exec(function(err, requestprice) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(requestprice) {
+					res.send(requestprice);
+					
+				}else{
+		    		res.send("not Request");
 				}
 			})
 		},
