@@ -19,6 +19,9 @@ var type=upload.single('upfile');
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
 
+var URL = 'http://highchem.winexme.com/#!/';
+
+
 router.post('/login', type,function(req, res, next) {
       passport.authenticate('login', function(err, user, info) {
         if (err) { return next(err); }
@@ -552,10 +555,18 @@ router.post('/getProductByProductCategoryID', type,function(req, res) {
     Search();
 });
 
+/***********************request price***************************/
+router.get('/getAllRequestPrice', type,function(req, res) {
+    var GetAllRequestPrice= async (function (){
+        await (RequestPriceController.getAllRequestPrice(req,res));
+    });
+    GetAllRequestPrice();
+});
+
 
 router.post('/addRequestPrice', type,function(req, res) {
     var AddRequestPrice = async (function (){
-        RequestPriceController.addRequestPrice(req,res)
+        RequestPriceController.addRequestPrice(req,res,URL)
     });
     AddRequestPrice();
 });
@@ -567,5 +578,12 @@ router.post('/updateRequestPrice', type,function(req, res) {
     UpdateRequestPrice();
 });
 
+
+router.post('/getRequestPriceByID', type,function(req, res) {
+    var GetRequestPriceByID= async (function (){
+        await (RequestPriceController.getRequestPriceByID(req,res));
+    });
+    GetRequestPriceByID();
+});
 
 module.exports = router;
