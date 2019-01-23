@@ -146,7 +146,7 @@ module.exports = {
 					  from: 'dev@pharmedsolutions.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
-					  html: '<h1><a href='+URL+'supplier-pricing?spid='+supplier_id+'&rqid='+row_id+'></a></h1>',
+					  html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
 
 					};
 					// console.log(msg);
