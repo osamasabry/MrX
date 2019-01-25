@@ -46,17 +46,18 @@ module.exports = {
 				},
 				{
 					Supplier_ID : 2,
-					Supplier_Email : 'mahmoud@gmail.com',
+					Supplier_Email : 'mahmoud.a1983@gmail.com',
 					Price_Status :0
 				},
 
 			];
 
-			var arrayOfProducts = [{
-				Product_ID : 1,
-				Quantity_Required : 300,
-				Weight_ID :1
-			}];
+			//var arrayOfProducts = request.body.RequestPrice_Product;
+			//[{
+			// 	Product_ID : 1,
+			// 	Quantity_Required : 300,
+			// 	Weight_ID :1
+			// }];
 
 			if (request.body.Category_ID) {
 				CheckData();		
@@ -106,8 +107,7 @@ module.exports = {
 				newRequestPrice.RequestPrice_Code        	        = NextCode;
 		        newRequestPrice.RequestPrice_Create_Date            = request.body.RequestPrice_Create_Date;
 		        newRequestPrice.RequestPrice_Customer_ID    	    = request.body.RequestPrice_Customer_ID;
-		        // newRequestPrice.RequestPrice_Product           		= request.body.RequestPrice_Product;
-		        newRequestPrice.RequestPrice_Product           		= arrayOfProducts;
+		        newRequestPrice.RequestPrice_Product           		= request.body.RequestPrice_Product;
 				newRequestPrice.RequestPrice_Supplier     	 	 	= arrayOfSuppliers;
 				newRequestPrice.RequestPrice_Status 	     	 	= request.body.RequestPrice_Status;
 				
