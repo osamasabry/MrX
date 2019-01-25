@@ -9,8 +9,8 @@ var crypto = require('crypto'),
  algorithm = 'aes-256-ctr',
   password = 'd6F3Efeq';
 
-// const sgMail = require('@sendgrid/mail');
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = {
 		
@@ -38,19 +38,19 @@ module.exports = {
 		addRequestPrice:function(request,res,URL){
 			// console.log(URL);
 			var arrayOfSuppliers = [];
-			arrayOfSuppliers = [
-				{
-					Supplier_ID : 1,
-					Supplier_Email : 'osamasabry14@gmail.com',
-					Price_Status :0
-				},
-				{
-					Supplier_ID : 2,
-					Supplier_Email : 'mahmoud.a1983@gmail.com',
-					Price_Status :0
-				},
+			// arrayOfSuppliers = [
+			// 	{
+			// 		Supplier_ID : 1,
+			// 		Supplier_Email : 'osamasabry14@gmail.com',
+			// 		Price_Status :0
+			// 	},
+			// 	{
+			// 		Supplier_ID : 2,
+			// 		Supplier_Email : 'mahmoud.a1983@gmail.com',
+			// 		Price_Status :0
+			// 	},
 
-			];
+			// ];
 
 			//var arrayOfProducts = request.body.RequestPrice_Product;
 			//[{
@@ -62,7 +62,7 @@ module.exports = {
 			if (request.body.Category_ID) {
 				CheckData();		
 			}else{
-				// arrayOfSuppliers = request.body.Supplier_ID;
+				arrayOfSuppliers = request.body.RequestPrice_Supplier;
 				GetlastID();
 			}
 
@@ -150,7 +150,7 @@ module.exports = {
 
 					};
 					// console.log(msg);
-					// sgMail.send(msg); 
+					sgMail.send(msg); 
 				}
 
 				return res.send({
