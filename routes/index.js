@@ -10,6 +10,7 @@ var CustomerController = require('../Controller/customerController');
 var SearchController = require('../Controller/searchController');
 
 var RequestPriceController = require('../Controller/requestpriceController');
+var SendOfferController = require('../Controller/sendofferController');
 
 
 var passport = require('passport');
@@ -585,5 +586,37 @@ router.post('/getRequestPriceByID', type,function(req, res) {
     });
     GetRequestPriceByID();
 });
+
+/***********************Send Offer***************************/
+router.get('/getAllSendOffer', type,function(req, res) {
+    var GetAllSendOffer= async (function (){
+        await (SendOfferController.getAllSendOffer(req,res));
+    });
+    GetAllSendOffer();
+});
+
+
+router.post('/addSendOffer', type,function(req, res) {
+    var AddSendOffer = async (function (){
+        SendOfferController.addSendOffer(req,res,URL)
+    });
+    AddSendOffer();
+});
+
+// router.post('/updateRequestPrice', type,function(req, res) {
+//     var UpdateRequestPrice = async (function (){
+//         SendOfferController.updateRequestPrice(req,res)
+//     });
+//     UpdateRequestPrice();
+// });
+
+
+// router.post('/getRequestPriceByID', type,function(req, res) {
+//     var GetRequestPriceByID= async (function (){
+//         await (SendOfferController.getRequestPriceByID(req,res));
+//     });
+//     GetRequestPriceByID();
+// });
+
 
 module.exports = router;
