@@ -25,7 +25,7 @@ module.exports = {
 
 		getSupplierByProductID:function(req,res){
 			Product.findOne({Product_Code:req.body.Product_Code})
-			.populate({path: 'Supplier', select: 'Supplier_Code Supplier_Name'})
+			.populate({path: 'Supplier', select: 'Supplier_Code Supplier_Name Supplier_Email'})
 			.exec(function(err, product) {
 				if (err){
 		    		return res.send({

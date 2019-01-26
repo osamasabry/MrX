@@ -39,7 +39,7 @@ module.exports = {
 			// console.log(URL);
 			var arrayOfSuppliers = [];
 			// arrayOfSuppliers = [
-			// 	{
+			// 	{ 
 			// 		Supplier_ID : 1,
 			// 		Supplier_Email : 'osamasabry14@gmail.com',
 			// 		Price_Status :0
@@ -143,7 +143,7 @@ module.exports = {
 					console.log('supplied_id: '+supplier_id);
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
-					  from: 'dev@pharmedsolutions.com',
+					  from: 'info@winexme.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
