@@ -611,12 +611,12 @@ router.post('/addSendOffer', type,function(req, res) {
 // });
 
 
-// router.post('/getRequestPriceByID', type,function(req, res) {
-//     var GetRequestPriceByID= async (function (){
-//         await (SendOfferController.getRequestPriceByID(req,res));
-//     });
-//     GetRequestPriceByID();
-// });
+router.post('/getSendOfferByID', type,function(req, res) {
+    var GetSendOfferByID= async (function (){
+        await (SendOfferController.getSendOfferByID(req,res));
+    });
+    GetSendOfferByID();
+});
 
 
 module.exports = router;
