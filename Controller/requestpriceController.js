@@ -39,21 +39,20 @@ module.exports = {
 			// console.log(URL);
 			var arrayOfSuppliers = [];
 			// arrayOfSuppliers = [
-			// 	{ 
+			// 	{
 			// 		Supplier_ID : 1,
 			// 		Supplier_Email : 'osamasabry14@gmail.com',
 			// 		Price_Status :0
 			// 	},
 			// 	{
 			// 		Supplier_ID : 2,
-			// 		Supplier_Email : 'mahmoud.a1983@gmail.com',
+			// 		Supplier_Email : 'mahmoud@gmail.com',
 			// 		Price_Status :0
 			// 	},
 
 			// ];
 
-			//var arrayOfProducts = request.body.RequestPrice_Product;
-			//[{
+			// var arrayOfProducts = [{
 			// 	Product_ID : 1,
 			// 	Quantity_Required : 300,
 			// 	Weight_ID :1
@@ -62,7 +61,7 @@ module.exports = {
 			if (request.body.Category_ID) {
 				CheckData();		
 			}else{
-				arrayOfSuppliers = request.body.RequestPrice_Supplier;
+				arrayOfSuppliers = request.body.Supplier_ID;
 				GetlastID();
 			}
 
@@ -108,6 +107,7 @@ module.exports = {
 		        newRequestPrice.RequestPrice_Create_Date            = request.body.RequestPrice_Create_Date;
 		        newRequestPrice.RequestPrice_Customer_ID    	    = request.body.RequestPrice_Customer_ID;
 		        newRequestPrice.RequestPrice_Product           		= request.body.RequestPrice_Product;
+		        // newRequestPrice.RequestPrice_Product           		= arrayOfProducts;
 				newRequestPrice.RequestPrice_Supplier     	 	 	= arrayOfSuppliers;
 				newRequestPrice.RequestPrice_Status 	     	 	= request.body.RequestPrice_Status;
 				
@@ -143,11 +143,12 @@ module.exports = {
 					console.log('supplied_id: '+supplier_id);
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
-					  from: 'info@winexme.com',
+					  from: 'dev@pharmedsolutions.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
-					  html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
-
+					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
+					  html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a>'+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'</h1>',
+					  
 					};
 					// console.log(msg);
 					sgMail.send(msg); 
