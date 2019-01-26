@@ -161,31 +161,22 @@ module.exports = {
 		},
 
 		updateRequestPrice:function(request,res){
-			// var Valid_Till =  new Date('2018-12-15')
-			// var RequestPrice_Details = [
-			// 	{
-			// 		Product_ID			: 1 ,
-			// 		Price       		: 500 ,
-			// 		Quantity_Available  : 20,
-			// 		Weight_ID			: 1
-			// 	},
-
-			// 	{
-			// 		Product_ID			: 2 ,
-			// 		Price       		: 300 ,
-			// 		Quantity_Available  : 5,
-			// 		Weight_ID			: 1
-			// 	},
-
-			// ]
+			function decrypt(text){
+				var decipher = crypto.createDecipher(algorithm,password)
+				var dec = decipher.update(text,'hex','utf8')
+				dec += decipher.final('utf8');
+				return dec;
+		  	}
+		  
+			var  RequestPriceid = decrypt(request.body.ID);
+			var RequestPriceSupplierid = decrypt(request.body.RequestPrice_Supplier_ID );
 			var myquery = { 
-				_id	 						: request.body.ID,
-				'RequestPrice_Supplier._id' : request.body.RequestPrice_Supplier_ID 
+				_id	 						: RequestPriceid,
+				'RequestPrice_Supplier._id' : RequestPriceSupplierid
 			}; 
 
 			var newvalues = { 
 					$set: {
-							// "RequestPrice_Supplier.$.Valid_Till"   : Valid_Till,
 							"RequestPrice_Supplier.$.Valid_Till"   : request.body.Valid_Till,
 							"RequestPrice_Supplier.$.Price_Status" : 1,
 							"RequestPrice_Supplier.$.Details"      : request.body.RequestPrice_Details,	
