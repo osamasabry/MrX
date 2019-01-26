@@ -147,7 +147,7 @@ module.exports = {
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
-					  html: text+'</br><h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'></a>Open Form To Fill Prices (click here)</h4>',
+					  html:'Hello , please fill </br><h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'>Open Form To Fill Prices (click here)</a></h4>',
 					  
 					};
 					// console.log(msg);
