@@ -61,7 +61,7 @@ module.exports = {
 			if (request.body.Category_ID) {
 				CheckData();		
 			}else{
-				arrayOfSuppliers = request.body.Supplier_ID;
+				arrayOfSuppliers = request.body.RequestPrice_Supplier;
 				GetlastID();
 			}
 
@@ -143,11 +143,11 @@ module.exports = {
 					console.log('supplied_id: '+supplier_id);
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
-					  from: 'dev@pharmedsolutions.com',
+					  from: 'info@winexme.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
-					  html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a>'+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'</h1>',
+					  html: text+'</br><h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'></a>Open Form To Fill Prices (click here)</h4>',
 					  
 					};
 					// console.log(msg);
