@@ -10,8 +10,7 @@ var crypto = require('crypto'),
   password = 'd6F3Efeq';
 
 const sgMail = require('@sendgrid/mail');
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 module.exports = {
 		
 		getAllSendOffer:function(request,res){
