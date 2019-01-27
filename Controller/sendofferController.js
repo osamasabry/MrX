@@ -11,7 +11,7 @@ var crypto = require('crypto'),
 
 const sgMail = require('@sendgrid/mail');
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgMail.setApiKey('SG.pLmNapBVRmGuDogOga8eEw.RVXHqxT4bGiyXOoV_Yg40sBPGQ9LXvWChJVlBYGb');
+sgMail.setApiKey('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');
 module.exports = {
 		
 		getAllSendOffer:function(request,res){
@@ -36,7 +36,8 @@ module.exports = {
 
 		addSendOffer:function(request,res,URL){
 			// console.log(URL);
-			var arrayOfCustomers = [];
+			// var arrayOfCustomers = [];
+			// var Products = reques;
 			// arrayOfCustomers = [
 			// 	{
 			// 		Customer_ID : 1,
@@ -50,13 +51,21 @@ module.exports = {
 				// 	Price_Status :0
 				// },
 
-			// ];
+			//];
 
-			// var arrayOfProducts = [{
-			// 	Product_ID : 1,
-			// 	Quantity_Required : 300,
-			// 	Weight_ID :1
-			// }];
+			// arrayOfProducts = [
+			// 	{
+			// 		Product_ID : 1,
+			// 		Quantity_Required : 300,
+			// 		Weight_ID :1
+			// 	},
+			// 	{
+			// 		Product_ID : 2,
+			// 		Quantity_Required : 500,
+			// 		Weight_ID :2
+			// 	},
+
+			// ];
 
 			if (request.body.Category_ID) {
 				CheckData();		
@@ -108,7 +117,6 @@ module.exports = {
 		        newSendOffer.SendOffer_Valid_Till    	    = request.body.SendOffer_Valid_Till;
 		        newSendOffer.SendOffer_Product              = request.body.SendOffer_Product;
 		        // newSendOffer.SendOffer_Product              = arrayOfProducts;
-				
 				newSendOffer.SendOffer_Customer     	 	= arrayOfCustomers;
 				newSendOffer.SendOffer_Status 	     	 	= request.body.SendOffer_Status;
 				
@@ -133,23 +141,36 @@ module.exports = {
 			    crypted += cipher.final('hex');
 			    return crypted;
 			}
+
+			function drawtable(data){
+				html = '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Details</th></tr>';
+				for (var i = 0; i < data.length; i++) {
+					html += '<tr><td>'+data[i].Product_Name+'</td>';
+					html += '<td>'+data[i].Quantity_Required+'</td>';
+					html += '<td>'+data[i].Weight_Name+'</td></tr>';
+					html += '<td><a></a>Click Here</td></tr>';
+				}
+  				html +='</table>';
+  				html +=<'<br><h3>THis Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'>
+  				return html;
+			}
 			
 			function SendEmail(row){
 				// url: http://highchem.winexme.com/#!/supplier-pricing?spid=asdfsadf&rqid=fgsdfg
 				var row_id = row._id;
 				row_id = encrypt(String(row_id));
-				console.log('row_id: '+row_id);
+				// console.log('row_id: '+row_id);
 				for (var i = row.SendOffer_Customer.length - 1; i >= 0; i--) {
 					var customer_id = encrypt(String(row.SendOffer_Customer[i]._id)); 
-					console.log('customer_id: '+customer_id);
+					// console.log('customer_id: '+customer_id);
 					 const msg = {
 					  to: row.SendOffer_Customer[i].Customer_Email,
 					  from: 'info@winexme.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
-					  html:'Hello , Show Offer </br><h4><a href='+URL+'customer-show-offer/'+customer_id+'/'+row_id+'>Open Form To Show Offer (click here)</a></h4>',
-					  
+					  // html:'Hello , Show Offer </br><h4><a href='+URL+'customer-show-offer/'+customer_id+'/'+row_id+'>Open Form To Show Offer (click here)</a></h4>',
+					  html:drawtable(request.body.arrayOfProducts),
 					};
 					// console.log(msg);
 					sgMail.send(msg); 
@@ -197,46 +218,46 @@ module.exports = {
 		// 	})
 		// },
 
-		getSendOfferByID:function(request,res){
+		// getSendOfferByID:function(request,res){
 
-			function decrypt(text){
-			  	var decipher = crypto.createDecipher(algorithm,password)
-			  	var dec = decipher.update(text,'hex','utf8')
-			  	dec += decipher.final('utf8');
-			  	return dec;
-			}
+		// 	function decrypt(text){
+		// 	  	var decipher = crypto.createDecipher(algorithm,password)
+		// 	  	var dec = decipher.update(text,'hex','utf8')
+		// 	  	dec += decipher.final('utf8');
+		// 	  	return dec;
+		// 	}
 			
-			var  id = decrypt(request.body.row_id);
-			var customer_id = decrypt(request.body.customer_id);
-			SendOffer.findOne({_id:id }).then((data) => {
-				var status = data.SendOffer_Customer.filter((object) => {
-					return object["_id"] == customer_id;
-			})
-				if (status[0].Price_Status==0) {
-					datarequestprice();
-				}else{
-					res.send("Link Is Expired");
-				}
-			})
+		// 	var  id = decrypt(request.body.row_id);
+		// 	var customer_id = decrypt(request.body.customer_id);
+		// 	SendOffer.findOne({_id:id }).then((data) => {
+		// 		var status = data.SendOffer_Customer.filter((object) => {
+		// 			return object["_id"] == customer_id;
+		// 	})
+		// 		if (status[0].Price_Status==0) {
+		// 			dataSendOffer();
+		// 		}else{
+		// 			res.send("Link Is Expired");
+		// 		}
+		// 	})
 
-			function datarequestprice(){
-				SendOffer.findOne({_id:id})
-				.select('SendOffer_Product')
-				.populate({ path: 'Product', select: 'Product_Name' })
-				.populate({ path: 'Weight', select: 'Weight_Name' })
-				.lean()
-				.exec(function(err, sendoffer) {
-					if (err){
-			    		return res.send({
-							message: err
-						});
-			    	} else if(sendoffer) {
-						res.send(sendoffer);
+		// 	function dataSendOffer(){
+		// 		SendOffer.findOne({_id:id})
+		// 		.select('SendOffer_Product SendOffer_Valid_Till')
+		// 		.populate({ path: 'Product', select: 'Product_Name' })
+		// 		.populate({ path: 'Weight', select: 'Weight_Name' })
+		// 		.lean()
+		// 		.exec(function(err, sendoffer) {
+		// 			if (err){
+		// 	    		return res.send({
+		// 					message: err
+		// 				});
+		// 	    	} else if(sendoffer) {
+		// 				res.send(sendoffer);
 						
-					}else{
-			    		res.send("not Offer");
-					}
-				})
-			}
-		},
+		// 			}else{
+		// 	    		res.send("not Offer");
+		// 			}
+		// 		})
+		// 	}
+		// },
 }
