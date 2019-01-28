@@ -31,7 +31,7 @@ var Hcm_ProductSchema = mongoose.Schema({
     Product_Classes_Code                        :Number,
     Product_Assay                               :[String],
     Product_Form_Code                           :Number,
-    Product_Certification                       :String,
+    Product_Certification                       :[String],
     Product_Release_Code                        :Number,
     Product_StorageType_Code                    :Number,
     Product_ProductCategory_Code                :[Number],

@@ -109,6 +109,7 @@ module.exports = {
 				newProduct.Product_Name 	     				 = request.body.Product_Name;
 				newProduct.Product_Manufacturer 	    		 = request.body.Product_Manufacturer;
 				newProduct.Product_Exporter 	     			 = request.body.Product_Exporter;
+				newProduct.Product_Abbreviation					 = request.body.Product_Abbreviation;
 				newProduct.Product_Chemical_Name   				 = request.body.Product_Chemical_Name;
 				newProduct.Product_Molecular_Formula			 = request.body.Product_Molecular_Formula;
 				newProduct.Product_Molecular_Weight	 			 = request.body.Product_Molecular_Weight;
@@ -291,6 +292,7 @@ module.exports = {
 				Product_Chemical_Name   		  	  : request.body.Product_Chemical_Name,
 				Product_Manufacturer 	    	  	  : request.body.Product_Manufacturer,
 				Product_Exporter 	     		  	  : request.body.Product_Exporter,
+				Product_Abbreviation				  : request.body.Product_Abbreviation,
 				Product_Molecular_Formula		  	  : request.body.Product_Molecular_Formula,
 				Product_Molecular_Weight		  	  : request.body.Product_Molecular_Weight,
 				Product_CAS_Number	 			  	  : request.body.Product_CAS_Number,
@@ -450,6 +452,7 @@ module.exports = {
 				newProduct.Product_Name 	     				 = req.body.Product_Name,
 				newProduct.Product_Manufacturer 	    		 = product.Product_Manufacturer;
 				newProduct.Product_Exporter 	     			 = product.Product_Exporter;
+				newProduct.Product_Abbreviation					 = product.Product_Abbreviation;
 				newProduct.Product_Chemical_Name   				 = product.Product_Chemical_Name;
 				newProduct.Product_Molecular_Formula			 = product.Product_Molecular_Formula;
 				newProduct.Product_Molecular_Weight	 			 = product.Product_Molecular_Weight;
