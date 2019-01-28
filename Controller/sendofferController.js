@@ -142,12 +142,14 @@ module.exports = {
 			}
 
 			function drawtable(data){
+
 				html = '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Details</th></tr>';
 				for (var i = 0; i < data.length; i++) {
+					var product_id = encrypt(String(data[i].Product_ID))
 					html += '<tr><td>'+data[i].Product_Name+'</td>';
 					html += '<td>'+data[i].Quantity_Required+'</td>';
 					html += '<td>'+data[i].Weight_Name+'</td></tr>';
-					html += '<td><a></a>Click Here</td></tr>';
+					html += '<td><a href='+URL+'show-details/'+product_id+'>Click Here</a></td></tr>';
 				}
   				html +='</table>';
   				html +=<'<br><h3>THis Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'>
@@ -169,7 +171,7 @@ module.exports = {
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
 					  // html:'Hello , Show Offer </br><h4><a href='+URL+'customer-show-offer/'+customer_id+'/'+row_id+'>Open Form To Show Offer (click here)</a></h4>',
-					  html:drawtable(request.body.arrayOfProducts),
+					  html:drawtable(request.body.SendOffer_Product),
 					};
 					// console.log(msg);
 					sgMail.send(msg); 
@@ -241,7 +243,7 @@ module.exports = {
 
 		// 	function dataSendOffer(){
 		// 		SendOffer.findOne({_id:id})
-		// 		.select('SendOffer_Product SendOffer_Valid_Till')
+		// 		// .select('SendOffer_Product SendOffer_Valid_Till')
 		// 		.populate({ path: 'Product', select: 'Product_Name' })
 		// 		.populate({ path: 'Weight', select: 'Weight_Name' })
 		// 		.lean()
@@ -259,4 +261,40 @@ module.exports = {
 		// 		})
 		// 	}
 		// },
+
+		getProductByID:function(request,res){
+			function decrypt(text){
+			  	var decipher = crypto.createDecipher(algorithm,password)
+			  	var dec = decipher.update(text,'hex','utf8')
+			  	dec += decipher.final('utf8');
+			  	return dec;
+			}
+			var  product_id = decrypt(request.body.row_id);
+			Prodcut.findOne({Product_Code:product_id})
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.populate({ path: 'productclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
+			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
+			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
+			.lean()
+			.exec(function(err, sendoffer) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(sendoffer) {
+					res.send(sendoffer);
+					
+				}else{
+		    		res.send("not Offer");
+				}
+			})
+		},
 }

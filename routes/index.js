@@ -611,11 +611,11 @@ router.post('/addSendOffer', type,function(req, res) {
 // });
 
 
-router.post('/getSendOfferByID', type,function(req, res) {
-    var GetSendOfferByID= async (function (){
-        await (SendOfferController.getSendOfferByID(req,res));
+router.post('/getProductByID', type,function(req, res) {
+    var GetProductByID= async (function (){
+        await (SendOfferController.getProductByID(req,res));
     });
-    GetSendOfferByID();
+    GetProductByID();
 });
 
 
