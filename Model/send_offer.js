@@ -5,12 +5,13 @@ var Hcm_SendOfferSchema = mongoose.Schema({
 		SendOffer_Code        	        :Number,
         SendOffer_Create_Date           :Date,
         SendOffer_Valid_Till            :Date,
+        SendOffer_Title                 :String,
 
         SendOffer_Product           		:[{
             Product_ID          :Number,
             Quantity_Required   :Number,
             Weight_ID           :Number,
-
+            Price               :Number,
         },{
             toJSON: { virtuals: true }
         }],

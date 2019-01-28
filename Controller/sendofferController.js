@@ -115,6 +115,8 @@ module.exports = {
 		        newSendOffer.SendOffer_Create_Date          = request.body.SendOffer_Create_Date;
 		        newSendOffer.SendOffer_Valid_Till    	    = request.body.SendOffer_Valid_Till;
 		        newSendOffer.SendOffer_Product              = request.body.SendOffer_Product;
+		        newSendOffer.SendOffer_Title                = request.body.SendOffer_Title;
+		        
 		        // newSendOffer.SendOffer_Product              = arrayOfProducts;
 				newSendOffer.SendOffer_Customer     	 	= arrayOfCustomers;
 				newSendOffer.SendOffer_Status 	     	 	= request.body.SendOffer_Status;
@@ -143,13 +145,15 @@ module.exports = {
 
 			function drawtable(data){
 
-				html = '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Details</th></tr>';
+				html = '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Price</th><th>Details</th></tr>';
 				for (var i = 0; i < data.length; i++) {
 					var product_id = encrypt(String(data[i].Product_ID))
 					html += '<tr><td>'+data[i].Product_Name+'</td>';
 					html += '<td>'+data[i].Quantity_Required+'</td>';
 					html += '<td>'+data[i].Weight_Name+'</td></tr>';
+					html += '<td>'+data[i].Price+'</td></tr>';
 					html += '<td><a href='+URL+'show-details/'+product_id+'>Click Here</a></td></tr>';
+					
 				}
   				html +='</table>';
   				html +='<br><h3>This Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'
