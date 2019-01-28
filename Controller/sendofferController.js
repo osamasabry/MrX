@@ -152,7 +152,7 @@ module.exports = {
 					html += '<td><a href='+URL+'show-details/'+product_id+'>Click Here</a></td></tr>';
 				}
   				html +='</table>';
-  				html +=<'<br><h3>THis Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'>
+  				html +='<br><h3>This Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'
   				return html;
 			}
 			
