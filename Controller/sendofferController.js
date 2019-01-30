@@ -11,7 +11,7 @@ var crypto = require('crypto'),
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-module.exports = {
+module.exports = { 
 		
 		getAllSendOffer:function(request,res){
 			SendOffer.find({})
