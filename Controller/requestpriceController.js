@@ -15,21 +15,38 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 module.exports = {
 		
 		getAllRequestPrice:function(request,res){
-			RequestPrice.find({})
-			.populate({ path: 'Customer', select: 'Customer_Name' })
-			.populate({ path: 'Product', select: 'Product_Name' })
-			.populate({ path: 'Weight', select: 'Weight_Name' })
-			.populate({ path: 'Supplier', select: 'Supplier_Name' })
-			.lean()
+
+			RequestPrice.aggregate([ 
+				{$unwind: "$RequestPrice_Supplier" },
+				{$unwind: "$RequestPrice_Supplier.Details" },
+			    { "$group": { 
+			        "_id": '$RequestPrice_Code',
+			        "RequestPrice_Customer_ID" : { $first: '$RequestPrice_Customer_ID' },
+			        "RequestPrice_Create_Date" : { $first: '$RequestPrice_Create_Date' },
+			        "RequestPrice_Product" : { $first: '$RequestPrice_Product' },
+			        "RequestPrice_Supplier" : { $first: '$RequestPrice_Supplier' },
+			        "RequestPrice_Status" : { $first: '$RequestPrice_Status' },
+			        "max": { "$max": "$RequestPrice_Supplier.Details.Price" }, 
+			        "min": { "$min": "$RequestPrice_Supplier.Details.Price" } 
+			    }},
+			])
 			.exec(function(err, supplier) {
 				if (err){
 		    		return res.send({
 						message: err
 					});
 		    	} else if(supplier) {
-					res.send(supplier);
-					
+					RequestPrice.populate(supplier, {path: 'Customer', select: 'Customer_Code Customer_Name'}, function(err, customer) {
+					 	RequestPrice.populate(customer, {path: 'Product',select: 'Product_Name'}, function(err, product) {
+							RequestPrice.populate(product, {path: 'Weight' ,select: 'Weight_Name'}, function(err, weight) {
+								RequestPrice.populate(weight, {path: 'Supplier' ,select: 'Supplier_Name'}, function(err, supplierName) {
+									res.send(supplierName);
+				        		});
+			        		});
+			        	});
+			        });
 				}else{
+
 		    		res.send("not Request");
 				}
 			})
