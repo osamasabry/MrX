@@ -15,6 +15,28 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 module.exports = {
 		
 		getAllRequestPrice:function(request,res){
+
+			// RequestPrice.aggregate([
+			// 	{   
+			// 		$match: { RequestPrice_Code : 7 }
+			// 	},
+			// 	{
+			// 		$unwind: "$RequestPrice_Supplier", 
+			// 		$unwind: "$RequestPrice_Supplier.Details"
+			// 	},
+			// 	{
+			// 		$group: {
+			// 			_id: {
+			// 			//minPrice: { $min: "$RequestPrice_Supplier.Details.Price" },
+			// 			// maxPrice: { $max: "$RequestPrice_Supplier.Details.Price" },
+			// 			// Product_ID: {},
+			// 			RequestPrice_Supplier: { $push: "$RequestPrice_Supplier.Details.Price" } }
+			// 		}
+					
+			// 	},
+			// 	//{$group: { _id: { to: "$Hotel_Contract.Hotel_Rooms.Room_To", from: "$Hotel_Contract.Hotel_Rooms.Room_From" }, Hotel_Contract: { $push: "$Hotel_Contract.Hotel_Rooms.Room_Count" } } },
+
+			// ])
 			RequestPrice.find({})
 			.populate({ path: 'Customer', select: 'Customer_Name' })
 			.populate({ path: 'Product', select: 'Product_Name' })

@@ -150,8 +150,8 @@ module.exports = {
 					var product_id = encrypt(String(data[i].Product_ID))
 					html += '<tr><td>'+data[i].Product_Name+'</td>';
 					html += '<td>'+data[i].Quantity_Required+'</td>';
-					html += '<td>'+data[i].Weight_Name+'</td></tr>';
-					html += '<td>'+data[i].Price+'</td></tr>';
+					html += '<td>'+data[i].Weight_Name+'</td>';
+					html += '<td>'+data[i].Price+'</td>';
 					html += '<td><a href='+URL+'show-details/'+product_id+'>Click Here</a></td></tr>';
 					
 				}
