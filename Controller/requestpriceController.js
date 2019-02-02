@@ -16,42 +16,36 @@ module.exports = {
 		
 		getAllRequestPrice:function(request,res){
 
-			// RequestPrice.aggregate([
-			// 	{   
-			// 		$match: { RequestPrice_Code : 7 }
-			// 	},
-			// 	{
-			// 		$unwind: "$RequestPrice_Supplier", 
-			// 		$unwind: "$RequestPrice_Supplier.Details"
-			// 	},
-			// 	{
-			// 		$group: {
-			// 			_id: {
-			// 			//minPrice: { $min: "$RequestPrice_Supplier.Details.Price" },
-			// 			// maxPrice: { $max: "$RequestPrice_Supplier.Details.Price" },
-			// 			// Product_ID: {},
-			// 			RequestPrice_Supplier: { $push: "$RequestPrice_Supplier.Details.Price" } }
-			// 		}
-					
-			// 	},
-			// 	//{$group: { _id: { to: "$Hotel_Contract.Hotel_Rooms.Room_To", from: "$Hotel_Contract.Hotel_Rooms.Room_From" }, Hotel_Contract: { $push: "$Hotel_Contract.Hotel_Rooms.Room_Count" } } },
-
-			// ])
-			RequestPrice.find({})
-			.populate({ path: 'Customer', select: 'Customer_Name' })
-			.populate({ path: 'Product', select: 'Product_Name' })
-			.populate({ path: 'Weight', select: 'Weight_Name' })
-			.populate({ path: 'Supplier', select: 'Supplier_Name' })
-			.lean()
+			RequestPrice.aggregate([ 
+				{$unwind: "$RequestPrice_Supplier" },
+				{$unwind: "$RequestPrice_Supplier.Details" },
+			    { "$group": { 
+			        "_id": '$RequestPrice_Code',
+			        "RequestPrice_Customer_ID" : { $first: '$RequestPrice_Customer_ID' },
+			        "RequestPrice_Create_Date" : { $first: '$RequestPrice_Create_Date' },
+			        "RequestPrice_Product" : { $first: '$RequestPrice_Product' },
+			        "RequestPrice_Supplier" : { $first: '$RequestPrice_Supplier' },
+			        "RequestPrice_Status" : { $first: '$RequestPrice_Status' },
+			        "max": { "$max": "$RequestPrice_Supplier.Details.Price" }, 
+			        "min": { "$min": "$RequestPrice_Supplier.Details.Price" } 
+			    }},
+			])
 			.exec(function(err, supplier) {
 				if (err){
 		    		return res.send({
 						message: err
 					});
 		    	} else if(supplier) {
-					res.send(supplier);
-					
-				}else{
+					RequestPrice.populate(supplier, {path: 'Customer', select: 'Customer_Code Customer_Name'}, function(err, customer) {
+						RequestPrice.populate(customer, {path: 'Product',select: 'Product_Name'}, function(err, product) {
+						   RequestPrice.populate(product, {path: 'Weight' ,select: 'Weight_Name'}, function(err, weight) {
+							   RequestPrice.populate(weight, {path: 'Supplier' ,select: 'Supplier_Name'}, function(err, supplierName) {
+								   res.send(supplierName);
+							   });
+						   });
+					   });
+				   });
+			   }else{
 		    		res.send("not Request");
 				}
 			})
