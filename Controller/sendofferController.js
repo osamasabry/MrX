@@ -152,7 +152,7 @@ module.exports = {
 					html += '<td>'+data[i].Quantity_Required+'</td>';
 					html += '<td>'+data[i].Weight_Name+'</td>';
 					html += '<td>'+data[i].Price+'</td>';
-					html += '<td><a href='+URL+'show-details/'+product_id+'>Click Here</a></td></tr>';
+					html += '<td><a href='+URL+'view-product/'+product_id+'>Click Here</a></td></tr>';
 					
 				}
   				html +='</table>';
