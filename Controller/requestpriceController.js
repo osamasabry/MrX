@@ -200,12 +200,19 @@ module.exports = {
 			}; 
 
 			var newvalues = { 
-					$set: {
-							"RequestPrice_Supplier.$.Valid_Till"   : request.body.Valid_Till,
-							"RequestPrice_Supplier.$.Price_Status" : 1,
-							"RequestPrice_Supplier.$.Details"      : request.body.RequestPrice_Details,	
-							"RequestPrice_Status"  				   : 1,
-					 },
+				$set: {
+						"RequestPrice_Supplier.$.Valid_Till"   			: request.body.Valid_Till,
+						"RequestPrice_Supplier.$.Price_Status" 			: 1,
+						"RequestPrice_Supplier.$.Place_of_Delivery"		: request.body.Place_of_Delivery,
+						"RequestPrice_Supplier.$.Taxes_Types"			: request.body.Taxes_Types,
+						"RequestPrice_Supplier.$.Method_of_Payment"		: request.body.Method_of_Payment,
+						"RequestPrice_Supplier.$.Delivery_Time"			: request.body.Delivery_Time,
+						"RequestPrice_Supplier.$.Delivery_Cost"			: request.body.Delivery_Cost,
+						"RequestPrice_Supplier.$.Work_Time_Off"			: request.body.Work_Time_Off,
+						"RequestPrice_Supplier.$.Details"      			: request.body.RequestPrice_Details,	
+						"RequestPrice_Status"  				   			: 1,
+						
+				 },
 
 			 },options = {upsert: true};
 

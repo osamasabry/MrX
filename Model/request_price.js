@@ -19,21 +19,19 @@ var Hcm_RequestPriceSchema = mongoose.Schema({
             Supplier_Email              :String,
             Valid_Till                  :Date,
             Price_Status                :Number, 
-
+            Place_of_Delivery           :String,
+            Taxes_Types                 :String,
+            Method_of_Payment           :String,
+            Delivery_Time               :String,
+            Delivery_Cost               :String,
+            Work_Time_Off               :String,
             Details                       :[{
                 Product_ID          :Number,
                 Price               :Number,
                 Quantity_Available  :Number,
                 Weight_ID           :Number,
-                Place_of_Delivery   :String,
-                Taxes_Types         :String,
-                Method_Payment      :Number,
-                Delivery_Time       :String,
-                Delivery_Cost       :Number,
-                Work_Time_Off       :String,
                 Note                :String,
             }]
-
         },{
             toJSON: { virtuals: true }
         }],
