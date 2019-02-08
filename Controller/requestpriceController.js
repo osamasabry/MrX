@@ -165,13 +165,19 @@ module.exports = {
 				for (var i = row.RequestPrice_Supplier.length - 1; i >= 0; i--) {
 					var supplier_id = encrypt(String(row.RequestPrice_Supplier[i]._id)); 
 					console.log('supplied_id: '+supplier_id);
+					var message = 'Dear valued supplier,</br>';
+					message += 'In High Chemicals Market we’re much keen on doing business with you and leveraging your market share. </br>';
+					message += 'Some of our customers are willing to procure some of your products.  Please click below link and fill in the form to make your bid onboard.</br>';
+					message += '<h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'>(click here)</a></h4></br>';
+					message += 'Beware that the more flexible your prices and terms are, the more likely your quotation will end up with a closed deal.</br>';
+					message += 'Have a great sales moment!';
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
 					  from: 'info@winexme.com',
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
-					  html:'Hello , please fill </br><h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'>Open Form To Fill Prices (click here)</a></h4>',
+					  html: message,
 					  
 					};
 					// console.log(msg);

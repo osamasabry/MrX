@@ -150,20 +150,35 @@ module.exports = {
 		}
 
 		function drawtable(data){
+			var message  = 'Dear valued customer,</br>';
+			message += 'In reply to your request, please find below quotation.  You might want to click below link(s) to see full product specification.</br>';
 
-			html = '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Price</th><th>Details</th></tr>';
+			message += '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Price</th><th>Details</th></tr>';
 			for (var i = 0; i < data.length; i++) {
 				var product_id = encrypt(String(data[i].Product_ID))
-				html += '<tr><td>'+data[i].Product_Name+'</td>';
-				html += '<td>'+data[i].Quantity_Required+'</td>';
-				html += '<td>'+data[i].Weight_Name+'</td>';
-				html += '<td>'+data[i].Price+'</td>';
-				html += '<td><a href='+URL+'view-product/'+product_id+'>Click Here</a></td></tr>';
+				message += '<tr><td>'+data[i].Product_Name+'</td>';
+				message += '<td>'+data[i].Quantity_Required+'</td>';
+				message += '<td>'+data[i].Weight_Name+'</td>';
+				message += '<td>'+data[i].Price+'</td>';
+				message += '<td><a href='+URL+'view-product/'+product_id+'>Click Here</a></td></tr>';
 				
 			}
-				html +='</table>';
-				html +='<br><h3>This Offer Vaild Till: '+request.body.SendOffer_Valid_Till+'</h3>'
-				return html;
+			
+			message +='</table>';
+			message +='Please note that payment terms are'+request.body.SendOffer_Method_of_Payment ;
+			message +='and the quotation is valid '+ request.body.SendOffer_Valid_Till+'</br>';
+			message +='Also please note the place of delivery is' + request.body.SendOffer_Place_of_Delivery;
+			message +='and it will take '+request.body.SendOffer_Delivery_Time;
+			message +='and the cost of delivery is '+request.body.SendOffer_Delivery_Cost+'</br>';
+			message +='this prices  '+request.body.SendOffer_Taxes_Types+'</br>';
+
+			message +='Should you find the quotation of interest to you, please reply to this email with confirmation as to  commence delivery.</br>';
+			message +='Yours faithfully,</br>';
+			message +='High Chemicals Market,</br>';
+			message +='work time off '+request.body.SendOffer_Work_Time_Off;
+
+			
+			return message;
 		}
 		
 		function SendEmail(row){
