@@ -16,6 +16,13 @@ var Hcm_SendOfferSchema = mongoose.Schema({
             toJSON: { virtuals: true }
         }],
 
+        SendOffer_Place_of_Delivery           :String,
+        SendOffer_Taxes_Types                 :String,
+        SendOffer_Method_of_Payment           :String,
+        SendOffer_Delivery_Time               :String,
+        SendOffer_Delivery_Cost               :String,
+        SendOffer_Work_Time_Off               :String,
+        
         SendOffer_Customer               :[{
             Customer_ID                 :Number,
             Customer_Email              :String,
