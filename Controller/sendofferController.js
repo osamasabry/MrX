@@ -34,6 +34,8 @@ module.exports = {
 	},
 
 	addSendOffer:function(request,res,URL){
+
+
 		// console.log(URL);
 		// var arrayOfCustomers = [];
 		// var Products = reques;
@@ -150,10 +152,17 @@ module.exports = {
 		}
 
 		function drawtable(data){
-			var message  = 'Dear valued customer,</br>';
-			message += 'In reply to your request, please find below quotation.  You might want to click below link(s) to see full product specification.</br>';
+			var date = request.body.SendOffer_Valid_Till;
+			var month = date.getUTCMonth() + 1; //months from 1-12
+			var day = date.getUTCDate();
+			var year = date.getUTCFullYear();
 
-			message += '<table><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Price</th><th>Details</th></tr>';
+			var newdate = year + "/" + month + "/" + day;
+
+			var message  = '<p>Dear valued customer,</p>';
+			message += '<p>In reply to your request, please find below quotation.  You might want to click below link(s) to see full product specification.</p>';
+
+			message += '<table border ="1" bordercolor="#81a28e"><tr><th>Product Name</th><th>Quantity Required</th><th>Weight</th><th>Price</th><th>Details</th></tr>';
 			for (var i = 0; i < data.length; i++) {
 				var product_id = encrypt(String(data[i].Product_ID))
 				message += '<tr><td>'+data[i].Product_Name+'</td>';
@@ -165,19 +174,18 @@ module.exports = {
 			}
 			
 			message +='</table>';
-			message +='Please note that payment terms are'+request.body.SendOffer_Method_of_Payment ;
-			message +='and the quotation is valid '+ request.body.SendOffer_Valid_Till+'</br>';
-			message +='Also please note the place of delivery is' + request.body.SendOffer_Place_of_Delivery;
+			message +='<p>Please note that payment terms are '+request.body.SendOffer_Method_of_Payment ;
+			message +=' and the quotation is valid '+ newdate +'</p>';
+			message +='<p> Also please note that place of delivery is ' + request.body.SendOffer_Place_of_Delivery;
 			message +='and it will take '+request.body.SendOffer_Delivery_Time;
-			message +='and the cost of delivery is '+request.body.SendOffer_Delivery_Cost+'</br>';
-			message +='this prices  '+request.body.SendOffer_Taxes_Types+'</br>';
+			message +='and the cost of delivery is '+request.body.SendOffer_Delivery_Cost+'</p>';
+			message +='<p>this prices  '+request.body.SendOffer_Taxes_Types+'</p>';
 
-			message +='Should you find the quotation of interest to you, please reply to this email with confirmation as to  commence delivery.</br>';
-			message +='Yours faithfully,</br>';
-			message +='High Chemicals Market,</br>';
-			message +='work time off '+request.body.SendOffer_Work_Time_Off;
+			message +='<p>Should you find the quotation of interest to you, please reply to this email with confirmation as to  commence delivery.</p>';
+			message +='<p> faithfully,</p>';
+			message +='<p>High Chemicals Market,</p>';
+			message +='<p>'+request.body.SendOffer_Work_Time_Off+'</p>';
 
-			
 			return message;
 		}
 		
