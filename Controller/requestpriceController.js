@@ -165,12 +165,12 @@ module.exports = {
 				for (var i = row.RequestPrice_Supplier.length - 1; i >= 0; i--) {
 					var supplier_id = encrypt(String(row.RequestPrice_Supplier[i]._id)); 
 					console.log('supplied_id: '+supplier_id);
-					var message = 'Dear valued supplier,</br>';
-					message += 'In High Chemicals Market we’re much keen on doing business with you and leveraging your market share. </br>';
-					message += 'Some of our customers are willing to procure some of your products.  Please click below link and fill in the form to make your bid onboard.</br>';
-					message += '<h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'>(click here)</a></h4></br>';
+					var message = '<p>Dear valued supplier, </p>';
+					message += '<p>In High Chemicals Market we’re much keen on doing business with you and leveraging your market share. </p>';
+					message += '<p>Some of our customers are willing to procure some of your products.  Please click below link and fill in the form to make your bid onboard.</p>';
+					message += '<h4><a href='+URL+'supplier-fill-price/'+supplier_id+'/'+row_id+'>(click here)</a></h4>';
 					message += 'Beware that the more flexible your prices and terms are, the more likely your quotation will end up with a closed deal.</br>';
-					message += 'Have a great sales moment!';
+					message += '<p>Have a great sales moment!</p>';
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
 					  from: 'info@winexme.com',
