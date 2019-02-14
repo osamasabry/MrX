@@ -28,9 +28,9 @@ module.exports = {
 			newUser.User_Code     	 	 = NextCode;
 			newUser.User_Name 	     	 = request.body.User_Name;
 			newUser.User_Password   	 = passwordHash.generate(request.body.User_Password);
-			// newUser.User_DisplayName	 = request.body.User_DisplayName;
-			// newUser.User_Permissions	 = request.body.User_Permissions;
-			// newUser.User_IsActive	 	 = request.body.User_IsActive;
+			newUser.User_DisplayName	 = request.body.User_DisplayName;
+			newUser.User_Permissions	 = request.body.User_Permissions;
+			newUser.User_IsActive	 	 = request.body.User_IsActive;
 			
 			newUser.save(function(error, doneadd){
 				if(error){
