@@ -15,6 +15,22 @@ module.exports = {
 	// 	})
 	// },
 
+	getAllUsers:function(request,res){
+			User.find({})
+			.exec(function(err, user) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(user) {
+					res.send(user);
+					
+				}else{
+		    		res.send("not Users");
+				}
+			})
+	},
+	
 	addUser:function(request,res){
 		User.getLastCode(function(err,user){
 			if (user) 
@@ -45,6 +61,30 @@ module.exports = {
 				}
 			});
 		}
+	},
+
+	editUserPermissions:function(request,res){
+			var newvalues = { $set: {
+				User_Permissions   		: request.body.User_Permissions,
+			} };
+			var myquery = { User_Code: request.body.User_Code }; 
+			User.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'User not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
 	},
 }
 

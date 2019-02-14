@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../Controller/userController');
+var UserController = require('../Controller/userController');
 var CategoryController = require('../Controller/categoryController');
 var ProductController = require('../Controller/productController');
 var SupplierController = require('../Controller/supplierController');
@@ -435,11 +435,25 @@ router.post('/EditSupplierContact', type,function(req, res) {
 
 router.post('/AddUser', type,function(req, res) {
     var addUser = async (function (){
-        User.addUser(req,res);
+        UserController.addUser(req,res);
     });
     addUser();
 });
 
+
+router.get('/getAllUsers', type,function(req, res) {
+    var Users = async (function (){
+        await (UserController.getAllUsers(req,res));
+    });
+    Users();
+});
+
+router.post('/editUserPermissions', type,function(req, res) {
+    var EditUserPermissions = async (function (){
+        await (UserController.editUserPermissions(req,res));
+    });
+    EditUserPermissions();
+});
 
 //************** Customer **********************************
 router.get('/getCustomer', type,function(req, res) {
