@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 // var bcrypt   = require('bcrypt-nodejs');
+var passwordHash = require('password-hash');
+
 
 var Hcm_UserSchema = mongoose.Schema({
    
@@ -12,12 +14,12 @@ var Hcm_UserSchema = mongoose.Schema({
 });
 
 Hcm_UserSchema.methods.verifyPassword = function(password) {
-    if(password.localeCompare(this.User_Password) == 0)
+    console.log(passwordHash.verify(password,this.Employee_Password))
+    if(passwordHash.verify(password,this.User_Password) == 1)
         return 1;
     else
         return 0;
 };
-
 
 User = module.exports = mongoose.model('hcm_user', Hcm_UserSchema);
 
