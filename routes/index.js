@@ -435,7 +435,7 @@ router.post('/EditSupplierContact', type,function(req, res) {
 
 router.post('/AddUser', type,function(req, res) {
     var addUser = async (function (){
-        User.addUser(req,res,NextCode);
+        User.addUser(req,res);
     });
     addUser();
 });
