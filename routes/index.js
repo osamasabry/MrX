@@ -20,7 +20,7 @@ var type=upload.single('upfile');
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
 
-var URL = 'http://highchem.winexme.com/#!/';
+var URL = 'http://app.highchem.net/#!/';
 
 
 router.post('/login', type,function(req, res, next) {
