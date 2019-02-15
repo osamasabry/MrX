@@ -448,6 +448,12 @@ router.get('/getAllUsers', type,function(req, res) {
     Users();
 });
 
+router.get('/getActiveUsers', type,function(req, res) {
+    var Users = async (function (){
+        await (UserController.getActiveUsers(req,res));
+    });
+    Users();
+});
 router.post('/editUserPermissions', type,function(req, res) {
     var EditUserPermissions = async (function (){
         await (UserController.editUserPermissions(req,res));

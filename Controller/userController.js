@@ -30,7 +30,22 @@ module.exports = {
 				}
 			})
 	},
-	
+
+	getActiveUsers:function(request,response){
+		User.find({User_IsActive:1})
+		.exec(function(err, user) {
+		    if (err){
+				return res.send({
+					message: err
+				});
+			} else if(user) {
+				response.send(user);
+				
+			}else{
+				response.send("no Users");
+			}
+    	});
+	},
 	addUser:function(request,res){
 		User.getLastCode(function(err,user){
 			if (user) 
