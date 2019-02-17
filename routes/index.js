@@ -8,6 +8,7 @@ var SupplierController = require('../Controller/supplierController');
 var SetupController = require('../Controller/lutSetupController');
 var CustomerController = require('../Controller/customerController');
 var SearchController = require('../Controller/searchController');
+var SystemSettingsController = require('../Controller/systemSettingController');
 
 var RequestPriceController = require('../Controller/requestpriceController');
 var SendOfferController = require('../Controller/sendofferController');
@@ -459,6 +460,14 @@ router.post('/editUserPermissions', type,function(req, res) {
         await (UserController.editUserPermissions(req,res));
     });
     EditUserPermissions();
+});
+
+//************** System Setting **********************************
+router.get('/getMasterPermisions', function(req, res) {
+    var GetMasterPermisions = async (function (){
+        await (SystemSettingsController.getMasterPermisions(req,res));
+    });
+    GetMasterPermisions();
 });
 
 //************** Customer **********************************
