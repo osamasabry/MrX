@@ -5,16 +5,6 @@ var passwordHash = require('password-hash');
 
 module.exports = {
 
-
-	// GetNextCode:function(request,res){
-	// 	User.getLastCode(function(err,user){
-	// 		if (user) 
-	// 			res.send( Number(user.User_Code)+1);
-	// 		else
-	// 			res.send(1);
-	// 	})
-	// },
-
 	getAllUsers:function(request,res){
 			User.find({})
 			.exec(function(err, user) {
@@ -100,6 +90,25 @@ module.exports = {
 					});
 				}
 			})
+	},
+	changeMyPassword:function(request,res){
+		User.findOne({ 'User_Code' :  request.body.User_Code }, function(err, user) {
+			if (err){
+				res.send({message: 'Error'});
+			}
+				if (user) {
+					if (!user.verifyPassword(request.body.old_password)){
+				// console.log("Enter correct password");
+								response.send({message: false});
+					}else{
+						user.updatePassword(request.body.new_password);
+						res.send({message: true});
+					}
+						
+				} 
+		});
+
+		
 	},
 }
 

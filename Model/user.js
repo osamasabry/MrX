@@ -20,6 +20,10 @@ Hcm_UserSchema.methods.verifyPassword = function(password) {
     else
         return 0;
 };
+Hcm_UserSchema.methods.updatePassword = function(password) {
+    this.User_Password = passwordHash.generate(password);;
+	this.save();
+};
 
 User = module.exports = mongoose.model('hcm_user', Hcm_UserSchema);
 

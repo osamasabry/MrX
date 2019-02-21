@@ -461,6 +461,13 @@ router.post('/editUserPermissions', type,function(req, res) {
     });
     EditUserPermissions();
 });
+router.post('/changeMyPassword', type,function(req, res) {
+    var ChangeMyPassword = async (function (){
+        await (UserController.changeMyPassword(req,res));
+    });
+    ChangeMyPassword();
+});
+
 
 //************** System Setting **********************************
 router.get('/getMasterPermisions', function(req, res) {
