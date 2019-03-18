@@ -188,7 +188,7 @@ Hcm_ProductSchema.virtual('productcategory',{
     ref: 'hcm_lut_porduct_category',
     localField: 'Product_ProductCategory_Code',
     foreignField: 'ProductCategory_Code',
-    justOne: true // for many-to-1 relationships
+    justOne: false // for many-to-1 relationships
 });
 
 
