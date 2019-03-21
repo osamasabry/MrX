@@ -11,6 +11,9 @@ var StorageType 	= require('../Model/lut_storage_type');
 var SellingArea 	= require('../Model/lut_sell_area');
 var Weight 			= require('../Model/lut_weight');
 var Concentration 	= require('../Model/lut_concentration');
+var Certificate 	= require('../Model/lut_certificate');
+var TemperatureUnit = require('../Model/lut_temperature_unit');
+
 
 
 
@@ -1018,6 +1021,163 @@ module.exports = {
 	            if (!field) {
 	            	return res.send({
 						message: 'Concentration not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+
+
+	/****************** Certificate ***********/
+
+		getCertificate:function(request,res){
+			Certificate.find({})
+			.select('Certificate_Code Certificate_Name Certificate_Description Certificate_IsActive')
+			.exec(function(err, certificate) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(certificate) {
+		    		res.send(certificate);
+				}else{
+		    		res.send("no Certificate");
+				}
+			})
+		},
+
+		addCertificate:function(request,res){
+
+			Certificate.getLastCode(function(err,certificate){
+				if (certificate) 
+					InsertIntoCertificate(certificate.Certificate_Code+1);
+				else
+					InsertIntoCertificate(1);
+			});
+
+			function InsertIntoCertificate(NextCode){
+				var newCertificate = new Certificate();
+				newCertificate.Certificate_Code    	   = NextCode;
+				newCertificate.Certificate_Name   	   = request.body.Certificate_Name;
+				newCertificate.Certificate_Description = request.body.Certificate_Description;
+				newCertificate.Certificate_IsActive	   = 1;
+				
+				newCertificate.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
+
+		editCertificate:function(request,res){
+			var myquery = { Certificate_Code: request.body.Certificate_Code }; 
+			var newvalues = { 
+				Certificate_Name	 		: request.body.Certificate_Name,
+				Certificate_Description		: request.body.Certificate_Description,
+				Certificate_IsActive	 	: request.body.Certificate_IsActive,
+
+			 };
+
+			Certificate.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Certificate not exists'
+					});
+	            } else {
+
+	                return res.send({
+						message: true
+					});
+				}
+			})
+		},
+
+
+		/****************** TemperatureUnit ***********/
+
+		getTemperatureUnit:function(request,res){
+			TemperatureUnit.find({})
+			.select('TemperatureUnit_Code TemperatureUnit_Name TemperatureUnit_Description TemperatureUnit_IsActive')
+			.exec(function(err, temperature_unit) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(temperature_unit) {
+		    		res.send(temperature_unit);
+				}else{
+		    		res.send("no TemperatureUnit");
+				}
+			})
+		},
+
+		addTemperatureUnit:function(request,res){
+
+			TemperatureUnit.getLastCode(function(err,temperatureunit){
+				if (temperatureunit) 
+					InsertIntoTemperatureUnit(temperatureunit.TemperatureUnit_Code+1);
+				else
+					InsertIntoTemperatureUnit(1);
+			});
+
+			function InsertIntoTemperatureUnit(NextCode){
+				var newTemperatureUnit = new TemperatureUnit();
+				newTemperatureUnit.TemperatureUnit_Code    	   = NextCode;
+				newTemperatureUnit.TemperatureUnit_Name   	   = request.body.TemperatureUnit_Name;
+				newTemperatureUnit.TemperatureUnit_Description = request.body.TemperatureUnit_Description;
+				newTemperatureUnit.TemperatureUnit_IsActive	   = 1;
+				
+				newTemperatureUnit.save(function(error, doneadd){
+					if(error){
+						return res.send({
+							message: error
+						});
+					}
+					else{
+						return res.send({
+							message: true
+						});
+					}
+				});
+			}
+		},
+
+		editTemperatureUnit:function(request,res){
+			var myquery = { TemperatureUnit_Code: request.body.TemperatureUnit_Code }; 
+			var newvalues = { 
+				TemperatureUnit_Name	 		: request.body.TemperatureUnit_Name,
+				TemperatureUnit_Description		: request.body.TemperatureUnit_Description,
+				TemperatureUnit_IsActive	 	: request.body.TemperatureUnit_IsActive,
+
+			 };
+
+			TemperatureUnit.findOneAndUpdate( myquery,newvalues, function(err, field) {
+	    	    if (err){
+	    	    	return res.send({
+						message: 'Error'
+					});
+	    	    }
+	            if (!field) {
+	            	return res.send({
+						message: 'Temperature Unit not exists'
 					});
 	            } else {
 

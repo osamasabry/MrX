@@ -221,6 +221,21 @@ router.get('/getConcentration', type,function(req, res) {
     Concentration();
 });
 
+router.get('/getCertificate', type,function(req, res) {
+    var GetCertificate = async (function (){
+        await (SetupController.getCertificate(req,res));
+    });
+    GetCertificate();
+});
+
+
+router.get('/getTemperatureUnit', type,function(req, res) {
+    var GetTemperatureUnit = async (function (){
+        await (SetupController.getTemperatureUnit(req,res));
+    });
+    GetTemperatureUnit();
+});
+
 router.post('/AddCountry', type,function(req, res) {
     var AddCountry = async (function (){
         SetupController.addCountry(req,res);
@@ -411,6 +426,36 @@ router.post('/EditConcentration', type,function(req, res) {
     });
     EditConcentration();
 });
+
+
+router.post('/AddCertificate', type,function(req, res) {
+    var AddCertificate = async (function (){
+       SetupController.addCertificate(req,res);
+    });
+    AddCertificate();
+});
+
+router.post('/EditCertificate', type,function(req, res) {
+    var EditCertificate = async (function (){
+        await (SetupController.editCertificate(req,res));
+    });
+    EditCertificate();
+});
+
+router.post('/AddTemperatureUnit', type,function(req, res) {
+    var AddTemperatureUnit = async (function (){
+       SetupController.addTemperatureUnit(req,res);
+    });
+    AddTemperatureUnit();
+});
+
+router.post('/EditTemperatureUnit', type,function(req, res) {
+    var EditTemperatureUnit = async (function (){
+        await (SetupController.editTemperatureUnit(req,res));
+    });
+    EditTemperatureUnit();
+});
+
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){
