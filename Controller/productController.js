@@ -94,8 +94,6 @@ module.exports = {
 		},
 
 		addProduct:function(request,res){
-
-
 			Prodcut.getLastCode(function(err,product){
 				if (product) 
 					InsertIntoProduct(product.Product_Code+1);
@@ -134,6 +132,9 @@ module.exports = {
 	        	newProduct.Product_Assay         				 = request.body.Product_Assay;
 	        	newProduct.Product_Form_Code         			 = request.body.Product_Form_Code;
 	        	newProduct.Product_Certification        		 = request.body.Product_Certification;
+	        	newProduct.Melting_Unit_Tempreture_Unit_ID       = request.body.Melting_Unit_Tempreture_Unit_ID;
+	        	newProduct.Boiling_Unit_Tempreture_Unit_ID       = request.body.Boiling_Unit_Tempreture_Unit_ID;
+	        	newProduct.Product_Suffix        				 = request.body.Product_Suffix;
 	        	newProduct.Product_Release_Code         		 = request.body.Product_Release_Code;
 	        	newProduct.Product_StorageType_Code     		 = request.body.Product_StorageType_Code;
 				newProduct.Product_ProductCategory_Code 		 = request.body.Product_ProductCategory_Code;
@@ -316,6 +317,9 @@ module.exports = {
 	        	Product_Assay         			  	  : request.body.Product_Assay,
 	        	Product_Form_Code         		  	  : request.body.Product_Form_Code,
 	        	Product_Certification        	  	  : request.body.Product_Certification,
+	        	Melting_Unit_Tempreture_Unit_ID       : request.body.Melting_Unit_Tempreture_Unit_ID,
+	        	Boiling_Unit_Tempreture_Unit_ID       : request.body.Boiling_Unit_Tempreture_Unit_ID,
+	        	Product_Suffix       				  : request.body.Product_Suffix,
 	        	Product_Release_Code         	  	  : request.body.Product_Release_Code,
 	        	Product_StorageType_Code     	  	  : request.body.Product_StorageType_Code,
 	        	Product_ProductCategory_Code 	  	  : request.body.Product_ProductCategory_Code,
@@ -477,6 +481,9 @@ module.exports = {
 	        	newProduct.Product_Assay         				 = product.Product_Assay;
 	        	newProduct.Product_Form_Code         			 = product.Product_Form_Code;
 	        	newProduct.Product_Certification        		 = product.Product_Certification;
+	        	newProduct.Melting_Unit_Tempreture_Unit_ID       = product.Melting_Unit_Tempreture_Unit_ID;
+	        	newProduct.Boiling_Unit_Tempreture_Unit_ID       = product.Boiling_Unit_Tempreture_Unit_ID;
+	        	newProduct.Product_Suffix        				 = product.Product_Suffix;
 	        	newProduct.Product_Release_Code         		 = product.Product_Release_Code;
 	        	newProduct.Product_StorageType_Code     		 = product.Product_StorageType_Code;
 				newProduct.Product_ProductCategory_Code 		 = product.Product_ProductCategory_Code;

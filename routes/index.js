@@ -442,6 +442,13 @@ router.post('/EditCertificate', type,function(req, res) {
     EditCertificate();
 });
 
+router.post('/getCertificateByname', type,function(req, res) {
+    var GetCertificateByname = async (function (){
+        await (SetupController.getCertificateByname(req,res));
+    });
+    GetCertificateByname();
+});
+
 router.post('/AddTemperatureUnit', type,function(req, res) {
     var AddTemperatureUnit = async (function (){
        SetupController.addTemperatureUnit(req,res);
@@ -456,6 +463,13 @@ router.post('/EditTemperatureUnit', type,function(req, res) {
     EditTemperatureUnit();
 });
 
+
+router.post('/getTemperatureUnitByname', type,function(req, res) {
+    var GetTemperatureUnitByname = async (function (){
+        await (SetupController.getTemperatureUnitByname(req,res));
+    });
+    GetTemperatureUnitByname();
+});
 
 router.post('/AddSupplier', type,function(req, res) {
     var AddSupplier = async (function (){

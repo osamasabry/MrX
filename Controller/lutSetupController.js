@@ -1110,6 +1110,24 @@ module.exports = {
 			})
 		},
 
+		getCertificateByname:function(request, response) {
+			var Searchquery = request.body.searchField;
+			Certificate.find({Certificate_Name:{ $regex: new RegExp('.*' +Searchquery+ '.*', "i") }})
+			.exec(function(err, certificate) {
+				if (err){
+		    		return response.send({
+						message: err
+					});
+		    	}
+		    	if (certificate.length == 0) {
+					return response.send({
+						message: 'No Certificate Found !!'
+					});
+	        	} else {
+					return response.send(certificate);
+				}
+			})
+		}, 
 
 		/****************** TemperatureUnit ***********/
 
@@ -1188,4 +1206,22 @@ module.exports = {
 			})
 		},
 
+		getTemperatureUnitByname:function(request, response) {
+			var Searchquery = request.body.searchField;
+			TemperatureUnit.find({TemperatureUnit_Name:{ $regex: new RegExp('.*' +Searchquery+ '.*', "i") }})
+			.exec(function(err, temperature_unit) {
+				if (err){
+		    		return response.send({
+						message: err
+					});
+		    	}
+		    	if (temperature_unit.length == 0) {
+					return response.send({
+						message: 'Temperature Unit Not Found !!'
+					});
+	        	} else {
+					return response.send(temperature_unit);
+				}
+			})
+		}, 
 }	
