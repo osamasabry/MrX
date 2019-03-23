@@ -63,11 +63,11 @@ router.post('/EditCategory', type,function(req, res) {
     EditCategory();
 });
 
-router.post('/getProduct', type,function(req, res) {
-    var Product = async (function (){
-        await (ProductController.getProduct(req,res));
+router.post('/getProducts', type,function(req, res) {
+    var Products = async (function (){
+        await (ProductController.getProducts(req,res));
     });
-    Product();
+    Products();
 });
 
 router.post('/getAllProduct', type,function(req, res) {

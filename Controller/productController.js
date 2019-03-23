@@ -3,21 +3,18 @@ var Prodcut = require('../Model/product');
 
 
 module.exports = {
-		getProduct:function(req,res){
-			Prodcut.findOne({Product_Code:Number(req.body.Product_Code)})
-			.populate({ path: 'Category', select: 'Category_Name' })
-			.populate({ path: 'Supplier', select: 'Supplier_Name' })
-			.populate({ path: 'productclass', select: 'Class_Name' })
-			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
-			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
-			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
-			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
-			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
-			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
-			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
-			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
-			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
-			.lean()
+		getProducts:function(req,res){
+			Prodcut.aggregate(
+			   [
+			      { $project: { 
+				      	concate: { $concat: [ "$Product_Name", " ", "$Product_Suffix" ] },
+				      	Product_Name : "$Product_Name",
+				      	Product_Suffix : "$Product_Suffix",
+				      	Product_Code :"$Product_Code",
+				      	Product_Category_ID : "$Product_Category_ID",
+			      	} }
+			   ]
+			)
 			.exec(function(err, product) {
 				if (err){
 		    		return res.send({

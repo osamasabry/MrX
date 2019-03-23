@@ -4,6 +4,7 @@ var Hcm_ProductSchema = mongoose.Schema({
    
 	Product_Code        		                :Number,
     Product_Name        	                   	:String,
+    Product_Suffix                              :String,
     Product_Chemical_Name 		                :String,
     Product_Manufacturer                        :String,
     Product_Exporter                            :String,
@@ -34,7 +35,6 @@ var Hcm_ProductSchema = mongoose.Schema({
     Product_Certification                       :[Number],
     Melting_Unit_Tempreture_Unit_ID             :Number,
     Boiling_Unit_Tempreture_Unit_ID             :Number,
-    Product_Suffix                              :String,
     Product_Release_Code                        :Number,
     Product_StorageType_Code                    :[Number],
     Product_ProductCategory_Code                :[Number],
