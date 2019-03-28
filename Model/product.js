@@ -148,6 +148,12 @@ Hcm_ProductSchema.virtual('productclass',{
     foreignField: 'Class_Code',
     justOne: true // for many-to-1 relationships
 });
+Hcm_ProductSchema.virtual('certification',{
+    ref: 'hcm_lut_certificate',
+    localField: 'Product_Certification',
+    foreignField: 'Certificate_Code',
+    justOne: false // for many-to-1 relationships
+});
 
 
 Hcm_ProductSchema.virtual('Supplier',{
@@ -184,7 +190,7 @@ Hcm_ProductSchema.virtual('productstrage',{
     ref: 'hcm_lut_storage_type',
     localField: 'Product_StorageType_Code',
     foreignField: 'StorageType_Code',
-    justOne: true // for many-to-1 relationships
+    justOne: false // for many-to-1 relationships
 });
 
 Hcm_ProductSchema.virtual('productcategory',{
