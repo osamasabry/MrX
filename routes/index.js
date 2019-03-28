@@ -63,7 +63,7 @@ router.post('/EditCategory', type,function(req, res) {
     EditCategory();
 });
 
-router.post('/getProducts', type,function(req, res) {
+router.get('/getProducts', type,function(req, res) {
     var Products = async (function (){
         await (ProductController.getProducts(req,res));
     });
@@ -114,6 +114,13 @@ router.post('/CopyProduct', type,function(req, res) {
         ProductController.copyProduct(req,res);
     });
     CopyProduct();
+});
+
+router.post('/removeProduct', type,function(req, res) {
+    var RemoveProduct = async (function (){
+        ProductController.removeProduct(req,res);
+    });
+    RemoveProduct();
 });
 
 router.get('/getSupplier', type,function(req, res) {

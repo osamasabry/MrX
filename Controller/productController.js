@@ -1,5 +1,10 @@
 var Prodcut = require('../Model/product');
+var RequestPrice = require('../Model/request_price');
+var SendOffer = require('../Model/send_offer');
 
+// var asyncLoop = require('node-async-loop');
+// var async = require('asyncawait/async');
+// var await = require('asyncawait/await');
 
 
 module.exports = {
@@ -44,17 +49,36 @@ module.exports = {
 			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
 			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
 			.lean()
-			.exec(function(err, product) {
+			.exec(function(err, products) {
 				if (err){
 		    		return res.send({
 						message: err
 					});
-		    	} else if(product) {
-		    		res.send(product);
+		    	} else if(products) {
+		    		var data = CheckStatusRequestPrice(products);
 				}else{
 		    		res.send("not Product");
 				}
 			})
+
+			CheckStatusRequestPrice = function(products) {
+				return Promise.all(products.map(product => {
+				    return RequestPrice.findOne({'RequestPrice_Product.Product_ID': product.Product_Code}).then(result => {
+				      if (result) {
+				       	 product.Status = true;
+				      }else{
+				    		return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
+				       	 		if (send_offer) {
+				       	 			product.Status = true;
+				      			}
+				      		})	
+				      }
+				    });
+				  }))
+				  .then((results) => {
+					    res.send(products); 
+				});
+			}
 		},
 
 		searchProduct:function(req,res){
@@ -80,16 +104,16 @@ module.exports = {
 				.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
 				.lean()
 				.exec(function(err, product) {
-				if (err){
-		    		return res.send({
-						message: err
-					});
-		    	} else if(product) {
-		    		res.send(product);
-				}else{
-		    		res.send("not Product");
-				}
-			})
+					if (err){
+			    		return res.send({
+							message: err
+						});
+			    	} else if(product) {
+			    		res.send(product);
+					}else{
+			    		res.send("not Product");
+					}
+				})
 		},
 
 		addProduct:function(request,res){
@@ -587,5 +611,18 @@ module.exports = {
 			}
 		},
 
-
+		removeProduct:function(request,response){
+			var object = {Product_Code:request.body.Product_Code};
+			Prodcut.remove(object)
+			.exec(function(err, done) {
+			    if (err){
+			    	response.send({message: err});
+			    }
+		        if (done) {
+			    	response.send(true);
+		        }else{
+			    	response.send(false);
+		        }
+    		})
+		},
 }
