@@ -102,7 +102,7 @@ var Hcm_ProductSchema = mongoose.Schema({
     Product_Weight_Unit_Code                    :Number,
     Product_Weight_Value                        :Number,
     Product_Concentration_Unit_Code             :Number,
-    Product_Concentration_Value                 :Number,
+    Product_Concentration_Value                 :String,
     Product_Remarkes                            :String,
     Product_Total_Plate_Count                   :String,
     Product_EColi                               :String,

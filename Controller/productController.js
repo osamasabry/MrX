@@ -70,7 +70,10 @@ module.exports = {
 				    		return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
 				       	 		if (send_offer) {
 				       	 			product.Status = true;
-				      			}
+								  }
+								  else{
+									product.Status = false;
+								  }
 				      		})	
 				      }
 				    });
@@ -255,7 +258,8 @@ module.exports = {
 					}
 					else{
 						return res.send({
-							message: true
+							message: true,
+							data: doneadd
 						});
 					}
 				});
