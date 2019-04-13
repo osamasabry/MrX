@@ -86,26 +86,28 @@ module.exports = {
 
 		searchProduct:function(req,res){
 			var object  = {};
-			if (req.body.type=='name') 
-				object = {Product_Name:{$regex:req.body.Product_Name}};
+
+			if (req.body.type=='name')
+
+				object = {Product_Name:{$regex: new RegExp('.*' +req.body.Product_Name+ '.*', "i")}};
 			else
 				object = {Product_Chemical_Name:{$regex:req.body.Product_Chemical_Name}};
 
-			Prodcut.findOne({object})
-				.populate({ path: 'Category', select: 'Category_Name' })
-				.populate({ path: 'Supplier', select: 'Supplier_Name' })
-				.populate({ path: 'customer', select: 'Customer_Name' })
-				.populate({ path: 'productclass', select: 'Class_Name' })
-				.populate({ path: 'certification', select: 'Certificate_Name' })
-				.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
-				.populate({ path: 'productform', select: 'Form_Code Form_Name' })
-				.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
-				.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
-				.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
-				.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
-				.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
-				.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
-				.lean()
+			Prodcut.find(object)
+			.populate({ path: 'Category', select: 'Category_Name' })
+			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			.populate({ path: 'customer', select: 'Customer_Name' })
+			.populate({ path: 'productclass', select: 'Class_Name' })
+			.populate({ path: 'certification', select: 'Certificate_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			.populate({ path: 'productform', select: 'Form_Code Form_Name' })
+			.populate({ path: 'productpacking', select: 'Packing_Code Packing_Name' })
+			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
+			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
+			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
+			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
+			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
+			.lean()
 				.exec(function(err, product) {
 					if (err){
 			    		return res.send({
