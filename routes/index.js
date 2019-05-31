@@ -70,6 +70,13 @@ router.get('/getProducts', type,function(req, res) {
     Products();
 });
 
+router.get('/getCustomeProductsField', type,function(req, res) {
+    var CustomeProducts = async (function (){
+        await (ProductController.getCustomeProductsField(req,res));
+    });
+    CustomeProducts();
+});
+
 router.post('/getAllProduct', type,function(req, res) {
     var Product = async (function (){
         await (ProductController.getAllProduct(req,res));

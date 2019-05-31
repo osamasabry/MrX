@@ -33,10 +33,36 @@ module.exports = {
 			})
 		},
 
+		getCustomeProductsField:function(req,res){
+			Prodcut.aggregate(
+			   [
+			      { $project: { 
+				      	Product_Code :"$Product_Code",
+				      	Product_Name : "$Product_Name",
+				      	Product_Chemical_Name :"$Product_Chemical_Name",
+				      	Product_Abbreviation : "$Product_Abbreviation",
+				      	Product_Manufacturer : "$Product_Manufacturer",
+				      	Product_IsActive : "$Product_IsActive",
+			      	} }
+			   ]
+			)
+			.exec(function(err, product) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(product) {
+		    		res.send(product);
+				}else{
+		    		res.send("not Product");
+				}
+			})
+		},
+
 		getAllProduct:function(req,res){
-			Prodcut.find({})
+			Prodcut.find({Product_Code:req.body.Product_Code})
 			.populate({ path: 'Category', select: 'Category_Name' })
-			.populate({ path: 'Supplier', select: 'Supplier_Name' })
+			//.populate({ path: 'Supplier', select: 'Supplier_Name' })
 			.populate({ path: 'productclass', select: 'Class_Name' })
 			.populate({ path: 'certification', select: 'Certificate_Name' })
 			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
@@ -45,7 +71,7 @@ module.exports = {
 			.populate({ path: 'productrelease', select: 'Release_Code Release_Name' })
 			.populate({ path: 'productstrage', select: 'StorageType_Code StorageType_Name' })
 			.populate({ path: 'productcategory', select: 'ProductCategory_Code ProductCategory_Name' })
-			.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
+			//.populate({ path: 'customer', select: 'Customer_Code Customer_Name' })
 			.populate({ path: 'weight', select: 'Weight_Code Weight_Name' })
 			.populate({ path: 'concentration', select: 'Concentration_Code Concentration_Name' })
 			.lean()
