@@ -52,11 +52,32 @@ module.exports = {
 						message: err
 					});
 		    	} else if(product) {
-		    		res.send(product);
+		    		var data = CheckStatusRequestPrice(product);
 				}else{
 		    		res.send("not Product");
 				}
 			})
+			CheckStatusRequestPrice = function(products) {
+				return Promise.all(products.map(product => {
+				    return RequestPrice.findOne({'RequestPrice_Product.Product_ID': product.Product_Code}).then(result => {
+				      if (result) {
+				       	 product.Status = true;
+				      }else{
+				    		return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
+				       	 		if (send_offer) {
+				       	 			product.Status = true;
+								  }
+								  else{
+									product.Status = false;
+								  }
+				      		})	
+				      }
+				    });
+				  }))
+				  .then((results) => {
+					    res.send(products); 
+				});
+			}
 		},
 
 		getAllProduct:function(req,res){
@@ -81,33 +102,34 @@ module.exports = {
 						message: err
 					});
 		    	} else if(products) {
-		    		var data = CheckStatusRequestPrice(products);
+					res.send(products); 
+		    		//var data = CheckStatusRequestPrice(products);
 				}else{
 		    		res.send("not Product");
 				}
 			})
 
-			CheckStatusRequestPrice = function(products) {
-				return Promise.all(products.map(product => {
-				    return RequestPrice.findOne({'RequestPrice_Product.Product_ID': product.Product_Code}).then(result => {
-				      if (result) {
-				       	 product.Status = true;
-				      }else{
-				    		return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
-				       	 		if (send_offer) {
-				       	 			product.Status = true;
-								  }
-								  else{
-									product.Status = false;
-								  }
-				      		})	
-				      }
-				    });
-				  }))
-				  .then((results) => {
-					    res.send(products); 
-				});
-			}
+			// CheckStatusRequestPrice = function(products) {
+			// 	return Promise.all(products.map(product => {
+			// 	    return RequestPrice.findOne({'RequestPrice_Product.Product_ID': product.Product_Code}).then(result => {
+			// 	      if (result) {
+			// 	       	 product.Status = true;
+			// 	      }else{
+			// 	    		return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
+			// 	       	 		if (send_offer) {
+			// 	       	 			product.Status = true;
+			// 					  }
+			// 					  else{
+			// 						product.Status = false;
+			// 					  }
+			// 	      		})	
+			// 	      }
+			// 	    });
+			// 	  }))
+			// 	  .then((results) => {
+			// 		    res.send(products); 
+			// 	});
+			// }
 		},
 
 		searchProduct:function(req,res){
@@ -140,11 +162,33 @@ module.exports = {
 							message: err
 						});
 			    	} else if(product) {
-			    		res.send(product);
+						var data = CheckStatusRequestPrice(product);
+			    		//res.send(product);
 					}else{
 			    		res.send("not Product");
 					}
 				})
+				CheckStatusRequestPrice = function(products) {
+					return Promise.all(products.map(product => {
+						return RequestPrice.findOne({'RequestPrice_Product.Product_ID': product.Product_Code}).then(result => {
+						  if (result) {
+								product.Status = true;
+						  }else{
+								return SendOffer.findOne({'SendOffer_Product.Product_ID': product.Product_Code}).then(send_offer => {
+										if (send_offer) {
+											product.Status = true;
+									  }
+									  else{
+										product.Status = false;
+									  }
+								  })	
+						  }
+						});
+					  }))
+					  .then((results) => {
+							res.send(products); 
+					});
+				}
 		},
 
 		addProduct:function(request,res){
