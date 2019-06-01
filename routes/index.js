@@ -137,11 +137,32 @@ router.get('/getSupplier', type,function(req, res) {
     Supplier();
 });
 
+router.get('/getManufacturer', type,function(req, res) {
+    var GetManufacturer = async (function (){
+        await (SupplierController.getManufacturer(req,res));
+    });
+    GetManufacturer();
+});
+
 router.get('/getAllSupplier', type,function(req, res) {
     var Supplier = async (function (){
         await (SupplierController.getAllSuppliers(req,res));
     });
     Supplier();
+});
+
+router.post('/searchSupplier', type,function(req, res) {
+    var SearchSupplier = async (function (){
+        await (SupplierController.searchSupplier(req,res));
+    });
+    SearchSupplier();
+});
+
+router.post('/getSupplierById', type,function(req, res) {
+    var GetSupplierById = async (function (){
+        await (SupplierController.getSupplierById(req,res));
+    });
+    GetSupplierById();
 });
 
 router.get('/getCountries', type,function(req, res) {

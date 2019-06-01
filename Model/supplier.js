@@ -34,7 +34,10 @@ var Hcm_SupplierSchema = mongoose.Schema({
         Supplier_SupplierType_Codes     :[Number],
         Supplier_Class_Code             :Number,
         Supplier_Rate                   :Number,
-        Supplier_IsActive               :Number
+        Supplier_IsActive               :Number,
+        Supplier_IsSupplier             :Number,
+        Supplier_IsManufacturer         :Number
+
 },{
     toJSON: { virtuals: true }
 });

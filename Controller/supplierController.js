@@ -9,7 +9,7 @@ var WayOfDelivery 	= require('../Model/lut_ways_of_delivery');
 
 module.exports = {
 		getSupplier:function(req,res){
-			Supplier.find({})
+			Supplier.find({Supplier_IsSupplier:1})
 			.select('Supplier_Code Supplier_Name Supplier_Email')
 			.exec(function(err, supplier) {
 				if (err){
@@ -24,8 +24,48 @@ module.exports = {
 			})
 		},
 		
+		getManufacturer:function(req,res){
+			Supplier.find({Supplier_IsManufacturer:1})
+			.select('Supplier_Code Supplier_Name Supplier_Email')
+			.exec(function(err, supplier) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supplier) {
+		    		res.send(supplier);
+				}else{
+		    		res.send("not Supplier");
+				}
+			})
+		},
+
 		getAllSuppliers:function(req,res){
 			Supplier.find({})
+			.select('Supplier_Code Supplier_Name Supplier_IsSupplier Supplier_IsManufacturer Supplier_IsActive Supplier_Class_Code Supplier_Country_Code Supplier_Category_IDs')
+			.populate({ path: 'Category', select: 'Category_Name' })
+			// .populate({ path: 'SupplierType', select: 'SupplierType_Name' })
+			.populate({ path: 'supplierclass', select: 'Class_Name' })
+			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+			// .populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
+			// .populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
+			.lean()
+			.exec(function(err, supplier) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supplier) {
+					res.send(supplier);
+					
+				}else{
+		    		res.send("not Supplier");
+				}
+			})
+		},
+
+		getSupplierById:function(req,res){
+			Supplier.find({Supplier_Code:Number(req.body.Supplier_Code)})
 			.populate({ path: 'Category', select: 'Category_Name' })
 			.populate({ path: 'SupplierType', select: 'SupplierType_Name' })
 			.populate({ path: 'supplierclass', select: 'Class_Name' })
@@ -47,38 +87,32 @@ module.exports = {
 			})
 		},
 
-		// searchSupplier:function(req,res){
-		// 	var object  = {};
-		// 	if (req.body.type=='name') 
-		// 		object = {Product_Name:{$regex:req.body.Product_Name}};
-		// 	else
-		// 		object = {Product_Chemical_Name:{$regex:req.body.Product_Chemical_Name}};
+		searchSupplier:function(req,res){
+			var object  = {};
 
-		// 	Prodcut.findOne({object})
-		// 		.exec(function(err, product) {
-		// 		if (err){
-		//     		return res.send({
-		// 				message: err
-		// 			});
-		//     	} else if(product) {
-		//     		res.send(product);
-		// 		}else{
-		//     		res.send("not Product");
-		// 		}
-		// 	})
-		// },
+			if (req.body.type=='supplier') 
+				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsSupplier:1};
+			else
+				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsManufacturer:1};
 
-		// GetNextCode:function(){
-		// 	return new Promise((resolve, reject) => {
-		// 		Supplier.getLastCode(function(err,supplier){
-		// 			if (supplier)
-		// 				resolve( Number(supplier.Supplier_Code)+1);
-		// 			else
-		// 				resolve (1);
-		// 		})
-		// 	})
-		// },
-
+			Supplier.findOne({object})
+				.select('Supplier_Code Supplier_Name Supplier_IsSupplier Supplier_IsManufacturer Supplier_IsActive Supplier_Class_Code Supplier_Country_Code Supplier_Category_IDs')
+				.populate({ path: 'Category', select: 'Category_Name' })
+				.populate({ path: 'supplierclass', select: 'Class_Name' })
+				.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+				.exec(function(err, supplier) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(supplier) {
+		    		res.send(supplier);
+				}else{
+		    		res.send("not Supplier");
+				}
+			})
+		},
+		
 		addSupplier:function(request,res){
 			Supplier.getLastCode(function(err,supplier){
 				if (supplier) 
@@ -112,6 +146,8 @@ module.exports = {
 				newSupplier.Supplier_Class_Code 			= request.body.Supplier_Class_Code;
 				newSupplier.Supplier_IsActive 				= 1;
 				newSupplier.Supplier_Category_IDs			= [1];
+				newSupplier.Supplier_IsSupplier 			= request.body.Supplier_IsSupplier;
+				newSupplier.Supplier_IsManufacturer 		= request.body.Supplier_IsManufacturer;
 				
 				newSupplier.save(function(error, doneadd){
 					if(error){
@@ -150,7 +186,10 @@ module.exports = {
 				Supplier_SupplierType_Codes		: request.body.Supplier_SupplierType_Codes,
 				Supplier_Rate					: request.body.Supplier_Rate,
 				Supplier_Class_Code				: request.body.Supplier_Class_Code,
-				Supplier_IsActive				: request.body.Supplier_IsActive
+				Supplier_IsActive				: request.body.Supplier_IsActive,
+				Supplier_IsSupplier				: request.body.Supplier_IsSupplier,
+				Supplier_IsManufacturer			: request.body.Supplier_IsManufacturer,
+
 			} };
 			var myquery = { Supplier_Code: request.body.Supplier_Code }; 
 			Supplier.findOneAndUpdate( myquery,newvalues, function(err, field) {
