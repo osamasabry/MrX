@@ -95,7 +95,7 @@ module.exports = {
 			else
 				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsManufacturer:1};
 
-			Supplier.find({object})
+			Supplier.find(object)
 				.select('Supplier_Code Supplier_Name Supplier_IsSupplier Supplier_IsManufacturer Supplier_IsActive Supplier_Class_Code Supplier_Country_Code Supplier_Category_IDs')
 				.populate({ path: 'Category', select: 'Category_Name' })
 				.populate({ path: 'supplierclass', select: 'Class_Name' })
