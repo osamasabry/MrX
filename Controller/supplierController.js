@@ -9,7 +9,7 @@ var WayOfDelivery 	= require('../Model/lut_ways_of_delivery');
 
 module.exports = {
 		getSupplier:function(req,res){
-			Supplier.find({Supplier_IsSupplier:1})
+			Supplier.find({Supplier_IsSupplier:1,Supplier_IsActive:1})
 			.select('Supplier_Code Supplier_Name Supplier_Email')
 			.exec(function(err, supplier) {
 				if (err){
@@ -42,7 +42,7 @@ module.exports = {
 
 		getAllSuppliers:function(req,res){
 			Supplier.find({})
-			.select('Supplier_Code Supplier_Name Supplier_IsSupplier Supplier_IsManufacturer Supplier_IsActive Supplier_Class_Code Supplier_Country_Code Supplier_Category_IDs')
+			.select('Supplier_Code Supplier_Name Supplier_IsSupplier Supplier_IsManufacturer Supplier_IsActive Supplier_Class_Code Supplier_Country_Code Supplier_Category_IDs Supplier_Email')
 			.populate({ path: 'Category', select: 'Category_Name' })
 			// .populate({ path: 'SupplierType', select: 'SupplierType_Name' })
 			.populate({ path: 'supplierclass', select: 'Class_Name' })
@@ -89,9 +89,8 @@ module.exports = {
 
 		searchSupplier:function(req,res){
 			var object  = {};
-
 			if (req.body.type=='supplier') 
-				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsSupplier:1};
+				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsSupplier: 1};
 			else
 				object = {Supplier_Name:{$regex: new RegExp('.*' +req.body.Supplier_Name+ '.*', "i")},Supplier_IsManufacturer:1};
 

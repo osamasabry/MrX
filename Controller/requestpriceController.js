@@ -161,10 +161,8 @@ module.exports = {
 				// url: http://highchem.winexme.com/#!/supplier-pricing?spid=asdfsadf&rqid=fgsdfg
 				var row_id = row._id;
 				row_id = encrypt(String(row_id));
-				console.log('row_id: '+row_id);
 				for (var i = row.RequestPrice_Supplier.length - 1; i >= 0; i--) {
 					var supplier_id = encrypt(String(row.RequestPrice_Supplier[i]._id)); 
-					console.log('supplied_id: '+supplier_id);
 					var message = '<p>Dear valued supplier, </p>';
 					message += '<p>In High Chemicals Market we’re much keen on doing business with you and leveraging your market share. </p>';
 					message += '<p>Some of our customers are willing to procure some of your products.  Please click below link and fill in the form to make your bid onboard.</p>';
@@ -173,14 +171,13 @@ module.exports = {
 					message += '<p>Have a great sales moment!</p>';
 					 const msg = {
 					  to: row.RequestPrice_Supplier[i].Supplier_Email,
-					  from: 'info@winexme.com',
+					  from: 'info@highchem.net',
 					  subject: 'Offer',
 					  text: 'please fill from',
 					  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
 					  html: message,
 					  
 					};
-					// console.log(msg);
 					sgMail.send(msg); 
 				}
 
