@@ -39,6 +39,41 @@ module.exports = {
 			})
 		},
 
+		getSupplierDataOnlyByProductID:function(req,res){
+			Product.findOne({Product_Code:req.body.Product_Code})
+			.select('Product_Supplier_Codes')
+			.populate({path: 'Supplier', select: 'Supplier_Code Supplier_Name Supplier_Email'})
+			.lean()
+			.exec(function(err, product) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(product) {
+		    		res.send(product);
+				}else{
+		    		res.send("Product not found");
+				}
+			})
+		},
+		
+		getCustomerDataOnlyByProductID:function(req,res){
+			Product.findOne({Product_Code:req.body.Product_Code})
+			.select('Product_Customer_Codes')
+			.populate({path: 'customer', select: 'Customer_Code Customer_Name'})
+			.exec(function(err, product) {
+				if (err){
+		    		return res.send({
+						message: err
+					});
+		    	} else if(product) {
+		    		res.send(product);
+				}else{
+		    		res.send("Product not found");
+				}
+			})
+		},
+
 		getProductBySupplierID:function(req,res){
 			Product.findOne({Product_Supplier_Codes:req.body.Product_Supplier_Codes})
 			// .populate({path: 'Supplier', select: 'Supplier_Code Supplier_Name'})

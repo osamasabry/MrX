@@ -686,6 +686,20 @@ router.post('/getProductByProductCategoryID', type,function(req, res) {
     Search();
 });
 
+router.post('/getSupplierDataByProductID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getSupplierDataOnlyByProductID(req,res));
+    });
+    Search();
+});
+
+router.post('/getCustomerDataByProductID', type,function(req, res) {
+    var Search = async (function (){
+        await (SearchController.getCustomerDataOnlyByProductID(req,res));
+    });
+    Search();
+});
+
 /***********************request price***************************/
 router.get('/getAllRequestPrice', type,function(req, res) {
     var GetAllRequestPrice= async (function (){
