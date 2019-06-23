@@ -27,6 +27,7 @@ var Hcm_ProductSchema = mongoose.Schema({
     Product_Origin_Country_Code                 :Number,
     Product_Packing_Code                        :Number,
     Product_Supplier_Codes                      :[Number],
+    Product_Manufacturer_Code                   :Number,
     Product_Customer_Codes                      :[Number],
     Product_MSDS                                :String,
     Product_Classes_Code                        :Number,
@@ -163,6 +164,13 @@ Hcm_ProductSchema.virtual('Supplier',{
     justOne: false // for many-to-1 relationships
 });
 
+
+Hcm_ProductSchema.virtual('Supplier',{
+    ref: 'hcm_supplier',
+    localField: 'Product_Manufacturer_Code',
+    foreignField: 'Supplier_Code',
+    justOne: false // for many-to-1 relationships
+});
 
 Hcm_ProductSchema.virtual('productform',{
     ref: 'hcm_lut_form',

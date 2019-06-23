@@ -225,6 +225,7 @@ module.exports = {
 			 	newProduct.Product_Origin_Country_Code  		 = request.body.Product_Origin_Country_Code;
 	        	newProduct.Product_Packing_Code         		 = request.body.Product_Packing_Code;
 	        	newProduct.Product_Supplier_Codes       		 = request.body.Product_Supplier_Codes;
+	        	newProduct.Product_Manufacturer_Code       		 = request.body.Product_Manufacturer_Code;
 	        	newProduct.Product_Customer_Codes       		 = request.body.Product_Customer_Codes;
 	        	newProduct.Product_MSDS         				 = request.body.Product_MSDS;
 	        	newProduct.Product_Classes_Code         		 = request.body.Product_Classes_Code;
@@ -411,6 +412,7 @@ module.exports = {
 				Product_Origin_Country_Code 	  	  : request.body.Product_Origin_Country_Code,
         		Product_Packing_Code              	  : request.body.Product_Packing_Code,
         		Product_Supplier_Codes       	  	  : request.body.Product_Supplier_Codes,
+        		Product_Manufacturer_Code       	  : request.body.Product_Manufacturer_Code,
         		Product_Customer_Codes       	  	  : request.body.Product_Customer_Codes,
 	        	Product_MSDS         			  	  : request.body.Product_MSDS,
 	        	Product_Classes_Code         	  	  : request.body.Product_Classes_Code,
@@ -575,6 +577,7 @@ module.exports = {
 			 	newProduct.Product_Origin_Country_Code  		 = product.Product_Origin_Country_Code;
 	        	newProduct.Product_Packing_Code         		 = product.Product_Packing_Code;
 	        	newProduct.Product_Supplier_Codes       		 = product.Product_Supplier_Codes;
+	        	newProduct.Product_Manufacturer_Code       		 = product.Product_Manufacturer_Code;
 	        	newProduct.Product_Customer_Codes       		 = product.Product_Customer_Codes;
 	        	newProduct.Product_MSDS         				 = product.Product_MSDS;
 	        	newProduct.Product_Classes_Code         		 = product.Product_Classes_Code;
