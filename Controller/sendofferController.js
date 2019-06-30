@@ -33,7 +33,7 @@ module.exports = {
 		})
 	},
 
-	addSendOffer:function(request,res,URL){
+	addSendOffer:function(request,res,URL,WorkingHours){
 
 
 		// console.log(URL);
@@ -114,8 +114,8 @@ module.exports = {
 
 			var newSendOffer = new SendOffer();
 			newSendOffer.SendOffer_Code        	        = NextCode;
-	        newSendOffer.SendOffer_Create_Date          = request.body.SendOffer_Create_Date;
-	        newSendOffer.SendOffer_Valid_Till    	    = request.body.SendOffer_Valid_Till;
+	        newSendOffer.SendOffer_Create_Date          = new Date(request.body.SendOffer_Create_Date);
+	        newSendOffer.SendOffer_Valid_Till    	    = new Date(request.body.SendOffer_Valid_Till + 'T23:59:59.000Z');
 	        newSendOffer.SendOffer_Product              = request.body.SendOffer_Product;
 	        newSendOffer.SendOffer_Title                = request.body.SendOffer_Title;
 	        newSendOffer.SendOffer_Place_of_Delivery    = request.body.SendOffer_Place_of_Delivery;
@@ -152,7 +152,7 @@ module.exports = {
 		}
 
 		function drawtable(data){
-			var date = request.body.SendOffer_Valid_Till;
+			var date = new Date(request.body.SendOffer_Valid_Till + 'T23:59:59.000Z');
 			var month = date.getUTCMonth() + 1; //months from 1-12
 			var day = date.getUTCDate();
 			var year = date.getUTCFullYear();
@@ -184,7 +184,7 @@ module.exports = {
 			message +='<p>Should you find the quotation of interest to you, please reply to this email with confirmation as to  commence delivery.</p>';
 			message +='<p> faithfully,</p>';
 			message +='<p>High Chemicals Market,</p>';
-			message +='<p>'+request.body.SendOffer_Work_Time_Off+'</p>';
+			message +='<p>'+WorkingHours+'</p>';
 
 			return message;
 		}
@@ -193,20 +193,18 @@ module.exports = {
 			// url: http://highchem.winexme.com/#!/supplier-pricing?spid=asdfsadf&rqid=fgsdfg
 			var row_id = row._id;
 			row_id = encrypt(String(row_id));
-			// console.log('row_id: '+row_id);
 			for (var i = row.SendOffer_Customer.length - 1; i >= 0; i--) {
-				var customer_id = encrypt(String(row.SendOffer_Customer[i]._id)); 
-				// console.log('customer_id: '+customer_id);
+				//var customer_id = encrypt(String(row.SendOffer_Customer[i]._id)); 
+				var message = drawtable(request.body.SendOffer_Product);
 				 const msg = {
 				  to: row.SendOffer_Customer[i].Customer_Email,
-				  from: 'info@winexme.com',
-				  subject: 'Offer',
+				  from: 'info@highchem.com',
+				  subject: 'Pricing Offer',
 				  text: 'please fill from',
 				  // html: '<h1><a href='+URL+'supplier-pricing/'+supplier_id+'/'+row_id+'></a></h1>',
 				  // html:'Hello , Show Offer </br><h4><a href='+URL+'customer-show-offer/'+customer_id+'/'+row_id+'>Open Form To Show Offer (click here)</a></h4>',
-				  html:drawtable(request.body.SendOffer_Product),
+				  html:message,
 				};
-				// console.log(msg);
 				sgMail.send(msg); 
 			}
 

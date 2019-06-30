@@ -84,7 +84,7 @@ Hcm_CustomerSchema.virtual('PaymentMethod',{
     justOne: false // for many-to-1 relationships
 });
 
-Hcm_CustomerSchema.virtual('WayOfDelivery',{
+Hcm_CustomerSchema.virtual('WayOfDeliver',{
     ref: 'hcm_lut_ways_of_deliver',
     localField: 'Customer_WayOfDelivery_Codes',
     foreignField: 'WayOfDelivary_Code',

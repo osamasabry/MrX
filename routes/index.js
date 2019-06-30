@@ -22,6 +22,7 @@ var async = require('asyncawait/async');
 var await = require('asyncawait/await');
 
 var URL = 'http://app.highchem.net/#!/';
+var WorkingHours = 'Working days: Sunday to Thursday, Working Hours 08:00AM - 05:00PM';
 
 
 router.post('/login', type,function(req, res, next) {
@@ -742,7 +743,7 @@ router.get('/getAllSendOffer', type,function(req, res) {
 
 router.post('/addSendOffer', type,function(req, res) {
     var AddSendOffer = async (function (){
-        SendOfferController.addSendOffer(req,res,URL)
+        SendOfferController.addSendOffer(req,res,URL,WorkingHours)
     });
     AddSendOffer();
 });

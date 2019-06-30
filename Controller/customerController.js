@@ -31,21 +31,22 @@ module.exports = {
 		
 		getAllCustomer:function(request,res){
 			Customer.find({})
+			.populate({ path: 'WayOfDeliver', select: 'WayOfDelivary_Name' })
 			.populate({ path: 'Category', select: 'Category_Name' })
 			.populate({ path: 'CustomerType', select: 'SupplierType_Name' })
 			.populate({ path: 'CustomerClass', select: 'Class_Name' })
 			.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
 			.populate({ path: 'PaymentMethod', select: 'PaymentMethod_Name' })
-			.populate({ path: 'WayOfDelivery', select: 'WayOfDelivary_Name' })
 			.populate({ path: 'SellingArea', select: 'SellingArea_Name' })
 			.lean()
-			.exec(function(err, supplier) {
+			.exec(function(err, customer) {
 				if (err){
 		    		return res.send({
 						message: err
 					});
-		    	} else if(supplier) {
-					res.send(supplier);
+		    	} else if(customer) {
+					console.log(customer);
+					res.send(customer);
 					
 				}else{
 		    		res.send("not Supplier");

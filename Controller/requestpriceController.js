@@ -32,7 +32,7 @@ module.exports = {
 			// ])
 
 			RequestPrice.find({})
-			.populate({ path: 'Customer', select: 'Customer_Name' })
+			.populate({ path: 'Customer', select: 'Customer_Name Customer_Email' })
 			.populate({ path: 'Product', select: 'Product_Name' })
 			.populate({ path: 'Weight', select: 'Weight_Name' })
 			.populate({ path: 'Supplier', select: 'Supplier_Name' })
